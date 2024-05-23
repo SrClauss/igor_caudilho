@@ -197,7 +197,7 @@ function App() {
           <h2 className="text-lg md:text-2xl font-bold text-cyan-600 pb-3">
             Escala Visual Analógica de dor de Dor
           </h2>
-          <img src="src/assets/escala_dor.png" alt="escala dor" />
+          <img src="/escala_dor.png" alt="escala dor" />
         </Box>
         <Box>
           <h3></h3>
