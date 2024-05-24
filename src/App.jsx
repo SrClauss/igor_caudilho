@@ -1,12 +1,9 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 import Layout from './Layout'
-
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import {
   Grid,
   Box,
@@ -17,11 +14,34 @@ import {
   OutlinedInput,
   Select,
   TextField,
-  
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  Typography,
+  Card,
+  Divider,
+
+
 } from '@mui/material'
+import SliderDor from './components/SliderDor';
+import QuestaoBilateral from './components/QuestaoBilateral';
+
+
 
 function App() {
   const [count, setCount] = useState(0)
+
+  
+  const handleChangeCheckboxes1 = (direito, esquerdo) => {
+
+    console.log('direito', direito, esquerdo)
+
+    
+  }
+  const handleSlide1change = (value) => {
+
+    console.log('value', value)
+  }
 
 
   return (
@@ -83,9 +103,9 @@ function App() {
               size='medium'
               InputProps={{
                 endAdornment: <InputAdornment position="end">kg</InputAdornment>,
-                
+
               }}
-            
+
             />
           </Grid>
         </Grid>
@@ -157,23 +177,27 @@ function App() {
             />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <TextField
-              id="hora"
-              label="Hora"
-              type="text"
-              variant="outlined"
-              className='w-full'
-              size="medium"
-            />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <TimePicker
+                ampm={false}
+                views={['hours', 'minutes']}
+                id="hora"
+                label="Hora"
+                type="text"
+                variant="outlined"
+                className='w-full'
+                size="medium"
+              />
+            </LocalizationProvider>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
 
-                <DatePicker
-                  className='w-full'
-                  label="Data"
+              <DatePicker
+                className='w-full'
+                label="Data"
 
-                />
+              />
             </LocalizationProvider>
           </Grid>
 
@@ -193,21 +217,34 @@ function App() {
             />
           </FormControl>
         </Box>
-        <Box className="mt-10 md:mt-16">
-          <h2 className="text-lg md:text-2xl font-bold text-cyan-600 pb-3">
-            Escala Visual Analógica de dor de Dor
-          </h2>
-          <img src="/escala_dor.png" alt="escala dor" />
-        </Box>
-        <Box>
-          <h3></h3>
-        </Box>
-        
+        <Card className='mt-4 p-2'>
+          <Box className="mt-10 md:mt-16 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-cyan-600 pb-3 mb-8">
+              Escala Visual Analógica de dor de Dor
+            </h2>
+            <img src="/escala_dor.png" alt="escala dor" />
+          </Box>
+          <div className='my-16'>
+
+            <Divider className='mt-4'/>
+          </div>
+          <QuestaoBilateral question={"Dor no joelho"} onChangeCheckboxes={handleChangeCheckboxes1} />
+          <div className='my-16'>
+
+    
+          </div>
+          <div className="text-center">
+          <SliderDor title={"Melhor nivelde dor no melhor momento do dia (Direito)"} onSliderChange={handleSlide1change}/>
+          </div>
+          <div className="text-center">
+          <SliderDor title={"Melhor nivelde dor no melhor momento do dia (Esquerdo)"} onSliderChange={handleSlide1change}/>
+          </div>
+        </Card >
 
       </form>
 
 
-      
+
 
 
 
