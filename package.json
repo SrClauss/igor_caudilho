@@ -15,8 +15,10 @@
     "@mui/material": "^5.15.18",
     "@mui/x-date-pickers": "^7.5.0",
     "dayjs": "^1.11.11",
+    "js-cookie": "^3.0.5",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.51.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
