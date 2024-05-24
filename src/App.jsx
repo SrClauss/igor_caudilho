@@ -50,10 +50,10 @@ function App() {
     
           </div>
           <div className="text-center">
-          <SliderDor title={"Melhor nivelde dor no melhor momento do dia (Direito)"} onSliderChange={handleSlide1change}/>
+          <SliderDor title={"Melhor nivel de dor no melhor momento do dia (Direito)"} onSliderChange={handleSlide1change}/>
           </div>
           <div className="text-center">
-          <SliderDor title={"Melhor nivelde dor no melhor momento do dia (Esquerdo)"} onSliderChange={handleSlide1change}/>
+          <SliderDor title={"Melhor nivel de dor no melhor momento do dia (Esquerdo)"} onSliderChange={handleSlide1change}/>
           </div>
         </Card >
 

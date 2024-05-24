@@ -24,8 +24,8 @@ export default function SliderDor({title, onSliderChange}) {
 
     }
     return (
-        <div className="p-2 text-center">
-            <h2 className="text-xl font-bold text-cyan-600">{title}</h2>
+        <div className="p-12 text-center">
+            <h2 className="text-xl font-bold text-cyan-600 mb-3">{title}</h2>
 
                
                 <Slider
@@ -41,7 +41,7 @@ export default function SliderDor({title, onSliderChange}) {
                     onChange={(e, value) => handleChangeSlider(e, value)}
                 />
 
-                <img style={{marginTop: '-30px'}} src='/escala_dor_slice.jpg' alt='escala dor' />
+                <img style={{marginTop: '-30px'}} src='/escala_dor_slice1.jpg' alt='escala dor' />
                 <div className={color + " font-bold text-xl"}>{value} - {classificacao}</div>
        
        
