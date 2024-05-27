@@ -8,6 +8,8 @@ import AmplitudeMovimentoJoelho from './components/AmplitudeMovimentoJoelho';
 import PerimetroCoxa from './components/PerimetroCoxa';
 import DinamometroManual from './components/DinamometroManual';
 import TableNormativoJoelho from './components/TableNormativoJoelho';
+import RelacaoFlexoresExtensores from './components/RelacaoFlexoresExtensores';
+import QuestionarioJoelho from './components/QuestionarioJoelho';
 
 function App() {
 
@@ -66,6 +68,8 @@ function App() {
         <PerimetroCoxa onDataChange={(data) => { console.log(data) }} />
         <DinamometroManual onDataChange={(data) => { console.log(data) }} />
         <TableNormativoJoelho />
+        <RelacaoFlexoresExtensores onDataChange={(data) => { console.log(data) }} />
+        <QuestionarioJoelho onDataChange={(data) => { console.log(data) }} />
      
 
 
