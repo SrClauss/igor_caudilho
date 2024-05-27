@@ -9,7 +9,7 @@ export default function QuestaoBilateral({question, onChangeCheckboxes}) {
         <Box className="mt-4 md:mt-16 text-center">
         <h3 className="text-2xl md:text3xl font-bold text-cyan-600 pb-3">{question}</h3>
         <div className="w-full flex justify-center items-center">
-          <div className="flex w-full justify-ce" >
+          <div className="flex w-full justify-around" >
 
             <div className='ms-8 md:ms-40'>
 
