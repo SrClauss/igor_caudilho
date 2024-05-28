@@ -24,7 +24,7 @@ export default function SliderDor({title, onSliderChange}) {
 
     }
     return (
-        <div className="p-12 text-center">
+        <div className="px-10 py-8 text-center">
             <h2 className="text-xl font-bold text-cyan-600 mb-3">{title}</h2>
 
                

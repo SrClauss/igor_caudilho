@@ -1,7 +1,7 @@
 
 import { Card } from "antd";
 import { useState, useEffect } from "react";
-import * as tw from "./tailwind";
+import * as tw from "../tailwind";
 import { TextField } from "@mui/material";
 
 export default function QuestionarioJoelho({ onDataChange }) {

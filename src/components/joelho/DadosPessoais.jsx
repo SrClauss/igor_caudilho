@@ -19,7 +19,7 @@ import {
 import { useState } from 'react';
 
 
-export default function DadosPessoais({ onSubmitData, onGetCookie }) {
+export default function DadosPessoais({ onSubmitData}) {
     
     const [nome, setNome] = useState('')
     const [idade, setIdade] = useState('')
@@ -131,9 +131,9 @@ export default function DadosPessoais({ onSubmitData, onGetCookie }) {
                             value = {sexo}
                             onChange={(e) => setSexo(e.target.value)}
                         >
-                            <MenuItem value={10}>Masculino</MenuItem>
-                            <MenuItem value={20}>Feminino</MenuItem>
-                            <MenuItem value={30}>Outro</MenuItem>
+                            <MenuItem value={"Masculino"}>Masculino</MenuItem>
+                            <MenuItem value={"Feminino"}>Feminino</MenuItem>
+                         
                         </Select>
                     </FormControl>
                 </Grid>
@@ -280,10 +280,10 @@ export default function DadosPessoais({ onSubmitData, onGetCookie }) {
             </Box>
             <Box className='pt-4'>
                 <button type="submit" onClick={() => {
-                    onSubmitData({nome, idade, altura, peso, sexo, lados, membro, data, hora, queixa, hd });
+                    onSubmitData(JSON.parse(JSON.stringify({nome, idade, altura, peso, sexo, lados, membro, data, hora, queixa, hd })));
                     Cookies.set('lastRegister', JSON.stringify({nome, idade, altura, peso, sexo, lados, membro, data, hora, hd }))
                     Cookies.set('lastQueixa', JSON.stringify(queixa))
-                    console.log(JSON.parse(Cookies.get('lastRegister')))
+                
                     setDisabled(!disabled)
                
                 

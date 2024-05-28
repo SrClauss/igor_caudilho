@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { Carousel, Card } from 'antd'
 import { useMediaQuery } from 'react-responsive'
-import '../index.css'
-import * as tw from './tailwind'
+import '../../index.css'
+import * as tw from '../tailwind'
 
 
 export default function PerimetroCoxa({ onDataChange }) {
@@ -43,11 +43,7 @@ function PerimetroCoxaCarousel({ onDataChange }) {
         })
     }, [data.coxaDireita15cm, data.coxaEsquerda15cm, data.coxaDireita6cm, data.coxaEsquerda6cm])
 
-    useEffect(() => {
-
-
-        onDataChange(data)
-    }, [data])
+   
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -65,7 +61,6 @@ function PerimetroCoxaCarousel({ onDataChange }) {
             if (current === 1) {
 
                 const element = document.getElementById('coxaDireita15cm')
-                console.log(element)
                 element.focus()
                 element.select()
 
