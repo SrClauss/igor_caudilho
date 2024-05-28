@@ -6,13 +6,10 @@ import PerimetroCoxa from "../components/joelho/PerimetroCoxa"
 import DinamometroManual from "../components/joelho/DinamometroManual"
 import RelacaoFlexoresExtensores from "../components/joelho/RelacaoFlexoresExtensores"
 import SliderDor from "../components/joelho/SliderDor"
-
-
-import { Divider } from "antd"
 import EscalaAnalogicaDor from "../components/joelho/EscalaVisualAnalogicaDor"
-import {CriteriosLimitacaoFuncionalGraveOsteoartroseTable} from "../components/joelho/CriteriosLimitaçãoFuncionalGraveOsteoartrose"
 
-export default function OsteoartroseArtroplastia() {
+
+export default function LCA() {
     const [data, setData] = useState({})
     const handleSetData = (object) => {
         const [keys, values] = [Object.keys(object), Object.values(object)]
@@ -31,7 +28,7 @@ export default function OsteoartroseArtroplastia() {
         console.log(data);
     }, [data])
     const enviarDados = async () => {
-        await push(ref(db, 'osteoartrose_artroplastia'), JSON.stringify(data)).then(() => {
+        await push(ref(db, 'lca'), JSON.stringify(data)).then(() => {
             console.log('Data is set');
         }).catch((error) => {
 
@@ -44,27 +41,15 @@ export default function OsteoartroseArtroplastia() {
     return (
         <>
             <h1 className="text-2xl lg:text-3xl text-center font-bold text-cyan-600 mt-14">
-                AVALIAÇÃO FUNCIONAL DO JOELHO (DFP)
+                AVALIAÇÃO FUNCIONAL DO JOELHO (LCA)
             </h1>
             <div className="py-10">
                 <DadosPessoais onSubmitData={handleSetData} />
             </div>
-            <Divider className="my-10"/>
-            <AmplitudeMovimentoJoelho onDataChange={handleSetData} />
-            <Divider className="my-10"/>
-            <PerimetroCoxa  onDataChange={handleSetData}/>
-            <Divider className="my-10"/>
             <EscalaAnalogicaDor onDataChange={handleSetData} />
             <Divider className="my-10"/>
-            <DinamometroManual onDataChange={handleSetData} />
-            <Divider className="my-10"/>
-            <RelacaoFlexoresExtensores onDataChange={handleSetData} />
-            <Divider className="my-10"/>
-            <SliderDor title={"Nível de dor no final do teste"} onDataChange={handleSetData} />
-            <Divider className="my-10"/>
-            <CriteriosLimitacaoFuncionalGraveOsteoartroseTable onDataChange={handleSetData} sexo={data.sexo} />
-
-          
+            
+            <Button onClick={enviarDados} type="primary">Enviar</Button>
         </>
     )
 

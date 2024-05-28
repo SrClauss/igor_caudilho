@@ -3,7 +3,8 @@ import { useState } from "react";
 import * as tw from "../tailwind";
 import {CheckBox, Cancel} from '@mui/icons-material';
 
-export default function CriteriosLimitacaoFuncionalGraveOsteoartrose({ onDataChange, sexo }) {
+//deplou
+export function CriteriosLimitacaoFuncionalGraveOsteoartroseTable({ onDataChange, sexo }) {
 
     const [data, setData] = useState({})
     const variaveisMasculinas = {
