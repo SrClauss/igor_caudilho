@@ -1,9 +1,87 @@
 
 import { Card } from "antd";
 import { useState, useEffect } from "react";
-import * as tw from "../tailwind";
-import { TextField } from "@mui/material";
+import * as tw from "./tailwind";
 
+
+
+export function QuestionarioLysholm({ onDataChange }) {
+
+
+
+    const [data, setData] = useState({
+        pontuacaoLysholm: ""
+    })
+
+    useEffect(() => {
+        onDataChange(data);
+    }, [data])
+
+    const handleChange = (e) => {
+        const newData = {
+            ...data,
+            [e.target.name]: e.target.value
+        }
+        setData(newData)
+    }
+
+    const boldPontuacao = (rangeMin, RangeMax) => {
+        const styleBold = "text-cyan-800 text-md p-1 font-bold"
+        if (data.pontuacaoLysholm >= rangeMin && data.pontuacaoLysholm <= RangeMax) {
+            return styleBold;
+        }
+
+        return "text-cyan-800 text-md p-1";
+    }
+
+
+    return (
+        <Card>
+            <div className="w-full text-center text-cyan-600 font-bold text-2xl md:text-3xl p-3">
+                Questionário de Função Reportada do Joelho
+            </div>
+            <div className="w-full text-center text-cyan-800 font-bold text-xl md:text-2xl p-3">
+                Questionário de Lysholm
+            </div>
+            <div className="w-full grid grid-cols-2 border-y border-y-1 border-cyan-800">
+                <div className={tw.sideValue}>
+                    Pontuação
+                </div>
+                <div className="col-auto bg-transparent">
+                    <input
+                        type="number"
+                        name="pontuacaoLysholm"
+                        id="pontuacaoLysholm"
+                        value={data.pontuacaoLysholm}
+                        onChange={handleChange}
+                        className={tw.inputTransparent} />
+                </div>
+            </div>
+            <div>
+                <div className="w-full text-cyan-800 pt-3">
+                    Escalas de pontuação:
+                </div>
+
+                <div id="escala" className="w-full flex">
+                    <div className="w-1/2">
+
+                        <div className={boldPontuacao(95, 100)}>95-100 - Excelente</div>
+                        <div className={boldPontuacao(84, 94)}>84-94 - Bom</div>
+                    </div>
+                    <div className="w-1/2">
+
+
+                        <div className={boldPontuacao(65, 83)}>65-83 - Regular</div>
+                        <div className={boldPontuacao(0, 64)}>64 ou menos - Ruim</div>
+                    </div>
+                </div>
+            </div>
+        </Card>
+
+
+
+    )
+}
 export default function QuestionarioJoelho({ onDataChange }) {
     const [data, setData] = useState({
         pontuacaoLysholm: "",

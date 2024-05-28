@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
 import { Carousel, Card } from 'antd'
 import { useMediaQuery } from 'react-responsive'
-import '../../index.css'
-import * as tw from '../tailwind'
+import '../index.css'
+import * as tw from './tailwind'
 
 
 export default function DinamometroManual({ onDataChange }) {

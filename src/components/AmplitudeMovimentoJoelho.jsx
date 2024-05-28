@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from 'react'
 import { Carousel, Card } from 'antd'
 import  {useMediaQuery} from 'react-responsive'
-import '../../index.css'
-import * as tw from '../tailwind'
+import '../index.css'
+import * as tw from './tailwind'
 
 
 
 export default function AmplitudeMovimentoJoelho({ onDataChange }) {
-    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1424px)' })
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
     return (
 
         <Card>
@@ -74,44 +74,34 @@ export function AmplitudeMovimentoJoelhoCarousel({ onDataChange }) {
                         <div className={tw.tableSideValue}>Joelho Direito</div>
                         <div className={tw.colTransparent}>
                             <input
-
-
                                 id='flexaoJoelhoDireito'
-
                                 className={tw.inputTransparent}
                                 type="number"
                                 name="flexaoJoelhoDireito"
                                 value={data.flexaoJoelhoDireito}
-                                onChange={handleChange} />
+                                onChange={handleChange}/>
                         </div>
                     </div>
                     <div className='border-b border-b-1 border-cyan-800 grid grid-cols-2 w-full bg-white'>
                         <div className={tw.tableSideValue}>Joelho Esquerdo</div>
                         <div className={tw.colTransparent}>
                             <input
-
-
                                 id='flexaoJoelhoEsquerdo'
                                 className={tw.inputTransparent}
                                 type="number"
                                 name="flexaoJoelhoEsquerdo"
                                 value={data.flexaoJoelhoEsquerdo}
                                 onKeyDown={(e) => {
-
                                     if (e.key === 'Tab') {
                                         e.preventDefault()
                                         carouselRef.current.next()
-
                                     }
-
                                 }}
-
-                                onChange={handleChange} />
+                                onChange={handleChange}/>
                         </div>
                     </div>
-
-
                 </div>
+
                 <div>
                     <div className={tw.headerCarousel}>
                         Extensão
