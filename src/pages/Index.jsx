@@ -10,7 +10,7 @@ export default function Index() {
           className="bg-cyan-800 w-full hover:bg-cyan-600  p-16 text-3xl text-white font-bold rounded"
           onClick={() => window.location.href = '/dfp'}
         >
-          Avaliacao Funcional do Joelho
+          DFP
         </button>
       </div>
 
