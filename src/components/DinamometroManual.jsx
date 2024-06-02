@@ -315,7 +315,7 @@ export function DinamometroManualTable({ onDataChange }) {
                 <div className={tw.colTransparent}>
                     <input id='deficitExtensor'
                         disabled
-                        className={tw.inputTransparentBold} type="number" name="deficitExtensor" value={data.deficitExtensor} />
+                        className={tw.inputTransparentBold} type="number" name="deficitExtensor" value={data.deficitExtensor? data.deficitExtensor: ""} />
                 </div>
             </div>
             <div className={tw.fourWhiteColumnsContent}>
@@ -331,7 +331,7 @@ export function DinamometroManualTable({ onDataChange }) {
                 <div className={tw.colTransparent}>
                     <input id='deficitFlexor'
                         disabled
-                        className={tw.inputTransparentBold} type="number" name="deficitFlexor" value={data.deficitFlexor} />
+                        className={tw.inputTransparentBold} type="number" name="deficitFlexor" value={data.deficitFlexor!=0? data.deficitFlexor: ""} />
                 </div>
             </div>
 
@@ -348,7 +348,7 @@ export function DinamometroManualTable({ onDataChange }) {
                 <div className={tw.colTransparent}>
                     <input id='deficitHipPosition'
                         disabled
-                        className={tw.inputTransparentBold} type="number" name="deficitHipPosition" value={data.deficitHipPosition} />
+                        className={tw.inputTransparentBold} type="number" name="deficitHipPosition" value={data.deficitHipPosition!=0? data.deficitHipPosition: ""} />
                 </div>
 
             </div>

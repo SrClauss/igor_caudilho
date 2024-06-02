@@ -10,30 +10,89 @@ import RelacaoFlexoresExtensores from "../components/RelacaoFlexoresExtensores";
 import QuestionarioJoelho from "../components/QuestionarioJoelho";
 import {db} from "../firebase";
 import { push, ref } from "firebase/database";
+import TestJoelho from "../components/TestJoelho";
+import StepDown from "../components/StepDown";
 
 
 export default function DFP() {
 
+  const [data, setData] = useState({})
+ 
+const requiredKeys = [
+  "stepDownDireito",
+  "stepDownEsquerdo",
+  "torqueExtensorMedioDireito",
+  "torqueExtensorMedioEsquerdo",
+  "torqueFlexorMedioDireito",
+  "torqueFlexorMedioEsquerdo",
+  "torqueHipPositionDireito",
+  "torqueHipPositionEsquerdo",
+  "deficitExtensor",
+  "deficitFlexor",
+  "deficitHipPosition",
+  "nome",
+  "idade",
+  "altura",
+  "peso",
+  "sexo",
+  "lados",
+  "membro",
+  "data",
+  "hora",
+  "queixa",
+  "hd",
+  "dorMomentoDireito",
+  "dorMomentoEsquerdo",
+  "dorMenorDireito",
+  "dorMenorEsquerdo",
+  "dorMaiorDireito",
+  "dorMaiorEsquerdo",
+  "coxaDireita6cm",
+  "coxaEsquerda6cm",
+  "coxaDireita15cm",
+  "coxaEsquerda15cm",
+  "diferencaCoxa6cm",
+  "diferencaCoxa15cm",
+  "flexores",
+  "extensores",
+  "pontuacaoLysholm",
+  "pontuacaoKujala",
+  "testeJoelho"
+]
+
+
+
+  
+
 
   const enviarDados = async () => {
+
+    const missingKeys = requiredKeys.filter(key => !(key in data));
+
+    if (missingKeys.length > 0) {
+
+      console.log(`Missing keys: ${missingKeys.join(", ")}`);
+
+      return;
+    }
+
     await push(ref(db, 'dfp'), JSON.stringify(data)).then(() => {
       console.log('Data is set');
-      window.location.href = "/";
     }).catch((error) => {
-
+      
       console.log(error);
     }
-    );
+  );
+  window.location.href = "/";
 
 
   }
+  useEffect(() => {
+    console.log(data);
+  }, [data])
 
+  
 
-
-
-
-
-  const [data, setData] = useState({})
 
   
   const handleSetData = (object) => {
@@ -71,6 +130,14 @@ export default function DFP() {
       <RelacaoFlexoresExtensores onDataChange={handleSetData} />
       <Divider className="my-10" />
       <QuestionarioJoelho onDataChange={handleSetData} />
+      <Divider className="my-10" />
+      <TestJoelho onDataChange={handleSetData} />
+      <Divider className="my-10" />
+      <StepDown onDataChange={handleSetData} />
+      <Divider className="my-10" />
+
+
+
       <Button type="primary"  className="block mx-auto mt-10 w-full" size="large" onClick={enviarDados}>
         Enviar
       </Button>

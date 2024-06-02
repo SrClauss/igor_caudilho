@@ -11,7 +11,7 @@ export default function AmplitudeMovimentoJoelho({ onDataChange }) {
     return (
 
         <Card>
-            <h2 className="text-2xl md:text-3xl font-bold text-cyan-600 pb-3 text-center"> 
+            <h2 className={tw.componentTitle}> 
                 Amplitude de Movimento do Joelho</h2>
             <div>
                 {isTabletOrMobile ? <AmplitudeMovimentoJoelhoCarousel onDataChange={onDataChange} /> : <AmplitudeMovimentoJoelhoTable onDataChange={onDataChange} />}

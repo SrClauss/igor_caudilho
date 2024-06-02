@@ -4,12 +4,14 @@ import QuestaoBilateral from "./QuestaoBilateral"
 import { useState, useEffect } from "react"
 export default function EscalaAnalogicaDor({ onDataChange }) {
     const [data, setData] = useState({
-        direito: false,
-        esquerdo: false,
-        menorDireito: 0,
-        menorEsquerdo: 0,
-        maiorDireito: 0,
-        maiorEsquerdo: 0
+        dorMomentoDireito: 0,
+        dorMomentoEsquerdo: 0,
+        dorMenorDireito: 0,
+        dorMenorEsquerdo: 0,
+        dorMaiorDireito: 0,
+        dorMaiorEsquerdo: 0
+
+
     })
     useEffect(() => {
        
