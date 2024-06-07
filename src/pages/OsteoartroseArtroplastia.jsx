@@ -12,6 +12,7 @@ import { CriteriosLimitacaoFuncionalGraveOsteoartroseTable } from "../components
 import { LachemeterTable } from "../components/Lechemeter"
 import { Button } from "antd"
 import { push, ref } from "firebase/database";
+import Womac  from "../components/Womac";
 
 export default function OsteoartroseArtroplastia() {
     const [data, setData] = useState({})
@@ -42,11 +43,13 @@ export default function OsteoartroseArtroplastia() {
         );
 
     }
-
+    const openPupupWomac = () => {
+        window.open("/womac", "WOMAC", "width=600,height=600,scrollbars=yes,resizable=yes");
+    }
     return (
         <>
             <h1 className="text-2xl lg:text-3xl text-center font-bold text-cyan-600 mt-14">
-                AVALIAÇÃO FUNCIONAL DO JOELHO (DFP)
+                OSTEOARTROSE /ARTROPLASTIA
             </h1>
             <div className="py-10">
                 <DadosPessoais onSubmitData={handleSetData} />
@@ -68,6 +71,16 @@ export default function OsteoartroseArtroplastia() {
             <Divider className="my-10" />
             <LachemeterTable onDataChange={handleSetData} />
             <Divider className="my-10" />
+            <Womac onDataChange={(e)=>{console.log(e)}} />
+
+            {/*
+
+                TODO: Criar componentes para perguntas e subqueries e colocar dentro de um Accordion chamado Womac
+            
+            
+            */}
+            <Divider className="my-10" />
+
             <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={enviarDados}>
                 Enviar
             </Button>

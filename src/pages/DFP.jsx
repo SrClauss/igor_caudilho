@@ -10,7 +10,7 @@ import RelacaoFlexoresExtensores from "../components/RelacaoFlexoresExtensores";
 import QuestionarioJoelho from "../components/QuestionarioJoelho";
 import {db} from "../firebase";
 import { push, ref } from "firebase/database";
-import TestJoelho from "../components/TestJoelho";
+import TesteMobilidadeTornozelo from "../components/TesteMobilidadeTornozelo";
 import StepDown from "../components/StepDown";
 
 
@@ -131,7 +131,7 @@ const requiredKeys = [
       <Divider className="my-10" />
       <QuestionarioJoelho onDataChange={handleSetData} />
       <Divider className="my-10" />
-      <TestJoelho onDataChange={handleSetData} />
+      <TesteMobilidadeTornozelo onDataChange={handleSetData} />
       <Divider className="my-10" />
       <StepDown onDataChange={handleSetData} />
       <Divider className="my-10" />

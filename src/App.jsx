@@ -7,6 +7,7 @@ import OsteoartroseArtroplastia from './pages/OsteoartroseArtroplastia';
 import LCA from './pages/LCA';
 import Menisco from './pages/Menisco';
 
+
 function App() {
   const [data, setData] = useState({})
 
@@ -18,7 +19,10 @@ function App() {
           <Route path="/dfp" element={<DFP/>} />
           <Route path="ortoartrose_artroplastia" element={<OsteoartroseArtroplastia/>} />
           <Route path="lca" element={<LCA/>} /> 
-          <Route path="menisco" element={<Menisco/>} /> 
+          <Route path="menisco" element={<Menisco/>} />
+      
+
+
         </Routes>
       </Router>
     </Layout>

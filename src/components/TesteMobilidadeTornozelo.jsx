@@ -3,7 +3,7 @@ import { Card } from 'antd'
 import * as tw from './tailwind'
 
 
-export default function TestJoelho({onDataChange}) {
+export default function TesteMobilidadeTornozelo({onDataChange}) {
     const [data, setData] = useState({})
     useEffect(() => {
         onDataChange(data)
@@ -18,7 +18,7 @@ export default function TestJoelho({onDataChange}) {
     return (
         <Card>
             <div className={tw.componentTitle}>
-                Teste de Joelho
+                Teste Mobilidade do Tornozelo
             </div>
 
 
