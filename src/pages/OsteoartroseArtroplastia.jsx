@@ -12,7 +12,9 @@ import { CriteriosLimitacaoFuncionalGraveOsteoartroseTable } from "../components
 import { LachemeterTable } from "../components/Lechemeter"
 import { Button } from "antd"
 import { push, ref } from "firebase/database";
-import Womac  from "../components/Womac";
+import Womac from "../components/Womac";
+import QuestionarioSF36 from "../components/SF36"
+
 
 export default function OsteoartroseArtroplastia() {
     const [data, setData] = useState({})
@@ -71,14 +73,9 @@ export default function OsteoartroseArtroplastia() {
             <Divider className="my-10" />
             <LachemeterTable onDataChange={handleSetData} />
             <Divider className="my-10" />
-            <Womac onDataChange={(e)=>{console.log(e)}} />
-
-            {/*
-
-                TODO: Criar componentes para perguntas e subqueries e colocar dentro de um Accordion chamado Womac
-            
-            
-            */}
+            <Womac onDataChange={handleSetData} />
+            <Divider className="my-10" />
+            <QuestionarioSF36 onDataChange={(e)=>{console.log(e)}} />
             <Divider className="my-10" />
 
             <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={enviarDados}>

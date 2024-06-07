@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react'
-import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material'
+import { useState, useEffect, useRef } from 'react'
+import { Accordion, AccordionSummary } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import BateriaPerguntas from './BateriaPerguntas';
-import { Card } from 'antd';
+import { Button, Card } from 'antd';
 
 
 export default function Womac({ onDataChange }) {
     const [data, setData] = useState({})
     const [soma, setSoma] = useState(0)
+    const [expanded, setExpanded] = useState(false)
 
     useEffect(() => {
 
@@ -36,12 +37,12 @@ export default function Womac({ onDataChange }) {
 
 
     return (
-        <Accordion>
+        <Accordion expanded={expanded} onChange={(e)=>setExpanded(!expanded)} >
             <AccordionSummary
-
+                
                 expandIcon={<ExpandMoreIcon />}
                 sx={{ padding: "30px" }}>
-                <h2 className='text-2xl md:text-3xl font-bold text-cyan-700 pb-3 text-center'>WOMAC ({soma.toFixed(1)})</h2>
+                <h2 className='text-2xl md:text-3xl font-bold text-cyan-700 pb-3 text-center'>WOMAC ({(soma/24).toFixed(1)})</h2>
 
                 
             </AccordionSummary>
@@ -112,6 +113,9 @@ export default function Womac({ onDataChange }) {
                         indique o grau de dificuldade que você está tendo devido à artrite em seu joelho durante as últimas 72 horas.
                     </Card>
                 </BateriaPerguntas>
+                <Button type="text" className="block mx-auto mt-10 w-full" size="large" onClick={(e)=>setExpanded(false)}>
+                    Esconder
+                </Button>
 
 
 
