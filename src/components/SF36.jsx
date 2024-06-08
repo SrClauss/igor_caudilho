@@ -4,7 +4,6 @@ import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ScoreQuestsSF from "./ScoreQuestsSF";
 import InstrucoesSF36 from "./InstrucoesSF36";
-import { set } from "firebase/database";
 export default function QuestionarioSF36({ onDataChange }) {
 
     const [itens, setItens] = useState({})

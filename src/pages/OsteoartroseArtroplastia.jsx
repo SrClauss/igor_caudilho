@@ -14,6 +14,7 @@ import { Button } from "antd"
 import { push, ref } from "firebase/database";
 import Womac from "../components/Womac";
 import QuestionarioSF36 from "../components/SF36"
+import TesteCaminhada from "../components/TesteCaminhada"
 
 
 export default function OsteoartroseArtroplastia() {
@@ -75,7 +76,9 @@ export default function OsteoartroseArtroplastia() {
             <Divider className="my-10" />
             <Womac onDataChange={(e)=>console.log(e)} />
             <Divider className="my-10" />
-            <QuestionarioSF36 onDataChange={(e)=>{console.log(e)}} />
+            <QuestionarioSF36 onDataChange={(e)=>{handleSetData}} />
+            <Divider className="my-10" />
+            <TesteCaminhada onDataChange={handleSetData} />
             <Divider className="my-10" />
 
             <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={enviarDados}>
