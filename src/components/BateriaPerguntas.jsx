@@ -1,25 +1,36 @@
 import { useState, useEffect } from "react";
 import FiveOptionsQuery from "./FiveOptionsQuery";
 import { Card } from "antd";
+import { set } from "firebase/database";
+import { red } from "@mui/material/colors";
 
 
 export default function BateriaPerguntas({ onDataChange, prompt, index, perguntas, children }) {
-    const [data, setData] = useState(0) //soma dos valores de data
-    const [perguntasResult, setPerguntasResult] = useState(Array(perguntas.length).fill(0)) //array com os valores de cada pergunta
+    const [media, setMedia] = useState(0)
+    const [soma, setSoma] = useState(0)
+    const [data, setData] = useState({})
 
 
-    useEffect(() => {
-        onDataChange(data, index)
-    }, [perguntasResult])
 
-    const handleDataChange = (value, i) => {
-        let newPerguntasResult = [...perguntasResult]
-        newPerguntasResult[i] = value
-        setPerguntasResult(newPerguntasResult)
-        setData(newPerguntasResult.reduce((acc, curr) => acc + curr, 0)/perguntasResult.length)
+    const handleDataChange = (value, index) => {
+        let newData = { ...data }
+        newData[index] = value
+        setData(newData)
+       
+        
+
     }
-
-
+    useEffect(() => {
+        let soma = 0
+        let media = 0
+        for (const key in data) {
+            soma += data[key]
+        }
+        media = soma / perguntas.length
+        setSoma(soma)
+        setMedia(media)
+        onDataChange(media, soma)
+    }, [data])
 
     return (
         <Card className="p-2 m-2">
@@ -28,7 +39,8 @@ export default function BateriaPerguntas({ onDataChange, prompt, index, pergunta
             {perguntas.map((pergunta, index) => (
                 <FiveOptionsQuery onDataChange={(value) => handleDataChange(value, index)} prompt={pergunta} index={index} />
             ))}
-            <div className="text-start py-2 text-xl">Total: <strong>{parseFloat(data).toFixed(2)}</strong> </div>
+            <div className="text-start py-2 text-xl">Media: <strong>{parseFloat(media).toFixed(2)}</strong> </div>
+            <div className="text-start py-2 text-xl">Soma: <strong>{soma}</strong> </div>
         </Card>
     )
 

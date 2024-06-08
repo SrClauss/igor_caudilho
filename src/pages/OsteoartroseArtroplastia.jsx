@@ -73,7 +73,7 @@ export default function OsteoartroseArtroplastia() {
             <Divider className="my-10" />
             <LachemeterTable onDataChange={handleSetData} />
             <Divider className="my-10" />
-            <Womac onDataChange={handleSetData} />
+            <Womac onDataChange={(e)=>console.log(e)} />
             <Divider className="my-10" />
             <QuestionarioSF36 onDataChange={(e)=>{console.log(e)}} />
             <Divider className="my-10" />

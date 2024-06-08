@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { Card } from "antd";
 import { FormControl, FormControlLabel, FormLabel, RadioGroup, Radio } from '@mui/material'
 
-export default function ScoreQuestsSF({ onDataChange, prompt, options, scores, index}) {
-    const [data, setData] = useState(0)
+export default function ScoreQuestsSF({ onDataChange, prompt, options, scores, labelIndex }) {
+    const [data, setData] = useState()
 
 
 
@@ -21,16 +21,23 @@ export default function ScoreQuestsSF({ onDataChange, prompt, options, scores, i
 
 
             <FormControl className="w-full" >
-                <FormLabel className="text-start">{index + 1}. {prompt}</FormLabel>
+                <FormLabel className="text-start">{labelIndex}. {prompt}</FormLabel>
                 <RadioGroup
-                    defaultValue={0}
+                    defaultValue={null}
                     onChange={(e) => {
-                        handleDataChange(parseInt(e.target.value))
+                        const score = scores[parseInt(e.target.value)]
+
+
+                        handleDataChange(score)
                     }}
                 >
-                    <div className="flex  flex-col  md:flex-row md:justify-between md:px-10 md:py-10">
+                    <div className="flex  flex-col  md:flex-row md:justify-between  md:py-10">
                         {options.map((option, index) => (
-                            <FormControlLabel value={scores[index]} control={<Radio />} label={option} />
+
+                            <div>
+                                <FormControlLabel value={index} control={<Radio />} label={option} />
+                                <div>{`${scores[index]}`}</div>
+                            </div>
                         ))}
                     </div>
                 </RadioGroup>

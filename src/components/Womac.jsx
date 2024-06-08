@@ -3,36 +3,42 @@ import { Accordion, AccordionSummary } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import BateriaPerguntas from './BateriaPerguntas';
 import { Button, Card } from 'antd';
+import { set } from 'firebase/database';
 
 
 export default function Womac({ onDataChange }) {
+    
+    const [expanded, setExpanded] = useState(false)
     const [data, setData] = useState({})
     const [soma, setSoma] = useState(0)
-    const [expanded, setExpanded] = useState(false)
+
+
+
 
     useEffect(() => {
-
-        
-        setSoma(Object.values(data).reduce((acc, curr) => acc + curr, 0))
-
-        onDataChange({
-            womac: soma/24
+        let sum = 0
+        Object.values(data).forEach((value) => {
+            sum += value.soma
         })
+
+        setSoma(sum)
+        
+     
 
     }, [data])
 
+    useEffect(() => {
+        onDataChange(soma/24)
+    }, [soma])
+    const handleSetData = (media, soma, index) => {
 
-    const handleSetData = (value, index) => {
+        let newData = { ...data }
+        newData[index] = { media, soma }
+        setData(newData)
+        
 
-        setData({
-            ...data,
-            [index]: value
-        })
-
-
+        
     }
-
-
 
 
 
@@ -42,7 +48,7 @@ export default function Womac({ onDataChange }) {
                 
                 expandIcon={<ExpandMoreIcon />}
                 sx={{ padding: "30px" }}>
-                <h2 className='text-2xl md:text-3xl font-bold text-cyan-700 pb-3 text-center'>WOMAC ({(soma/24).toFixed(1)})</h2>
+                <h2 className='text-2xl md:text-3xl font-bold text-cyan-700 pb-3 text-center'>WOMAC ({parseFloat(soma/24).toFixed(1)})</h2>
 
                 
             </AccordionSummary>
@@ -50,7 +56,7 @@ export default function Womac({ onDataChange }) {
 
                 <BateriaPerguntas
 
-                    onDataChange={(e) => { handleSetData(e, 0) }}
+                    onDataChange={(media, soma) => { handleSetData(media, soma, 0) }}
                     prompt="Intensidade da Dor"
                     index={0}
                     perguntas={[
@@ -71,7 +77,7 @@ export default function Womac({ onDataChange }) {
 
 
                 <BateriaPerguntas
-                    onDataChange={(e) => { handleSetData(e, 1) }}
+                    onDataChange={(media, soma) => { handleSetData(media, soma, 1) }}
                     prompt="Intensidade da Rigidez"
                     index={1} perguntas={[
                         "Qual é a intensidade de sua rigidez logo após acordar de manhã?",
@@ -85,7 +91,7 @@ export default function Womac({ onDataChange }) {
 
 
                 <BateriaPerguntas
-                    onDataChange={(e) => { handleSetData(e, 2) }}
+                    onDataChange={(media, soma) => { handleSetData(media, soma, 2) }}
                     prompt="Atividade Física"
                     index={2}
                     perguntas={[
