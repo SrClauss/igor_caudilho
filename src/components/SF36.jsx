@@ -9,9 +9,9 @@ export default function QuestionarioSF36({ onDataChange }) {
 
     const [itens, setItens] = useState({})
     const [score8, setScore] = useState([6.0, 4.75, 3.5, 2.25, 1.0])
-    const [itensRespondidos, setItensRespondidos] = useState(0)
-    const [labelsf36, setLabelsf36] = useState(`${itensRespondidos} de 36 itens respondidos`)
-    const [resultado, setResultado] = useState(0)
+    const [label, setLabel] = useState("0 de 36 itens respondidos")
+   
+
 
     const handleDataChange = (value, index) => {
         setItens({
@@ -32,32 +32,18 @@ export default function QuestionarioSF36({ onDataChange }) {
     }, [itens[21]])
 
     useEffect(() => {
-        const count = Object.keys(itens).filter(key => itens[key] !== null && itens[key] !== undefined).length;
-        setItensRespondidos(count);
-    }, [itens])
+        const count = Object.values(itens).filter(item => item !== undefined).length
+        console.log("count", count)
+        if (count === 36) {
 
-    useEffect(() => {
-        if (itensRespondidos === 36) {
-            let total = 0
-            Object.keys(itens).forEach(key => {
-                total += itens[key]
-            })
-            setResultado(total)
-        }
-
-
-    }, [itensRespondidos])
-
-    useEffect(() => {
-        if (itensRespondidos === 36) {
-            setLabelsf36(resultado.toFixed(2) + " pontos")
+            const total = Object.values(itens).reduce((acc, item) => acc + item)
+            onDataChange(total)
+            setLabel(`Total de ${total} pontos`)
         }
         else {
-            setLabelsf36(`${itensRespondidos} de 36 itens respondidos`)
+            setLabel(`${count} de 36 itens respondidos`)
         }
-
-
-    }, [resultado])
+    }, [itens])
 
 
 
@@ -70,7 +56,7 @@ export default function QuestionarioSF36({ onDataChange }) {
                 expandIcon={<ExpandMoreIcon />}
                 sx={{ padding: "30px" }}
             >
-                <h2 className='text-2xl md:text-3xl font-bold text-cyan-700 pb-3 text-center'>SF36  ({labelsf36})</h2>
+            <h2 className='text-2xl md:text-3xl font-bold text-cyan-700 pb-3 text-center'>SF36 ({label})</h2>
 
             </AccordionSummary>
             <AccordionDetails>
