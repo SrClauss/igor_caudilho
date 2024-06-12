@@ -11,7 +11,10 @@ import Lachemeter from "../components/Lechemeter"
 import { QuestionarioLysholm } from "../components/QuestionarioJoelho"
 import { Button } from "antd"
 import { push, ref } from "firebase/database";
-
+import Lysholm from "../components/Lysholm"
+import TesteMobilidadeTornozelo from "../components/TesteMobilidadeTornozelo"
+import StepDown from "../components/StepDown"
+import HopTest from "../components/HopTest"
 
 export default function LCA() {
     const [data, setData] = useState({})
@@ -63,9 +66,16 @@ export default function LCA() {
             <DinamometroManual onDataChange={handleSetData} />
             <Divider className="my-10" />
             <RelacaoFlexoresExtensores onDataChange={handleSetData} />
-
             <Divider className="my-10" />
-            <QuestionarioLysholm onDataChange={handleSetData} />
+            <Lysholm onDataChange={handleSetData} />
+            <Divider className="my-10" />
+            <HopTest onDataChange={handleSetData} />
+            <Divider className="my-10" />
+            <TesteMobilidadeTornozelo onDataChange={handleSetData} />
+            <Divider className="my-10" />
+            <StepDown onDataChange={handleSetData} />
+            <Divider className="my-10" />
+
             <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={enviarDados}>
                 Enviar
             </Button>

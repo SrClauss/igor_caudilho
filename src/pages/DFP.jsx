@@ -8,93 +8,37 @@ import PerimetroCoxa from "../components/PerimetroCoxa";
 import DinamometroManual from "../components/DinamometroManual";
 import RelacaoFlexoresExtensores from "../components/RelacaoFlexoresExtensores";
 import QuestionarioJoelho from "../components/QuestionarioJoelho";
-import {db} from "../firebase";
+import { db } from "../firebase";
 import { push, ref } from "firebase/database";
 import TesteMobilidadeTornozelo from "../components/TesteMobilidadeTornozelo";
 import StepDown from "../components/StepDown";
-
-
+import Kujala from "../components/Kujala";
 export default function DFP() {
 
   const [data, setData] = useState({})
- 
-const requiredKeys = [
-  "stepDownDireito",
-  "stepDownEsquerdo",
-  "torqueExtensorMedioDireito",
-  "torqueExtensorMedioEsquerdo",
-  "torqueFlexorMedioDireito",
-  "torqueFlexorMedioEsquerdo",
-  "torqueHipPositionDireito",
-  "torqueHipPositionEsquerdo",
-  "deficitExtensor",
-  "deficitFlexor",
-  "deficitHipPosition",
-  "nome",
-  "idade",
-  "altura",
-  "peso",
-  "sexo",
-  "lados",
-  "membro",
-  "data",
-  "hora",
-  "queixa",
-  "hd",
-  "dorMomentoDireito",
-  "dorMomentoEsquerdo",
-  "dorMenorDireito",
-  "dorMenorEsquerdo",
-  "dorMaiorDireito",
-  "dorMaiorEsquerdo",
-  "coxaDireita6cm",
-  "coxaEsquerda6cm",
-  "coxaDireita15cm",
-  "coxaEsquerda15cm",
-  "diferencaCoxa6cm",
-  "diferencaCoxa15cm",
-  "flexores",
-  "extensores",
-  "pontuacaoLysholm",
-  "pontuacaoKujala",
-  "testeJoelho"
-]
 
 
 
-  
 
-
-  const enviarDados = async () => {
-
-    const missingKeys = requiredKeys.filter(key => !(key in data));
-
-    if (missingKeys.length > 0) {
-
-      console.log(`Missing keys: ${missingKeys.join(", ")}`);
-
-      return;
-    }
-
-    await push(ref(db, 'dfp'), JSON.stringify(data)).then(() => {
-      console.log('Data is set');
-    }).catch((error) => {
-      
-      console.log(error);
-    }
-  );
-  window.location.href = "/";
-
-
-  }
   useEffect(() => {
     console.log(data);
   }, [data])
+  const enviarDados = async () => {
+    await push(ref(db, 'dfp'), JSON.stringify(data)).then(() => {
+      console.log('Data is set');
+      document.location.href = "/";
+    }).catch((error) => {
 
-  
+      console.log(error);
+    }
+    );
+
+  }
 
 
-  
+
+
+
   const handleSetData = (object) => {
     const [keys, values] = [Object.keys(object), Object.values(object)]
     let newData = { ...data };
@@ -129,7 +73,7 @@ const requiredKeys = [
       <Divider className="my-10" />
       <RelacaoFlexoresExtensores onDataChange={handleSetData} />
       <Divider className="my-10" />
-      <QuestionarioJoelho onDataChange={handleSetData} />
+      <Kujala onDataChange={handleSetData} />
       <Divider className="my-10" />
       <TesteMobilidadeTornozelo onDataChange={handleSetData} />
       <Divider className="my-10" />
@@ -138,7 +82,9 @@ const requiredKeys = [
 
 
 
-      <Button type="primary"  className="block mx-auto mt-10 w-full" size="large" onClick={enviarDados}>
+
+
+      <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={enviarDados}>
         Enviar
       </Button>
 

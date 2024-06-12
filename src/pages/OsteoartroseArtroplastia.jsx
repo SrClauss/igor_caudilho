@@ -17,6 +17,7 @@ import QuestionarioSF36 from "../components/SF36"
 import TesteCaminhada from "../components/TesteCaminhada"
 
 
+
 export default function OsteoartroseArtroplastia() {
     const [data, setData] = useState({})
     const handleSetData = (object) => {
@@ -46,9 +47,7 @@ export default function OsteoartroseArtroplastia() {
         );
 
     }
-    const openPupupWomac = () => {
-        window.open("/womac", "WOMAC", "width=600,height=600,scrollbars=yes,resizable=yes");
-    }
+    
     return (
         <>
             <h1 className="text-2xl lg:text-3xl text-center font-bold text-cyan-600 mt-14">
@@ -64,22 +63,20 @@ export default function OsteoartroseArtroplastia() {
             <Divider className="my-10" />
             <EscalaAnalogicaDor onDataChange={handleSetData} />
             <Divider className="my-10" />
+            <QuestionarioSF36 onDataChange={handleSetData} onQuestionaryChange={handleSetData} onDominionsChange={handleSetData} />
+            <Divider className="my-10" />
+            <Womac onDataChange={handleSetData} />
+            <Divider className="my-10" />
             <DinamometroManual onDataChange={handleSetData} />
             <Divider className="my-10" />
             <RelacaoFlexoresExtensores onDataChange={handleSetData} />
             <Divider className="my-10" />
-            <SliderDor title={"Nível de dor no final do teste"} onDataChange={handleSetData} />
-            <Divider className="my-10" />
-            <CriteriosLimitacaoFuncionalGraveOsteoartroseTable onDataChange={handleSetData} sexo={data.sexo} />
-            <Divider className="my-10" />
-            <LachemeterTable onDataChange={handleSetData} />
-            <Divider className="my-10" />
-            <Womac onDataChange={(e)=>console.log(e)} />
-            <Divider className="my-10" />
-            <QuestionarioSF36 onDataChange={(e)=>{handleSetData}} />
-            <Divider className="my-10" />
             <TesteCaminhada onDataChange={handleSetData} />
             <Divider className="my-10" />
+            <CriteriosLimitacaoFuncionalGraveOsteoartroseTable onDataChange={handleSetData} sexo={data.sexo} />
+           
+
+            
 
             <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={enviarDados}>
                 Enviar

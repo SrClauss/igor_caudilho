@@ -1,19 +1,35 @@
 import { useState, useEffect } from "react";
 import { Card } from "antd";
 import { FormControl, FormControlLabel, FormLabel, RadioGroup, Radio } from '@mui/material'
+import { useMediaQuery } from "react-responsive";
 
-export default function ScoreQuestsSF({ onDataChange, prompt, options, scores, labelIndex }) {
-    const [data, setData] = useState()
-
+export default function ScoreQuestsSF({ onDataChange, prompt, options, scores, labelIndex, multiline = false, elementsPerRow = 3 }) {
+    const [result, setResult] = useState()
+    const [response, setResponse] = useState()
+    const isLargeScreen = useMediaQuery({ query: '(min-width: 500px)' })
 
 
     useEffect(() => {
-        onDataChange(data)
-    }, [data])
+
+
+        onDataChange(result, response)
+    }, [result])
 
     const handleDataChange = (value) => {
-        setData(value)
+
+
+
+        setResult(value)
     }
+    const generatesRows = () => {
+        const rows = []
+        for (let i = 0; i < options.length; i += elementsPerRow) {
+            rows.push(options.slice(i, i + elementsPerRow))
+        }
+        return rows
+    }
+
+
 
     return (
 
@@ -26,20 +42,44 @@ export default function ScoreQuestsSF({ onDataChange, prompt, options, scores, l
                     defaultValue={null}
                     onChange={(e) => {
                         const score = scores[parseInt(e.target.value)]
-
-
                         handleDataChange(score)
+                        setResponse(e.target.value)
                     }}
                 >
-                    <div className="flex  flex-col  md:flex-row md:justify-between  md:py-10">
-                        {options.map((option, index) => (
+                    {multiline &&  isLargeScreen ?
+                        generatesRows().map((row, rowIndex) => (
+                            <div key={rowIndex} className="flex flex-row py-4">
+                                {row.map((option, optionIndex) => {
+                                  
+                                    const uniqueIndex = rowIndex * elementsPerRow + optionIndex;
 
-                            <div>
-                                <FormControlLabel value={index} control={<Radio />} label={option} />
-                                <div>{`${scores[index]}`}</div>
+                                    return (
+                                        <FormControlLabel
+                                            key={uniqueIndex}
+                                            value={uniqueIndex}
+                                            control={<Radio />}
+                                            label={option}
+                                            className="items-center justify-start w-1/3"
+                                        />
+                                    );
+                                })}
                             </div>
-                        ))}
-                    </div>
+                        ))
+                        
+
+                        : (
+                            <div className="flex  flex-col  md:flex-row md:justify-between  md:py-10">
+                                {options.map((option, index) => (
+                                    <FormControlLabel
+                                        key={index}
+                                        value={index}
+                                        control={<Radio />}
+                                        label={option}
+                                    />
+                                ))}
+                            </div>)
+
+                    }
                 </RadioGroup>
             </FormControl>
         </Card>

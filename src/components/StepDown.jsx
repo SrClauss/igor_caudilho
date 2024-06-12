@@ -10,8 +10,7 @@ export default function StepDown({ onDataChange }) {
         stepDownDireito: 'normal',
         stepDownEsquerdo: 'normal'
     })
-    const [diretoChecked, setDireitoChecked] = useState(false)
-    const [esquerdoChecked, setEsquerdoChecked] = useState(false)
+
 
 
     const handleChange = (e) => {

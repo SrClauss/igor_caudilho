@@ -10,6 +10,10 @@ import { QuestionarioLysholm } from "../components/QuestionarioJoelho"
 import { Button } from "antd"
 import { Divider } from "@mui/material"
 import { push, ref } from "firebase/database";
+import QuestionarioSF36 from "../components/SF36"
+import Womac from "../components/Womac"
+import TesteMobilidadeTornozelo from "../components/TesteMobilidadeTornozelo"
+import StepDown from "../components/StepDown"
 
 
 
@@ -55,9 +59,9 @@ export default function Menisco() {
             <div className="py-10">
                 <DadosPessoais onSubmitData={handleSetData} />
             </div>
+            <Divider className="my-10" />
             <EscalaAnalogicaDor onDataChange={handleSetData} />
             <Divider className="my-10" />
-
             <AmplitudeMovimentoJoelho onDataChange={handleSetData} />
             <Divider className="my-10" />
             <PerimetroCoxa onDataChange={handleSetData} />
@@ -68,6 +72,11 @@ export default function Menisco() {
             <Divider className="my-10" />
             <QuestionarioLysholm onDataChange={handleSetData} />
             <Divider className="my-10" />
+            <TesteMobilidadeTornozelo onDataChange={handleSetData} />
+            <Divider className="my-10" />
+            <StepDown onDataChange={handleSetData} />
+            <Divider className="my-10" />
+            
             <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={enviarDados}>
                 Enviar
             </Button>

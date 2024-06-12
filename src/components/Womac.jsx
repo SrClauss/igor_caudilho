@@ -7,56 +7,45 @@ import { set } from 'firebase/database';
 
 
 export default function Womac({ onDataChange }) {
-    
+
     const [expanded, setExpanded] = useState(false)
     const [data, setData] = useState({})
     const [soma, setSoma] = useState(0)
 
 
 
+    const handleSetData = (object) => {
 
+        const newData = { ...data, ...object }
+        setData(newData)
+    }
     useEffect(() => {
-        let sum = 0
-        Object.values(data).forEach((value) => {
-            sum += value.soma
-        })
 
-        setSoma(sum)
-        
-     
+        console.log(data)
 
     }, [data])
 
-    useEffect(() => {
-        onDataChange(soma/24)
-    }, [soma])
-    const handleSetData = (media, soma, index) => {
 
-        let newData = { ...data }
-        newData[index] = { media, soma }
-        setData(newData)
-        
 
-        
-    }
+
 
 
 
     return (
-        <Accordion expanded={expanded} onChange={(e)=>setExpanded(!expanded)} >
+        <Accordion expanded={expanded} onChange={(e) => setExpanded(!expanded)} >
             <AccordionSummary
-                
-                expandIcon={<ExpandMoreIcon />}
-                sx={{ padding: "30px" }}>
-                <h2 className='text-2xl md:text-3xl font-bold text-cyan-700 pb-3 text-center'>WOMAC ({parseFloat(soma/24).toFixed(1)})</h2>
 
-                
+                expandIcon={<ExpandMoreIcon />}
+            >
+                <h2 className='text-2xl md:text-3xl font-bold text-cyan-700 pb-3 text-center'>WOMAC ({parseFloat(soma / 24).toFixed(1)})</h2>
+
+
             </AccordionSummary>
             <div className="text-center">
 
                 <BateriaPerguntas
 
-                    onDataChange={(media, soma) => { handleSetData(media, soma, 0) }}
+                    onDataChange={(object) => { handleSetData(object) }}
                     prompt="Intensidade da Dor"
                     index={0}
                     perguntas={[
@@ -69,7 +58,7 @@ export default function Womac({ onDataChange }) {
                     ]} >
 
 
-                    <Card className='mx-3 text-justify text-xl text-cyan-900'>As perguntas a seguir se referem à INTENSIDADE DA DOR que você está atualmente sentindo
+                    <Card className="text-justify text-sm md:text-xl bg-gray-100">As perguntas a seguir se referem à INTENSIDADE DA DOR que você está atualmente sentindo
                         devido a artrite de seu joelho. Para cada situação, por favor, coloque a intensidade da dor que sentiu nas últimas
                         72 horas (3 dias).</Card>
                 </BateriaPerguntas>
@@ -77,6 +66,7 @@ export default function Womac({ onDataChange }) {
 
 
                 <BateriaPerguntas
+                    onResponseChange={(e, index) => handleDataResponseChange(e, index)}
                     onDataChange={(media, soma) => { handleSetData(media, soma, 1) }}
                     prompt="Intensidade da Rigidez"
                     index={1} perguntas={[
@@ -84,13 +74,14 @@ export default function Womac({ onDataChange }) {
                         "Qual é a intensidade de sua rigidez após se sentar, se deitar ou repousar no decorrer do dia?"]}
                 >
 
-                    <Card className='mx-3 text-justify text-xl text-cyan-900'>As perguntas a seguir se referem a intensidade de RIGIDEZ nas juntas (não dor), que você está
+                    <Card className="text-justify text-sm md:text-xl bg-gray-100">As perguntas a seguir se referem a intensidade de RIGIDEZ nas juntas (não dor), que você está
                         atualmente sentindo devido a artrite em seu joelho nas últimas 72 horas. Rigidez é uma sensação de restrição
                         ou dificuldade para movimentar suas juntas.</Card>
                 </BateriaPerguntas>
 
 
                 <BateriaPerguntas
+                    onResponseChange={(e, index) => console.log(e, index)}
                     onDataChange={(media, soma) => { handleSetData(media, soma, 2) }}
                     prompt="Atividade Física"
                     index={2}
@@ -114,12 +105,12 @@ export default function Womac({ onDataChange }) {
                         "Fazer tarefas domésticas leves"
                     ]} >
 
-                    <Card className='mx-3 text-justify text-xl text-cyan-900'>As perguntas a seguir se referem a sua ATIVIDADE FÍSICA. Nós chamamos atividade física, sua
+                    <Card className="text-justify text-sm md:text-xl bg-gray-100">As perguntas a seguir se referem a sua ATIVIDADE FÍSICA. Nós chamamos atividade física, sua
                         capacidade de se movimentar e cuidar de você mesmo(a). Para cada uma das atividades a seguir, por favor,
                         indique o grau de dificuldade que você está tendo devido à artrite em seu joelho durante as últimas 72 horas.
                     </Card>
                 </BateriaPerguntas>
-                <Button type="text" className="block mx-auto mt-10 w-full" size="large" onClick={(e)=>setExpanded(false)}>
+                <Button type="text" className="block mx-auto mt-10 w-full" size="large" onClick={(e) => setExpanded(false)}>
                     Esconder
                 </Button>
 
