@@ -5,11 +5,11 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {Button}  from "@mui/material";
 
 
-export default function Lysholm({ onDataChange }) {
+export default function Lysholm({ onDataChange, initialData = null}) {
     const [expanded, setExpanded] = useState(false)
-    const [score, setScore] = useState({})
-    const [response, setResponse] = useState({})
-    const [soma, setSoma] = useState(0)
+    const [score, setScore] = useState(initialData?.lysholmScore||{})
+    const [response, setResponse] = useState(initialData?.lysholResponse||{})
+    const [soma, setSoma] = useState(initialData?.lysholmSoma|| 0)
 
 
 
@@ -66,7 +66,7 @@ export default function Lysholm({ onDataChange }) {
             <AccordionDetails>
                 <ScoreQuestsSF
                     onDataChange={(result, response) => { handleDataChange(result, response, 1) }}
-                    prompt={"Ao andar, vc manca?"}
+                    prompt={"Ao andar, você manca?"}
                     options={["Nunca", "Leve ou Periodicamento", "Intenso e Constantemente"]}
                     scores={[5, 3, 0]}
                     labelIndex={1}

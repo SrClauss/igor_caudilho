@@ -6,7 +6,7 @@ import * as tw from './tailwind'
 
 
 
-export default function AmplitudeMovimentoJoelho({ onDataChange }) {
+export default function AmplitudeMovimentoJoelho({ onDataChange, initialData=null }) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
     return (
 
@@ -14,15 +14,15 @@ export default function AmplitudeMovimentoJoelho({ onDataChange }) {
             <h2 className={tw.componentTitle}> 
                 Amplitude de Movimento do Joelho</h2>
             <div>
-                {isTabletOrMobile ? <AmplitudeMovimentoJoelhoCarousel onDataChange={onDataChange} /> : <AmplitudeMovimentoJoelhoTable onDataChange={onDataChange} />}
+                {isTabletOrMobile ? <AmplitudeMovimentoJoelhoCarousel onDataChange={onDataChange} initialData={initialData}/> : <AmplitudeMovimentoJoelhoTable onDataChange={onDataChange} initialData={initialData} />}
             </div>
         </Card>
     )
 }
 
 
-export function AmplitudeMovimentoJoelhoCarousel({ onDataChange }) {
-    const [data, setData] = useState({
+export function AmplitudeMovimentoJoelhoCarousel({ onDataChange, initialData = null}) {
+    const [data, setData] = useState(initialData ||{
 
         flexaoJoelhoDireito: '',
         flexaoJoelhoEsquerdo: '',
@@ -74,6 +74,7 @@ export function AmplitudeMovimentoJoelhoCarousel({ onDataChange }) {
                         <div className={tw.tableSideValue}>Joelho Direito</div>
                         <div className={tw.colTransparent}>
                             <input
+                                
                                 id='flexaoJoelhoDireito'
                                 className={tw.inputTransparent}
                                 type="number"
@@ -157,10 +158,10 @@ export function AmplitudeMovimentoJoelhoCarousel({ onDataChange }) {
 
 
 
-function AmplitudeMovimentoJoelhoTable({ onDataChange }) {
+function AmplitudeMovimentoJoelhoTable({ onDataChange, initialData = null}) {
 
 
-    const [data, setData] = useState({
+    const [data, setData] = useState(initialData ||{
 
         flexaoJoelhoDireito: '',
         flexaoJoelhoEsquerdo: '',

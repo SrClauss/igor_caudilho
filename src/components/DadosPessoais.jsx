@@ -19,19 +19,19 @@ import {
 import { useState } from 'react';
 
 
-export default function DadosPessoais({ onSubmitData}) {
+export default function DadosPessoais({ onSubmitData, initialData = null}) {
     
-    const [nome, setNome] = useState('')
-    const [idade, setIdade] = useState('')
-    const [altura, setAltura] = useState('')
-    const [peso, setPeso] = useState('')
-    const [sexo, setSexo] = useState('')
-    const [lados, setLados] = useState([])
-    const [membro, setMembro] = useState('')
-    const [data, setData] = useState(dayjs())
-    const [hora, setHora] = useState(dayjs())
-    const [queixa, setQueixa] = useState('')
-    const [hd , setHd] = useState('')
+    const [nome, setNome] = useState(initialData?.nome || '')
+    const [idade, setIdade] = useState(initialData?.idade || '')
+    const [altura, setAltura] = useState(initialData?.altura || '')
+    const [peso, setPeso] = useState(initialData?.peso || '')
+    const [sexo, setSexo] = useState(initialData?.sexo || 'Masculino')
+    const [lados, setLados] = useState(initialData?.lados || [])
+    const [membro, setMembro] = useState(initialData?.membro || 'direito')
+    const [data, setData] = useState(initialData?.data || dayjs())
+    const [hora, setHora] = useState(initialData?.hora || dayjs())
+    const [queixa, setQueixa] = useState(initialData?.queixa || '')
+
     const [disabled, setDisabled] = useState(false)
     
     
@@ -208,24 +208,7 @@ export default function DadosPessoais({ onSubmitData}) {
             </Grid>
 
             <Grid container spacing={2} className='pt-4'>
-                <Grid item xs={12} sm={6} md={4}>
-                    <TextField
-                        disabled={disabled}
-                        id="data"
-                        label="HD"
-                        type="text"
-                        variant="outlined"
-                        className='w-full'
-                        size="medium"
-                        value={hd}
-                        onChange={(e) => {
-
-                            setHd(e.target.value)
-                            console.log(hd) 
-                        }}
-
-                    />
-                </Grid>
+                
                 <Grid item xs={12} sm={6} md={4}>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <TimePicker
@@ -280,8 +263,8 @@ export default function DadosPessoais({ onSubmitData}) {
             </Box>
             <Box className='pt-4'>
                 <button type="submit" onClick={() => {
-                    onSubmitData(JSON.parse(JSON.stringify({nome, idade, altura, peso, sexo, lados, membro, data, hora, queixa, hd })));
-                    Cookies.set('lastRegister', JSON.stringify({nome, idade, altura, peso, sexo, lados, membro, data, hora, hd }))
+                    onSubmitData(JSON.parse(JSON.stringify({nome, idade, altura, peso, sexo, lados, membro, data, hora, queixa })));
+                    Cookies.set('lastRegister', JSON.stringify({nome, idade, altura, peso, sexo, lados, membro, data, hora }))
                     Cookies.set('lastQueixa', JSON.stringify(queixa))
                 
                     setDisabled(!disabled)
@@ -307,7 +290,7 @@ export default function DadosPessoais({ onSubmitData}) {
                         setData(dayjs(JSON.parse(Cookies.get('lastRegister')).data, 'DD-MM-YY'))
                         setHora(dayjs(JSON.parse(Cookies.get('lastRegister')).hora, 'HH:mm'))
                         setQueixa(JSON.parse(Cookies.get('lastQueixa')))
-                        setHd(JSON.parse(Cookies.get('lastRegister')).hd)
+                       
                     }
                     setDisabled(true)
                 

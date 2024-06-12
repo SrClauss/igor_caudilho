@@ -3,9 +3,9 @@ import { Card } from "antd";
 import { FormControl, FormControlLabel, FormLabel, RadioGroup, Radio } from '@mui/material'
 import { useMediaQuery } from "react-responsive";
 
-export default function ScoreQuestsSF({ onDataChange, prompt, options, scores, labelIndex, multiline = false, elementsPerRow = 3 }) {
-    const [result, setResult] = useState()
-    const [response, setResponse] = useState()
+export default function ScoreQuestsSF({ onDataChange, prompt, options, scores, labelIndex, multiline = false, elementsPerRow = 3, initialData = null}) {
+    const [result, setResult] = useState(initialData?.result || null)
+    const [response, setResponse] = useState(initialData?.response || null)
     const isLargeScreen = useMediaQuery({ query: '(min-width: 500px)' })
 
 
@@ -39,7 +39,7 @@ export default function ScoreQuestsSF({ onDataChange, prompt, options, scores, l
             <FormControl className="w-full" >
                 <FormLabel className="text-start">{labelIndex}. {prompt}</FormLabel>
                 <RadioGroup
-                    defaultValue={null}
+                    defaultValue={initialData?.response || null}
                     onChange={(e) => {
                         const score = scores[parseInt(e.target.value)]
                         handleDataChange(score)
@@ -57,7 +57,7 @@ export default function ScoreQuestsSF({ onDataChange, prompt, options, scores, l
                                         <FormControlLabel
                                             key={uniqueIndex}
                                             value={uniqueIndex}
-                                            control={<Radio />}
+                                            control={<Radio  />}
                                             label={option}
                                             className="items-center justify-start w-1/3"
                                         />

@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 import ScoreQuestsSF from "./ScoreQuestsSF";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {Button} from 'antd'
-export default function Kujala({ onDataChange }) {
+export default function Kujala({ onDataChange, initialValues = null}) {
     const [expanded, setExpanded] = useState(false)
-    const [score, setScore] = useState({})
-    const [response, setResponse] = useState({})
-    const [soma, setSoma] = useState(0)
+    const [score, setScore] = useState(initialValues?.kujalaScore||{})
+    const [response, setResponse] = useState(initialValues?.kujalaResponse|| {})
+    const [soma, setSoma] = useState(initialValues?.kujalaSoma || 0)
 
     const handleDataChange = (result, response, index) => {
         const newScore = {

@@ -5,10 +5,10 @@ import { set } from "firebase/database";
 import { red } from "@mui/material/colors";
 
 
-export default function BateriaPerguntas({ onDataChange, prompt, index, perguntas, children }) {
-    const [data, setData] = useState({})
-    const [soma, setSoma] = useState(0)
-    const [media, setMedia] = useState(0)
+export default function BateriaPerguntas({ onDataChange, prompt, index, perguntas, children, initialData = null}) {
+    const [data, setData] = useState(initialData?.response || {})
+    const [soma, setSoma] = useState(initialData?.soma || 0)
+    const [media, setMedia] = useState(initialData?.media || 0)
 
 
 
@@ -68,6 +68,7 @@ export default function BateriaPerguntas({ onDataChange, prompt, index, pergunta
             <h2 className="flex p-5 text-xl text-cyan-800">{index + 1}. {prompt}</h2>
             {perguntas.map((pergunta, index) => (
                 <ScoreQuestsSF
+                    
                     key={index}
                     options={['Nunca', 'Poucas vezes', 'As vezes', 'Quase sempre', 'Sempre']}
                     scores={[0, 25, 50, 75, 100]}

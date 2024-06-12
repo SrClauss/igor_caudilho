@@ -2,8 +2,8 @@ import { Card } from "@mui/material"
 import SliderDor from "./SliderDor"
 import QuestaoBilateral from "./QuestaoBilateral"
 import { useState, useEffect } from "react"
-export default function EscalaAnalogicaDor({ onDataChange }) {
-    const [data, setData] = useState({
+export default function EscalaAnalogicaDor({ onDataChange, initialData = null}) {
+    const [data, setData] = useState(initialData ||{
         dorMomentoDireito: 0,
         dorMomentoEsquerdo: 0,
         dorMenorDireito: 0,

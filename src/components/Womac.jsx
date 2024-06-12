@@ -6,10 +6,10 @@ import { Button, Card } from 'antd';
 import { set } from 'firebase/database';
 
 
-export default function Womac({ onDataChange }) {
+export default function Womac({ onDataChange, initialData = null}) {
 
     const [expanded, setExpanded] = useState(false)
-    const [data, setData] = useState({})
+    const [data, setData] = useState(initialData||{})
     const [soma, setSoma] = useState(0)
 
 
@@ -21,7 +21,7 @@ export default function Womac({ onDataChange }) {
     }
     useEffect(() => {
 
-        console.log(data)
+        onDataChange(data)
 
     }, [data])
 

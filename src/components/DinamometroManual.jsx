@@ -24,8 +24,8 @@ export default function DinamometroManual({ onDataChange }) {
 
 }
 
-export function DinamometroManualCarousel({ onDataChange }) {
-    const [data, setData] = useState({
+export function DinamometroManualCarousel({ onDataChange, initialData = null}) {
+    const [data, setData] = useState(initialData || {
         "torqueExtensorMedioDireito": '',
         "torqueExtensorMedioEsquerdo": '',
         "torqueFlexorMedioDireito": '',

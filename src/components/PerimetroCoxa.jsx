@@ -5,21 +5,21 @@ import '../index.css'
 import * as tw from './tailwind'
 
 
-export default function PerimetroCoxa({ onDataChange }) {
+export default function PerimetroCoxa({ onDataChange, initialData = null}) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
     return (
         <Card>
             <h2 className="text-xl md:text-3xl font-bold text-cyan-600 pb-3 text-center"> 
                 {"Perimetro da Coxa (medida de 6 e 15cm da borda superior da paleta)"}</h2>
             <div>
-                {isTabletOrMobile ? <PerimetroCoxaCarousel onDataChange={onDataChange} /> : <PerimetroCoxaTable onDataChange={onDataChange} />}
+                {isTabletOrMobile ? <PerimetroCoxaCarousel onDataChange={onDataChange} initialData={initialData} /> : <PerimetroCoxaTable onDataChange={onDataChange} initialData={initialData}/>}
             </div>
         </Card>
     )
 
 }
 
-function PerimetroCoxaCarousel({ onDataChange }) {
+function PerimetroCoxaCarousel({ onDataChange, initialData = null}) {
     const [data, setData] = useState({
         coxaDireita6cm: '',
         coxaEsquerda6cm: '',

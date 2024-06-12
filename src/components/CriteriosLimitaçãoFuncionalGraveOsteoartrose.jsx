@@ -10,7 +10,7 @@ import { useMediaQuery } from "react-responsive";
 
 
 
-export function CriteriosLimitacaoFuncionalGraveOsteoartroseTable({ onDataChange, sexo }) {
+export function CriteriosLimitacaoFuncionalGraveOsteoartroseTable({ onDataChange, sexo, initialData = null }) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
     const variaveisMasculinas = {
         idade: (x) => x >= 64,
@@ -74,7 +74,7 @@ export function CriteriosLimitacaoFuncionalGraveOsteoartroseTable({ onDataChange
     const labels = sexo === 'Feminino' ? labelsFemininas : labelsMasculinas
 
 
-    const [data, setData] = useState({})
+    const [data, setData] = useState(initialData || {})
     const handleDataChange = (key, value) => {
         setData(prevData => ({
             ...prevData,

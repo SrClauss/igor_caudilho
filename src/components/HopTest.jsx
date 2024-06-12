@@ -2,8 +2,8 @@ import { useState, useEffect } from "react"
 import { Card } from "antd";
 import * as tw from "./tailwind";
 
-export default function HopTest({ onDataChange }) {
-    const [data, setData] = useState({
+export default function HopTest({ onDataChange, initialData = null}) {
+    const [data, setData] = useState(initialData || {
         hopTestDireito: 0,
         hopTestEsquerdo: 0
     })
