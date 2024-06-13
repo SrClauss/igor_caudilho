@@ -7,13 +7,14 @@ export default function ScoreQuestsSF({ onDataChange, prompt, options, scores, l
     const [result, setResult] = useState(initialData?.result || null)
     const [response, setResponse] = useState(initialData?.response || null)
     const isLargeScreen = useMediaQuery({ query: '(min-width: 500px)' })
-
+    const [prevResult, setPrevResult] = useState(result);
 
     useEffect(() => {
-
-
-        onDataChange(result, response)
-    }, [result])
+      if (prevResult !== result) {
+        onDataChange(result, response);
+        setPrevResult(result);
+      }
+    }, [result, prevResult, response]);
 
     const handleDataChange = (value) => {
 

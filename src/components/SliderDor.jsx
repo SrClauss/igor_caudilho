@@ -1,7 +1,7 @@
 import { Slider } from "@mui/material";
 import { useState } from "react";
-export default function SliderDor({title, onSliderChange}) {
-    const [value, setValue] = useState(0)
+export default function SliderDor({title, onSliderChange, initialData = null}) {
+    const [value, setValue] = useState(initialData ? initialData : 0)
     const [classificacao, setClassificacao] = useState('leve')
     const [color, setColor] = useState('text-blue-500')
 
@@ -31,7 +31,7 @@ export default function SliderDor({title, onSliderChange}) {
                 <Slider
 
                     color="neutral"                                   
-                    defaultValue={0}
+                    defaultValue={initialData?initialData : 0}
                     aria-labelledby="discrete-slider"
                     valueLabelDisplay="auto"
                     step={1}

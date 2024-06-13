@@ -5,8 +5,8 @@ import * as tw from './tailwind'
 
 
 
-export default function StepDown({ onDataChange }) {
-    const [data, setData] = useState({
+export default function StepDown({ onDataChange , initialData = null}) {
+    const [data, setData] = useState(initialData||{
         stepDownDireito: 'normal',
         stepDownEsquerdo: 'normal'
     })

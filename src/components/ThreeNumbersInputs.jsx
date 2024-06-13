@@ -1,7 +1,7 @@
 import { useEffect, useState,  } from "react"
 import * as tw from "./tailwind"
-export default function ThreeNumberInputs({onChange, disabled=false, lastOnKeyDown =null}){
-    const [data, setData] = useState([0,0,0])
+export default function ThreeNumberInputs({onChange, disabled=false, lastOnKeyDown =null, initialData = null}){
+    const [data, setData] = useState(initialData||[0,0,0])
     useEffect(() => {
         onChange(data)
     }, [data])

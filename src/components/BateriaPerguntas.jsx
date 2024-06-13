@@ -1,23 +1,24 @@
 import { useState, useEffect } from "react";
 import ScoreQuestsSF from "./ScoreQuestsSF";
 import { Card } from "antd";
-import { set } from "firebase/database";
-import { red } from "@mui/material/colors";
+
 
 
 export default function BateriaPerguntas({ onDataChange, prompt, index, perguntas, children, initialData = null}) {
-    const [data, setData] = useState(initialData?.response || {})
+    const [data, setData] = useState(initialData?.respostas || {})  
     const [soma, setSoma] = useState(initialData?.soma || 0)
     const [media, setMedia] = useState(initialData?.media || 0)
 
 
 
     const handleDataChange = (result, response, indexPergunta) => {
-     
+      
         let newData = { ...data }
-        newData[`result${indexPergunta}`] = result
-        newData[`response${indexPergunta}`] = response
-        
+        newData[indexPergunta] = {
+            result,
+            response
+        }
+
         setData(newData)
 
 
@@ -33,33 +34,22 @@ export default function BateriaPerguntas({ onDataChange, prompt, index, pergunta
         let sum = 0
         let average = 0
         Object.keys(data).forEach((key) => {
-            if (key.includes('result')) {
-                sum += data[key]
-            }
+            sum += data[key].result
         })
-        average = perguntas.length>0? sum / perguntas.length:0
+        average = sum / Object.keys(data).length
 
+        onDataChange({
+            soma: sum,
+            media: average,
+            respostas: data
+        
+        })
         setSoma(sum)
         setMedia(average)
 
-
     }, [data])
 
-    useEffect(() => {
-
-        const object = {
-            [`woamc${index + 1}`]: {
-
-                soma: soma,
-                media: media,
-                respostas: data
-
-
-            }
-        }
-
-        onDataChange(object)
-    }, [media])
+    
 
 
     return (
@@ -68,6 +58,8 @@ export default function BateriaPerguntas({ onDataChange, prompt, index, pergunta
             <h2 className="flex p-5 text-xl text-cyan-800">{index + 1}. {prompt}</h2>
             {perguntas.map((pergunta, index) => (
                 <ScoreQuestsSF
+
+                    initialData={initialData?.respostas?initialData.respostas[index]:null}
                     
                     key={index}
                     options={['Nunca', 'Poucas vezes', 'As vezes', 'Quase sempre', 'Sempre']}

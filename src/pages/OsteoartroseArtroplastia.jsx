@@ -5,11 +5,9 @@ import AmplitudeMovimentoJoelho from "../components/AmplitudeMovimentoJoelho"
 import PerimetroCoxa from "../components/PerimetroCoxa"
 import DinamometroManual from "../components/DinamometroManual"
 import RelacaoFlexoresExtensores from "../components/RelacaoFlexoresExtensores"
-import SliderDor from "../components/SliderDor"
 import { Divider } from "antd"
 import EscalaAnalogicaDor from "../components/EscalaVisualAnalogicaDor"
 import { CriteriosLimitacaoFuncionalGraveOsteoartroseTable } from "../components/CriteriosLimitaçãoFuncionalGraveOsteoartrose"
-import { LachemeterTable } from "../components/Lechemeter"
 import { Button } from "antd"
 import { push, ref } from "firebase/database";
 import Womac from "../components/Womac";
@@ -20,9 +18,14 @@ import TesteCaminhada from "../components/TesteCaminhada"
 
 export default function OsteoartroseArtroplastia() {
     const [data, setData] = useState({})
+    useEffect(() => {
+        console.log(data);
+    }, [data])
     const handleSetData = (object) => {
+        
         const [keys, values] = [Object.keys(object), Object.values(object)]
         let newData = { ...data };
+
 
         keys.forEach((key, index) => {
             newData = {
@@ -33,9 +36,6 @@ export default function OsteoartroseArtroplastia() {
 
         setData(newData);
     }
-    useEffect(() => {
-        console.log(data);
-    }, [data])
     const enviarDados = async () => {
         await push(ref(db, 'osteoartrose_artroplastia'), JSON.stringify(data)).then(() => {
             console.log('Data is set');
@@ -63,7 +63,7 @@ export default function OsteoartroseArtroplastia() {
             <Divider className="my-10" />
             <EscalaAnalogicaDor onDataChange={handleSetData} />
             <Divider className="my-10" />
-            <QuestionarioSF36 onDataChange={handleSetData} onQuestionaryChange={handleSetData} onDominionsChange={handleSetData} />
+            <QuestionarioSF36 onDataChange={handleSetData} />
             <Divider className="my-10" />
             <Womac onDataChange={handleSetData} />
             <Divider className="my-10" />

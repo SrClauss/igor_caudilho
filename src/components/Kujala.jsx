@@ -3,47 +3,44 @@ import { useState, useEffect } from "react";
 import ScoreQuestsSF from "./ScoreQuestsSF";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {Button} from 'antd'
-export default function Kujala({ onDataChange, initialValues = null}) {
+export default function Kujala({ onDataChange,  initialData = null}) {
     const [expanded, setExpanded] = useState(false)
-    const [score, setScore] = useState(initialValues?.kujalaScore||{})
-    const [response, setResponse] = useState(initialValues?.kujalaResponse|| {})
-    const [soma, setSoma] = useState(initialValues?.kujalaSoma || 0)
+    const [data, setData] = useState(initialData || {})
 
     const handleDataChange = (result, response, index) => {
-        const newScore = {
-            ...score,
-            [index]: result
-        }
-        const newResponse = {
-            ...response,
-            [index + 1]: response
-        }
+        const newData = {...data}
+        newData[index] = {result, response}
 
-        setScore(newScore)
-        setResponse(newResponse)
+        setData(newData)
+
+
 
 
     }
 
 
     useEffect(() => {
-        const values = Object.values(score).map((value) => value === undefined ? 0 : value)
-
-
-
-
-        const sum = values.reduce((acc, value) => acc + value, 0)
-        setSoma(sum)
-
-
-        onDataChange({
-            kujalaScore: score,
-            kujalaResponse: response,
-            kujaSoma: sum
+        let sum = 0
+        Object.keys(data).forEach((key) => {
+            if (data[key].result) {
+                sum += data[key].result
+            }
         })
 
-    }, [score])
-   
+        onDataChange({kujala:{...data, soma:sum}})
+
+        
+    }, [data])
+    const defInitialData = (number) => {
+        if (!initialData) {
+            return null
+        }
+        if (!initialData[number]) {
+            return null
+        }
+        return initialData[number]
+
+    }
 
     return (
         <Accordion expanded={expanded} onChange={(e, isExpanded) => setExpanded(isExpanded)}>
@@ -61,6 +58,8 @@ export default function Kujala({ onDataChange, initialValues = null}) {
 
                 <ScoreQuestsSF
 
+
+                    initialData={defInitialData(1)}
                     onDataChange={(result, response) => { handleDataChange(result, response, 1) }}
                     prompt={"Ao andar, você manca?"}
                     options={["Não", "As vezes", "Sempre"]}
@@ -69,6 +68,7 @@ export default function Kujala({ onDataChange, initialValues = null}) {
 
                 />
                 <ScoreQuestsSF
+                    initialData={defInitialData(2)}
                     onDataChange={(result, response) => { handleDataChange(result, response, 2) }}
                     prompt={"Você sustenta o peso do corpo?"}
                     options={["Sim, totalmente sem dor", "Sim, mas com dor", "Não, é impossível"]}
@@ -76,6 +76,7 @@ export default function Kujala({ onDataChange, initialValues = null}) {
                     labelIndex={2}
                 />
                 <ScoreQuestsSF
+                    initialData={defInitialData(3)}
                     onDataChange={(result, response) => { handleDataChange(result, response, 3) }}
                     prompt={"Você caminha:"}
                     options={["Sem limite de distância", "Mais de 2 km", "Entre 1 a 2 km", "Sou incapaz de caminhar"]}
@@ -83,6 +84,7 @@ export default function Kujala({ onDataChange, initialValues = null}) {
                     labelIndex={3}
                 />
                 <ScoreQuestsSF
+                    initialData={defInitialData(4)}
                     onDataChange={(result, response) => { handleDataChange(result, response, 4) }}
                     prompt={"Para subir e descer escadas você:"}
                     options={["Não tem dificuldade", "Tem leve dor apenas ao descer", "Tem dor ao descer e ao subir", "Não consegue subir nem descer escadas"]}
@@ -90,6 +92,7 @@ export default function Kujala({ onDataChange, initialValues = null}) {
                     labelIndex={4}
                 />
                 <ScoreQuestsSF
+                    initialData={defInitialData(5)}
                     onDataChange={(result, response) => { handleDataChange(result, response, 5) }}
                     prompt={"Para agachar você:"}
                     multiline={true}
@@ -99,6 +102,7 @@ export default function Kujala({ onDataChange, initialValues = null}) {
                     labelIndex={5}
                 />
                 <ScoreQuestsSF
+                    initialData={defInitialData(6)}
                     onDataChange={(result, response) => { handleDataChange(result, response, 6) }}
                     prompt={"Para correr você"}
                     options={["Não tem dificuldade", "Sente dor após 2km", "Sente dor leve desde o início", "Sente dor forte", "Não consegue"]}
@@ -106,6 +110,7 @@ export default function Kujala({ onDataChange, initialValues = null}) {
                     labelIndex={6}
                 />
                 <ScoreQuestsSF
+                    initialData={defInitialData(7)}
                     onDataChange={(result, response) => { handleDataChange(result, response, 7) }}
                     prompt={"Para pular você:"}
                     options={["Não tem dificuldade", "Tem leve dificuldade", "Tem dor constante", "Não consegue"]}
@@ -113,6 +118,7 @@ export default function Kujala({ onDataChange, initialValues = null}) {
                     labelIndex={7}
                 />
                 <ScoreQuestsSF
+                    initialData={defInitialData(8)}
                     onDataChange={(result, response) => { handleDataChange(result, response, 8) }}
                     prompt={"Em relação á sentar-se prolongadamente com os joelhos flexionados:"}
                     multiline={true}
@@ -121,6 +127,7 @@ export default function Kujala({ onDataChange, initialValues = null}) {
                     labelIndex={8}
                 />
                 <ScoreQuestsSF
+                    initialData={defInitialData(9)}
                     onDataChange={(result, response) => { handleDataChange(result, response, 9) }}
                     prompt={"Você sente dor no joelho afetado?"}
                     options={["Não", "Leve e ás vezes", "Tenho dor que prejudica o sono", "Forte e ás vezes", "Forte e constante"]}
@@ -128,7 +135,7 @@ export default function Kujala({ onDataChange, initialValues = null}) {
                     labelIndex={9}
                 />
                 <ScoreQuestsSF
-
+                    initialData={defInitialData(10)}
                     onDataChange={(result, response) => { handleDataChange(result, response, 10) }}
                     prompt={"Quanto ao inchaço:"}
                     options={["Não apresento", "Tenho apenas após muito esforço", "Tenho após atividades diárias", "Tenho toda noite", "Tenho constantemente"]}
@@ -136,6 +143,7 @@ export default function Kujala({ onDataChange, initialValues = null}) {
                     labelIndex={10}
                 />
                 <ScoreQuestsSF
+                    initialData={defInitialData(11)}
                     onDataChange={(result, response) => { handleDataChange(result, response, 11) }}
                     multiline={true}
                     prompt={"Movimento anormal doloroso da patela ao ajoelhar-se (subluxação)"}
@@ -144,6 +152,7 @@ export default function Kujala({ onDataChange, initialValues = null}) {
                     labelIndex={11}
                 />
                 <ScoreQuestsSF
+                    initialData={defInitialData(12)}
                     onDataChange={(result, response) => { handleDataChange(result, response, 12) }}
                     prompt={"Você perdeu massa muscular (atrofia) da coxa?"}
                     options={["Nenhuma", "Pouca", "Muita"]}
@@ -152,6 +161,7 @@ export default function Kujala({ onDataChange, initialValues = null}) {
                 />
 
                 <ScoreQuestsSF
+                    initialData={defInitialData(13)}
                     onDataChange={(result, response) => { handleDataChange(result, response, 13) }}
                     prompt={"Você tem dificuldade para dobrar o joelho afetado?"}
                     options={["Nenhuma", "Pouca", "Muita"]}

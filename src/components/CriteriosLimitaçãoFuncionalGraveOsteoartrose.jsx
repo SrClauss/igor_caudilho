@@ -2,16 +2,9 @@ import { Card } from "@mui/material";
 import { useEffect, useState, useRef } from "react";
 import * as tw from "./tailwind";
 import { CheckBox, Cancel } from '@mui/icons-material';
-import { Carousel } from "antd";
-import { useMediaQuery } from "react-responsive";
-
-
-
-
-
 
 export function CriteriosLimitacaoFuncionalGraveOsteoartroseTable({ onDataChange, sexo, initialData = null }) {
-    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
+
     const variaveisMasculinas = {
         idade: (x) => x >= 64,
         imc: (x) => x >= 29,

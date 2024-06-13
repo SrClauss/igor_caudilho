@@ -1,8 +1,8 @@
 import { Box, Card } from "@mui/material"
 import { useEffect, useState } from "react"
 import * as tw from "./tailwind"
-export default function RelacaoFlexoresExtensores({ onDataChange }) {
-    const [data, setData] = useState({
+export default function RelacaoFlexoresExtensores({ onDataChange, initialData = null}) {
+    const [data, setData] = useState(initialData ||{
         flexores: "",
         extensores: ""
     })

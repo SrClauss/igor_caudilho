@@ -7,7 +7,6 @@ import AmplitudeMovimentoJoelho from "../components/AmplitudeMovimentoJoelho";
 import PerimetroCoxa from "../components/PerimetroCoxa";
 import DinamometroManual from "../components/DinamometroManual";
 import RelacaoFlexoresExtensores from "../components/RelacaoFlexoresExtensores";
-import QuestionarioJoelho from "../components/QuestionarioJoelho";
 import { db } from "../firebase";
 import { push, ref } from "firebase/database";
 import TesteMobilidadeTornozelo from "../components/TesteMobilidadeTornozelo";

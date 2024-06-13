@@ -6,24 +6,41 @@ import { Button, Card } from 'antd';
 import { set } from 'firebase/database';
 
 
+
 export default function Womac({ onDataChange, initialData = null}) {
 
     const [expanded, setExpanded] = useState(false)
     const [data, setData] = useState(initialData||{})
-    const [soma, setSoma] = useState(0)
+    const [soma, setSoma] = useState(initialData?.soma || 0)
+
+    
 
 
 
-    const handleSetData = (object) => {
-
-        const newData = { ...data, ...object }
+    const handleSetData = (womac, object) => {
+      
+        const newData = {...data}
+        newData[womac] = object
         setData(newData)
     }
     useEffect(() => {
 
-        onDataChange(data)
 
+
+     
+        let sum = 0
+        Object.keys(data).forEach((key) => {
+
+            sum += data[key].soma
+        })
+
+        onDataChange({womac:{...data, soma:sum}})
+        setSoma(sum)
+     
+
+        
     }, [data])
+    
 
 
 
@@ -37,15 +54,15 @@ export default function Womac({ onDataChange, initialData = null}) {
 
                 expandIcon={<ExpandMoreIcon />}
             >
-                <h2 className='text-2xl md:text-3xl font-bold text-cyan-700 pb-3 text-center'>WOMAC ({parseFloat(soma / 24).toFixed(1)})</h2>
+                <h2 className='text-2xl md:text-3xl font-bold text-cyan-700 pb-3 text-center'>WOMAC ({parseFloat(soma/24).toFixed(1)})</h2>
 
 
             </AccordionSummary>
             <div className="text-center">
 
                 <BateriaPerguntas
-
-                    onDataChange={(object) => { handleSetData(object) }}
+                    initialData={initialData?.womac1}
+                    onDataChange={(object) => { handleSetData("womac1", object) }}
                     prompt="Intensidade da Dor"
                     index={0}
                     perguntas={[
@@ -66,8 +83,8 @@ export default function Womac({ onDataChange, initialData = null}) {
 
 
                 <BateriaPerguntas
-                    onResponseChange={(e, index) => handleDataResponseChange(e, index)}
-                    onDataChange={(media, soma) => { handleSetData(media, soma, 1) }}
+                    initialData={initialData?.womac2}                  
+                    onDataChange={(object) => { handleSetData("womac2", object) }}
                     prompt="Intensidade da Rigidez"
                     index={1} perguntas={[
                         "Qual é a intensidade de sua rigidez logo após acordar de manhã?",
@@ -81,8 +98,8 @@ export default function Womac({ onDataChange, initialData = null}) {
 
 
                 <BateriaPerguntas
-                    onResponseChange={(e, index) => console.log(e, index)}
-                    onDataChange={(media, soma) => { handleSetData(media, soma, 2) }}
+                    initialData={initialData?.womac3}   
+                    onDataChange={(object) => { handleSetData("womac3", object) }}
                     prompt="Atividade Física"
                     index={2}
                     perguntas={[

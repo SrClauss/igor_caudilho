@@ -4,8 +4,8 @@ import SliderDor from './SliderDor'
 import { Card } from 'antd';
 
 
-export default function TesteCaminhada({ onDataChange }) {
-    const [data, setData] = useState({
+export default function TesteCaminhada({ onDataChange, initialData = null}) {
+    const [data, setData] = useState(initialData ||{
         distanciaPercorrida: '',
         dorCaminhada: '',
     })

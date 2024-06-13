@@ -20,7 +20,7 @@ export default function PerimetroCoxa({ onDataChange, initialData = null}) {
 }
 
 function PerimetroCoxaCarousel({ onDataChange, initialData = null}) {
-    const [data, setData] = useState({
+    const [data, setData] = useState(initialData ||{
         coxaDireita6cm: '',
         coxaEsquerda6cm: '',
         coxaDireita15cm: '',
@@ -35,15 +35,14 @@ function PerimetroCoxaCarousel({ onDataChange, initialData = null}) {
 
         const diferencaCoxa6cm = Math.abs(data.coxaDireita6cm - data.coxaEsquerda6cm)
         const diferencaCoxa15cm = Math.abs(data.coxaDireita15cm - data.coxaEsquerda15cm)
+        onDataChange({...data, diferencaCoxa6cm, diferencaCoxa15cm})
+        setData({...data. diferencaCoxa6cm, diferencaCoxa15cm})
+        
 
-        setData({
-            ...data,
-            diferencaCoxa6cm,
-            diferencaCoxa15cm
-        })
+      
     }, [data.coxaDireita15cm, data.coxaEsquerda15cm, data.coxaDireita6cm, data.coxaEsquerda6cm])
 
-   
+   useEffect
 
     const handleChange = (e) => {
         const { name, value } = e.target

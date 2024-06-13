@@ -5,29 +5,14 @@ import * as tw from "./tailwind";
 
 
 
-export function QuestionarioLysholm({ onDataChange }) {
+export function QuestionarioLysholm({ pontuacao }) {
 
 
 
-    const [data, setData] = useState({
-        pontuacaoLysholm: ""
-    })
-
-    useEffect(() => {
-        onDataChange(data);
-    }, [data])
-
-    const handleChange = (e) => {
-        const newData = {
-            ...data,
-            [e.target.name]: e.target.value
-        }
-        setData(newData)
-    }
 
     const boldPontuacao = (rangeMin, RangeMax) => {
         const styleBold = "text-cyan-800 text-md p-1 font-bold"
-        if (data.pontuacaoLysholm >= rangeMin && data.pontuacaoLysholm <= RangeMax) {
+        if (pontuacao >= rangeMin && pontuacao <= RangeMax) {
             return styleBold;
         }
 
@@ -37,23 +22,18 @@ export function QuestionarioLysholm({ onDataChange }) {
 
     return (
         <Card>
-            <div className="w-full text-center text-cyan-600 font-bold text-2xl md:text-3xl p-3">
-                Questionário de Função Reportada do Joelho
-            </div>
-            <div className="w-full text-center text-cyan-800 font-bold text-xl md:text-2xl p-3">
-                Questionário de Lysholm
-            </div>
+            
             <div className="w-full grid grid-cols-2 border-y border-y-1 border-cyan-800">
                 <div className={tw.sideValue}>
                     Pontuação
                 </div>
                 <div className="col-auto bg-transparent">
                     <input
+                        disabled
                         type="number"
                         name="pontuacaoLysholm"
                         id="pontuacaoLysholm"
-                        value={data.pontuacaoLysholm}
-                        onChange={handleChange}
+                        value={pontuacao}
                         className={tw.inputTransparent} />
                 </div>
             </div>

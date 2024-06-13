@@ -10,10 +10,9 @@ import { QuestionarioLysholm } from "../components/QuestionarioJoelho"
 import { Button } from "antd"
 import { Divider } from "@mui/material"
 import { push, ref } from "firebase/database";
-import QuestionarioSF36 from "../components/SF36"
-import Womac from "../components/Womac"
 import TesteMobilidadeTornozelo from "../components/TesteMobilidadeTornozelo"
 import StepDown from "../components/StepDown"
+import Lysholm from "../components/Lysholm"
 
 
 
@@ -40,7 +39,7 @@ export default function Menisco() {
         await push(ref(db, 'menisco'), JSON.stringify(data)).then(() => {
             console.log('Data is set');
             document.location.href = "/";
-            
+
 
 
         }).catch((error) => {
@@ -69,14 +68,18 @@ export default function Menisco() {
             <DinamometroManual onDataChange={handleSetData} />
             <Divider className="my-10" />
             <RelacaoFlexoresExtensores onDataChange={handleSetData} />
+
             <Divider className="my-10" />
+
+            <Lysholm onDataChange={handleSetData} />
             <QuestionarioLysholm onDataChange={handleSetData} />
+            <Divider className="my-10" />
             <Divider className="my-10" />
             <TesteMobilidadeTornozelo onDataChange={handleSetData} />
             <Divider className="my-10" />
             <StepDown onDataChange={handleSetData} />
             <Divider className="my-10" />
-            
+
             <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={enviarDados}>
                 Enviar
             </Button>

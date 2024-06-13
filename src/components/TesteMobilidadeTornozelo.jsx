@@ -3,8 +3,8 @@ import { Card } from 'antd'
 import * as tw from './tailwind'
 
 
-export default function TesteMobilidadeTornozelo({onDataChange}) {
-    const [data, setData] = useState({})
+export default function TesteMobilidadeTornozelo({onDataChange, initialData = null}) {
+    const [data, setData] = useState(initialData||{})
     useEffect(() => {
         onDataChange(data)
     }, [data])
