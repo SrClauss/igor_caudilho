@@ -22,19 +22,13 @@ export default function AmplitudeMovimentoJoelho({ onDataChange, initialData=nul
 
 
 export function AmplitudeMovimentoJoelhoCarousel({ onDataChange, initialData = null}) {
-    const [data, setData] = useState(initialData ||{
-
-        flexaoJoelhoDireito: '',
-        flexaoJoelhoEsquerdo: '',
-        extensaoJoelhoDireito: '',
-        extensaoJoelhoEsquerdo: '',
-    })
+    const [data, setData] = useState(initialData ||{})
 
     const carouselRef = useRef()
 
     useEffect(() => {
-        onDataChange(data)
-        console.log(data)
+        onDataChange({amplitudeMovimentoJoelho:data})
+
 
     }, [data])
 
@@ -43,7 +37,7 @@ export function AmplitudeMovimentoJoelhoCarousel({ onDataChange, initialData = n
         const { name, value } = e.target
         setData({
             ...data,
-            [name]: value
+            [name]: parseFloat(value)
         })
  
     }
@@ -161,21 +155,15 @@ export function AmplitudeMovimentoJoelhoCarousel({ onDataChange, initialData = n
 function AmplitudeMovimentoJoelhoTable({ onDataChange, initialData = null}) {
 
 
-    const [data, setData] = useState(initialData ||{
-
-        flexaoJoelhoDireito: '',
-        flexaoJoelhoEsquerdo: '',
-        extensaoJoelhoDireito: '',
-        extensaoJoelhoEsquerdo: '',
-    })
+    const [data, setData] = useState(initialData ||{})
     useEffect(() => {
-        onDataChange(data)
+        onDataChange({amplitudeMovimentoJoelho:data})
     }, [data])
     const handleChange = (e) => {
         const { name, value } = e.target
         setData(prevData => ({
             ...prevData,
-            [name]: value
+            [name]: parseFloat(value)
         }))
        
     }
@@ -230,51 +218,3 @@ function AmplitudeMovimentoJoelhoTable({ onDataChange, initialData = null}) {
 
 }
 
-
-/*
-{
-    "pontuacaoLysholm": "20",
-    "pontuacaoKujala": "20",
-    "torqueExtensorMedioDireito": "25",
-    "torqueExtensorMedioEsquerdo": "20",
-    "torqueFlexorMedioDireito": "20",
-    "torqueFlexorMedioEsquerdo": "20",
-    "torqueHipPositionDireito": "12",
-    "torqueHipPositionEsquerdo": "30",
-    "deficitExtensor": 5,
-    "deficitFlexor": 0,
-    "deficitHipPosition": 18,
-    "nome": "Clausemberg Rodrigues de Oliveira",
-    "idade": "40",
-    "altura": "25",
-    "peso": "30",
-    "sexo": "Feminino",
-    "lados": [
-        "Braço Esquerdo"
-    ],
-    "membro": "esquerdo",
-    "data": "2020-05-20T03:00:00.000Z",
-    "hora": "2024-05-27T23:04:00.000Z",
-    "queixa": "Qauariasdfjaçlk",
-    "hd": "125582",
-    "direito": true,
-    "esquerdo": false,
-    "menorDireito": 4,
-    "menorEsquerdo": 6,
-    "maiorDireito": 5,
-    "maiorEsquerdo": 5,
-    "flexaoJoelhoDireito": "20",
-    "flexaoJoelhoEsquerdo": "40",
-    "extensaoJoelhoDireito": "30",
-    "extensaoJoelhoEsquerdo": "40",
-    "coxaDireita6cm": 20,
-    "coxaEsquerda6cm": 30,
-    "coxaDireita15cm": 30,
-    "coxaEsquerda15cm": 30,
-    "diferencaCoxa6cm": 10,
-    "diferencaCoxa15cm": 0,
-    "flexores": "20",
-    "extensores": "20"
-}
-
-*/

@@ -6,20 +6,25 @@ import Index from './pages/Index';
 import OsteoartroseArtroplastia from './pages/OsteoartroseArtroplastia';
 import LCA from './pages/LCA';
 import Menisco from './pages/Menisco';
+import Pesquisa from './pages/Pesquisa';
+import RelatorioDFP from './pages/RelatorioDFP';
 
 
 function App() {
-  const [data, setData] = useState({})
+
 
   return (
     <Layout>
       <Router>
         <Routes>
           <Route path="/" element={<Index/>} />
-          <Route path="/dfp" element={<DFP/>} />
-          <Route path="ortoartrose_artroplastia" element={<OsteoartroseArtroplastia/>} />
+          <Route path="/dfp" element={<DFP initialData/>} />
+          <Route path="osteoartrose_artroplastia" element={<OsteoartroseArtroplastia/>} />
           <Route path="lca" element={<LCA/>} /> 
           <Route path="menisco" element={<Menisco/>} />
+          <Route path="pesquisa" element={<Pesquisa/>} />
+          <Route path="relatorio-dfp" element={<RelatorioDFP/>} />
+        
       
 
 

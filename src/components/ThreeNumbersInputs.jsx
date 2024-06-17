@@ -8,7 +8,7 @@ export default function ThreeNumberInputs({onChange, disabled=false, lastOnKeyDo
     const handleChange = (e, index) => {
         const { value } = e.target
         let newData = [...data]
-        newData[index] = parseInt(value)
+        newData[index] = parseFloat(value)
         setData(newData)
         
     }

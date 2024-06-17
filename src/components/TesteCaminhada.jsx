@@ -5,11 +5,7 @@ import { Card } from 'antd';
 
 
 export default function TesteCaminhada({ onDataChange, initialData = null}) {
-    const [data, setData] = useState(initialData ||{
-        distanciaPercorrida: '',
-        dorCaminhada: '',
-    })
-
+    const [data, setData] = useState(initialData ||{})
     const [distanciaPercorrida, setDistanciaPercorrida] = useState(0)
     const [distanciaPredita, setDistanciaPredita] = useState(0)
     const [deficit, setDeficit] = useState(0)
@@ -28,17 +24,29 @@ export default function TesteCaminhada({ onDataChange, initialData = null}) {
         const { name, value } = e.target
         setData({
             ...data,
-            [name]: value
+            [name]: parseFloat(value)
         })
     }
     const handleSliderChange = (value) => {
         setData({
             ...data,
-            dorCaminhada: value
+            dorCaminhada: parseInt(value)
         })
     }
     useEffect(() => {
-        onDataChange(data)
+        let def = data.distanciaPredita !== 0 && data.distanciaPredita >= data.distanciaPercorrida
+            ? parseFloat(((data.distanciaPredita - data.distanciaPercorrida) / data.distanciaPredita * 100).toFixed(1))
+            : 0;
+
+
+   
+        const newData = {
+            ...data,
+            deficit: def
+        }
+        onDataChange({testeCaminhada: newData})
+        setDeficit(def)
+        
     }, [data])
 
     return (
@@ -48,7 +56,9 @@ export default function TesteCaminhada({ onDataChange, initialData = null}) {
                 Teste de Caminhada
             </div>
             <div className="col-auto px-2 py-3 bg-transparent text-cyan-800 text-lg">
-                <SliderDor title="Nivel de dor no final do teste" onSliderChange={handleSliderChange} />
+                <SliderDor title="Nivel de dor no final do teste" 
+                initialData={initialData?.dorCaminhada?initialData.dorCaminhada:null} 
+                onSliderChange={handleSliderChange} />
 
             </div>
             <div className="grid grid-cols-2 w-full bg-slate-300 border-t border-t-1 border-cyan-800">
@@ -56,8 +66,7 @@ export default function TesteCaminhada({ onDataChange, initialData = null}) {
                     Distância Percorrida
                 </div>
                 <div className="col-auto bg-transparent text-cyan-800 text-lg">
-                    <input type="text" name="distanciaPercorrida" onChange={(e)=>{
-                        
+                    <input type="number" name="distanciaPercorrida" value={data.distanciaPercorrida} onChange={(e)=>{
                         handleDataChange(e);
                         setDistanciaPercorrida(e.target.value);
                     
@@ -69,7 +78,10 @@ export default function TesteCaminhada({ onDataChange, initialData = null}) {
                     Distância Predita
                 </div>
                 <div className="col-auto bg-transparent">
-                    <input type="text" name="flexores" onChange={
+                    <input type="number" 
+                    name="distanciaPredita" 
+                    value={data.distanciaPredita}
+                    onChange={
                         (e) => {
                             handleDataChange(e);
                             setDistanciaPredita(e.target.value);
@@ -82,7 +94,7 @@ export default function TesteCaminhada({ onDataChange, initialData = null}) {
                     Deficit em relação ao normativo
                 </div>
                 <div className="col-auto bg-transparent">
-                    <input type="text"  name="extensores" disabled value={deficit} className={tw.inputTransparentBold} />
+                    <input type="number"  name="extensores" disabled value={deficit} className={tw.inputTransparentBold} />
                 </div>
             </div>
            

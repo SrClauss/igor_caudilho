@@ -6,6 +6,7 @@ import {Button} from 'antd'
 export default function Kujala({ onDataChange,  initialData = null}) {
     const [expanded, setExpanded] = useState(false)
     const [data, setData] = useState(initialData || {})
+    const [soma, setSoma] = useState(initialData?.soma || 0)
 
     const handleDataChange = (result, response, index) => {
         const newData = {...data}
@@ -28,6 +29,7 @@ export default function Kujala({ onDataChange,  initialData = null}) {
         })
 
         onDataChange({kujala:{...data, soma:sum}})
+        setSoma(sum)
 
         
     }, [data])

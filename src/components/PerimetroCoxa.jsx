@@ -7,6 +7,7 @@ import * as tw from './tailwind'
 
 export default function PerimetroCoxa({ onDataChange, initialData = null}) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
+ 
     return (
         <Card>
             <h2 className="text-xl md:text-3xl font-bold text-cyan-600 pb-3 text-center"> 
@@ -20,14 +21,7 @@ export default function PerimetroCoxa({ onDataChange, initialData = null}) {
 }
 
 function PerimetroCoxaCarousel({ onDataChange, initialData = null}) {
-    const [data, setData] = useState(initialData ||{
-        coxaDireita6cm: '',
-        coxaEsquerda6cm: '',
-        coxaDireita15cm: '',
-        coxaEsquerda15cm: '',
-        diferencaCoxa6cm: '',
-        diferencaCoxa15cm: ''
-    })
+    const [data, setData] = useState(initialData ||{})
 
 
     const carouselRef = useRef()
@@ -35,14 +29,16 @@ function PerimetroCoxaCarousel({ onDataChange, initialData = null}) {
 
         const diferencaCoxa6cm = Math.abs(data.coxaDireita6cm - data.coxaEsquerda6cm)
         const diferencaCoxa15cm = Math.abs(data.coxaDireita15cm - data.coxaEsquerda15cm)
-        onDataChange({...data, diferencaCoxa6cm, diferencaCoxa15cm})
-        setData({...data. diferencaCoxa6cm, diferencaCoxa15cm})
+        
+        setData({...data,  diferencaCoxa6cm, diferencaCoxa15cm})
         
 
       
     }, [data.coxaDireita15cm, data.coxaEsquerda15cm, data.coxaDireita6cm, data.coxaEsquerda6cm])
 
-   useEffect
+    useEffect(() => {
+        onDataChange({perimetroCoxa:data})
+    }, [data])
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -164,16 +160,10 @@ function PerimetroCoxaCarousel({ onDataChange, initialData = null}) {
 
 }
 
-function PerimetroCoxaTable({ onDataChange }) {
-    const [data, setData] = useState({
-        coxaDireita6cm: '',
-        coxaEsquerda6cm: '',
-        coxaDireita15cm: '',
-        coxaEsquerda15cm: '',
-        diferencaCoxa6cm: '',
-        diferencaCoxa15cm: ''
-    })
+function PerimetroCoxaTable({ onDataChange, initialData = null}) {
+    const [data, setData] = useState(initialData||{})
     useEffect(() => {
+
         const diferencaCoxa6cm =  Math.abs(data.coxaDireita6cm - data.coxaEsquerda6cm)
         const diferencaCoxa15cm = Math.abs(data.coxaDireita15cm - data.coxaEsquerda15cm)
         setData({
@@ -184,7 +174,7 @@ function PerimetroCoxaTable({ onDataChange }) {
     }, [data.coxaDireita15cm, data.coxaEsquerda15cm, data.coxaDireita6cm, data.coxaEsquerda6cm])
 
     useEffect(() => {
-        onDataChange(data)
+       onDataChange({perimetroCoxa:data})
     }
         , [data])
 
@@ -193,7 +183,7 @@ function PerimetroCoxaTable({ onDataChange }) {
         const { name, value } = e.target
         setData({
             ...data,
-            [name]: parseInt(value)
+            [name]: parseFloat(value)
         })
     }
 

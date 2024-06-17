@@ -15,9 +15,12 @@ import Lysholm from "../components/Lysholm"
 import TesteMobilidadeTornozelo from "../components/TesteMobilidadeTornozelo"
 import StepDown from "../components/StepDown"
 import HopTest from "../components/HopTest"
+import { useLocation } from "react-router-dom"
 
 export default function LCA() {
-    const [data, setData] = useState({})
+    const location = useLocation()
+    const initialData = location.state?.initialData
+    const [data, setData] = useState(initialData||{})
     const handleSetData = (object) => {
         const [keys, values] = [Object.keys(object), Object.values(object)]
         let newData = { ...data };
@@ -52,33 +55,36 @@ export default function LCA() {
                 AVALIAÇÃO FUNCIONAL DO JOELHO (LCA)
             </h1>
             <div className="py-10">
-                <DadosPessoais onSubmitData={handleSetData} />
+                <DadosPessoais onSubmitData={handleSetData} initialData={initialData?.dadosPessoais}/>
             </div>
-            <EscalaAnalogicaDor onDataChange={handleSetData} />
             <Divider className="my-10" />
-
-            <AmplitudeMovimentoJoelho onDataChange={handleSetData} />
+            <EscalaAnalogicaDor onDataChange={handleSetData} initialData={initialData?.escalaAnalogicaDor} />
             <Divider className="my-10" />
-            <PerimetroCoxa onDataChange={handleSetData} />
+            <AmplitudeMovimentoJoelho onDataChange={handleSetData} initialData={initialData?.amplitudeMovimentoJoelho} />
             <Divider className="my-10" />
-            <Lachemeter onDataChange={handleSetData} />
+            <PerimetroCoxa onDataChange={handleSetData} initialData={initialData?.perimetroCoxa} />
             <Divider className="my-10" />
-            <DinamometroManual onDataChange={handleSetData} />
+            <Lachemeter onDataChange={handleSetData} initialData={initialData?.lachemeter} />
             <Divider className="my-10" />
-            <RelacaoFlexoresExtensores onDataChange={handleSetData} />
+            <DinamometroManual onDataChange={handleSetData} initialData={initialData?.dinamometroManual} />
             <Divider className="my-10" />
-            <Lysholm onDataChange={handleSetData} />
+            <RelacaoFlexoresExtensores onDataChange={handleSetData} initialData={initialData?.relacaoFlexoresExtensores} />
             <Divider className="my-10" />
-            <HopTest onDataChange={handleSetData} />
+            <Lysholm onDataChange={handleSetData} initialData={initialData?.lysholm} />
             <Divider className="my-10" />
-            <TesteMobilidadeTornozelo onDataChange={handleSetData} />
+            <HopTest onDataChange={handleSetData} initialData={initialData?.hopTest} />
             <Divider className="my-10" />
-            <StepDown onDataChange={handleSetData} />
+            <TesteMobilidadeTornozelo onDataChange={handleSetData} initialData={initialData?.testeMobilidadeTornozelo} />
             <Divider className="my-10" />
-
+            <StepDown onDataChange={handleSetData} initialData={initialData?.stepDown} />
+            <Divider className="my-10" />
+          
             <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={enviarDados}>
                 Enviar
             </Button>
+           
+
+          
         </>
     )
 

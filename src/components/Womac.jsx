@@ -54,7 +54,7 @@ export default function Womac({ onDataChange, initialData = null}) {
 
                 expandIcon={<ExpandMoreIcon />}
             >
-                <h2 className='text-2xl md:text-3xl font-bold text-cyan-700 pb-3 text-center'>WOMAC ({parseFloat(soma/24).toFixed(1)})</h2>
+                <h2 className='text-2xl md:text-3xl font-bold text-cyan-700 pb-3 text-center'>WOMAC ({soma?parseFloat(soma/24).toFixed(1):data?.soma?data.soma:0})</h2>
 
 
             </AccordionSummary>

@@ -2,10 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@media print{
 
+  body{
+
+
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto;
+
+  }
+ 
+
+ 
+}
 
 body{
   background-color: gray;
+  
 }
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
@@ -13,9 +27,4 @@ input[type="number"]::-webkit-outer-spin-button {
     margin: 0;
 }
 
-.gradient-box {
-  background: linear-gradient(to right, cyan, rgb(97, 177, 177), cyan);
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  color: white;
-}
+

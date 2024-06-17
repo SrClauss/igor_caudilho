@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { db } from "../firebase"
+import {enviarDados } from "../firebase"
 import DadosPessoais from "../components/DadosPessoais"
 import AmplitudeMovimentoJoelho from "../components/AmplitudeMovimentoJoelho"
 import PerimetroCoxa from "../components/PerimetroCoxa"
@@ -9,20 +9,26 @@ import { Divider } from "antd"
 import EscalaAnalogicaDor from "../components/EscalaVisualAnalogicaDor"
 import { CriteriosLimitacaoFuncionalGraveOsteoartroseTable } from "../components/CriteriosLimitaçãoFuncionalGraveOsteoartrose"
 import { Button } from "antd"
-import { push, ref } from "firebase/database";
+
 import Womac from "../components/Womac";
 import QuestionarioSF36 from "../components/SF36"
 import TesteCaminhada from "../components/TesteCaminhada"
+import { useLocation } from "react-router-dom"
+
 
 
 
 export default function OsteoartroseArtroplastia() {
-    const [data, setData] = useState({})
+
+    const location = useLocation()
+    const initialData = location.state?.initialData
+
+    const [data, setData] = useState(initialData || {})
     useEffect(() => {
-        console.log(data);
+
     }, [data])
     const handleSetData = (object) => {
-        
+
         const [keys, values] = [Object.keys(object), Object.values(object)]
         let newData = { ...data };
 
@@ -36,20 +42,42 @@ export default function OsteoartroseArtroplastia() {
 
         setData(newData);
     }
-    const enviarDados = async () => {
-        await push(ref(db, 'osteoartrose_artroplastia'), JSON.stringify(data)).then(() => {
-            console.log('Data is set');
-            document.location.href = "/";
-        }).catch((error) => {
+   
 
-            console.log(error);
-        }
-        );
 
-    }
-    
     return (
         <>
+            <h1 className="text-2xl lg:text-3xl text-center font-bold text-cyan-600 mt-14">
+                OSTEOARTROSE /ARTROPLASTIA
+            </h1>
+            <div className="py-10">
+                <DadosPessoais onSubmitData={handleSetData} initialData={initialData?.dadosPessoais} />
+            </div>
+            <Divider className="my-10" />
+            <AmplitudeMovimentoJoelho onDataChange={handleSetData} initialData={initialData?.amplitudeMovimentoJoelho} />
+            <Divider className="my-10" />
+            <PerimetroCoxa onDataChange={handleSetData} initialData={initialData?.perimetroCoxa} />
+            <Divider className="my-10" />
+            <EscalaAnalogicaDor onDataChange={handleSetData} initialData={initialData?.escalaAnalogicaDor} />
+            <Divider className="my-10" />
+            <QuestionarioSF36 onDataChange={handleSetData} initialData={initialData?.sf36} />
+            <Divider className="my-10" />
+            <Womac onDataChange={handleSetData} initialData={initialData?.womac} />
+            <Divider className="my-10" />
+            <DinamometroManual onDataChange={handleSetData} initialData={initialData?.dinamometroManual} />
+            <Divider className="my-10" />
+            <RelacaoFlexoresExtensores onDataChange={handleSetData} initialData={initialData?.relacaoFlexoresExtensores} />
+            <Divider className="my-10" />
+            <TesteCaminhada onDataChange={handleSetData} initialData={initialData?.testeCaminhada} />
+            <Divider className="my-10" />
+            <CriteriosLimitacaoFuncionalGraveOsteoartroseTable onDataChange={handleSetData} sexo={data.sexo} initialData={initialData?.criteriosLimitacaoFuncionalGrave} />
+            <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={(_)=>enviarDados("osteoartrose_artroplastia", data)}>
+                Enviar
+            </Button>
+
+
+
+            {/*
             <h1 className="text-2xl lg:text-3xl text-center font-bold text-cyan-600 mt-14">
                 OSTEOARTROSE /ARTROPLASTIA
             </h1>
@@ -81,6 +109,7 @@ export default function OsteoartroseArtroplastia() {
             <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={enviarDados}>
                 Enviar
             </Button>
+             */}
 
 
 

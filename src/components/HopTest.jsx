@@ -3,21 +3,18 @@ import { Card } from "antd";
 import * as tw from "./tailwind";
 
 export default function HopTest({ onDataChange, initialData = null}) {
-    const [data, setData] = useState(initialData || {
-        hopTestDireito: 0,
-        hopTestEsquerdo: 0
-    })
+    const [data, setData] = useState(initialData || { })
 
     const handleChange = (e) => {
         const newData = {
             ...data,
-            [e.target.name]: e.target.value
+            [e.target.name]: parseFloat(e.target.value)
         }
         setData(newData);
     }
 
     useEffect(() => {
-        onDataChange(data)
+        onDataChange({hopTest: data})
     }, [data])
 
 

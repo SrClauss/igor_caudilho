@@ -4,24 +4,20 @@ import { Switch } from '@mui/material'
 import * as tw from './tailwind'
 
 
-
-export default function StepDown({ onDataChange , initialData = null}) {
-    const [data, setData] = useState(initialData||{
-        stepDownDireito: 'normal',
-        stepDownEsquerdo: 'normal'
-    })
+export default function StepDown({ onDataChange , initialData = {stepDownDireito: false, stepDownEsquerdo: false}}) {
+    const [data, setData] = useState(initialData||{})
 
 
 
     const handleChange = (e) => {
         const newData = {
             ...data,
-            [e.target.name]: e.target.checked ? 'alterado' : 'normal'
+            [e.target.name]: e.target.checked ? true : false
         }
         setData(newData);
     }
     useEffect(() => {
-        onDataChange(data)
+        onDataChange({stepDown: data})
     }, [data])
 
 
@@ -39,15 +35,15 @@ export default function StepDown({ onDataChange , initialData = null}) {
                     <Switch
                         name="stepDownDireito"
                         id="stepDownDireito"
-                        value={data.stepDownDireito}
+                        checked={data.stepDownDireito}
                         onChange={handleChange}
                         className={tw.inputTransparent} />
                     <div>
 
 
-                        <span className={`text-cyan-800 text-sm  ${data.stepDownDireito==="normal"?"font-bold":""}` }>Normal</span>
+                        <span className={`text-cyan-800 text-sm  ${data.stepDownDireito===false?"font-bold":""}` }>Normal</span>
                         <span className={"text-cyan-800 text-sm"}> / </span>
-                        <span className={`text-cyan-800 text-sm ${data.stepDownDireito==="alterado"?"font-bold":""}`}>Alterado</span>
+                        <span className={`text-cyan-800 text-sm ${data.stepDownDireito===true?"font-bold":""}`}>Alterado</span>
 
                     </div>
                 </div>
@@ -60,14 +56,14 @@ export default function StepDown({ onDataChange , initialData = null}) {
                     <Switch
                         name="stepDownEsquerdo"
                         id="stepDownEsquerdo"
-                        value={data.stepDownEsquerdo}
+                        checked={data.stepDownEsquerdo}
                         onChange={handleChange}
                         className={tw.inputTransparent} />
                     <div>
 
-                    <span className={`text-cyan-800 text-sm ${data.stepDownEsquerdo==="normal"?"font-bold":""}`}>Normal</span>
+                    <span className={`text-cyan-800 text-sm ${data.stepDownEsquerdo===false?"font-bold":""}`}>Normal</span>
                     <span className={"text-cyan-800 text-sm"}> / </span>
-                    <span className={`text-cyan-800 text-sm ${data.stepDownEsquerdo==="alterado"?"font-bold":""}`}>Alterado</span>	
+                    <span className={`text-cyan-800 text-sm ${data.stepDownEsquerdo===true?"font-bold":""}`}>Alterado</span>	
                     </div>
                 </div>
             </div>

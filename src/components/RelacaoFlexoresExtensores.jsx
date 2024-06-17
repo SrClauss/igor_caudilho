@@ -1,20 +1,19 @@
 import { Box, Card } from "@mui/material"
 import { useEffect, useState } from "react"
 import * as tw from "./tailwind"
+
 export default function RelacaoFlexoresExtensores({ onDataChange, initialData = null}) {
-    const [data, setData] = useState(initialData ||{
-        flexores: "",
-        extensores: ""
-    })
+
+    const [data, setData] = useState(initialData || {})
     useEffect(() => {
-        onDataChange(data)
+        onDataChange({relacaoFlexoresExtensores:data})
     }, [data])
 
 
     const handleDataChange = (e) => {
         const newData = {
             ...data,
-            [e.target.name]: e.target.value
+            [e.target.name]: parseFloat(e.target.value)
         }
         setData(newData)
     }
@@ -40,7 +39,7 @@ export default function RelacaoFlexoresExtensores({ onDataChange, initialData = 
                     Direito
                 </div>
                 <div className="col-auto bg-transparent">
-                    <input type="text" name="flexores" onChange={handleDataChange} className={tw.inputTransparent} />
+                    <input type="text" name="direito" onChange={handleDataChange} value={data.direito} className={tw.inputTransparent} />
                 </div>
             </div>
             <div className="grid grid-cols-2 w-full bg-slate-300 border-b border-b-1 border-cyan-800 ">
@@ -48,7 +47,7 @@ export default function RelacaoFlexoresExtensores({ onDataChange, initialData = 
                     Esquerdo
                 </div>
                 <div className="col-auto bg-transparent">
-                    <input type="text" name="extensores" onChange={handleDataChange} className={tw.inputTransparent} />
+                    <input type="number" name="esquerdo" value={data.esquerdo} onChange={handleDataChange} className={tw.inputTransparent} />
                 </div>
             </div>
            

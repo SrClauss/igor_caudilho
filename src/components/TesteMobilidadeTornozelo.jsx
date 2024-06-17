@@ -6,12 +6,12 @@ import * as tw from './tailwind'
 export default function TesteMobilidadeTornozelo({onDataChange, initialData = null}) {
     const [data, setData] = useState(initialData||{})
     useEffect(() => {
-        onDataChange(data)
+        onDataChange({testeMobilidadeTornozelo:data})
     }, [data])
     const handleChange = (e) => {
         const newData = {
             ...data,
-            [e.target.name]: e.target.value
+            [e.target.name]: parseFloat(e.target.value)
         }
         setData(newData)
     }
@@ -29,7 +29,7 @@ export default function TesteMobilidadeTornozelo({onDataChange, initialData = nu
                 </div>
                 <div>
                     <input
-                        type="text"
+                        type="number"
                         name="testeJoelho"
                         id="testeJoelho"
                         value={data.testeJoelho}

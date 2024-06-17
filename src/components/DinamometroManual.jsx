@@ -4,14 +4,13 @@ import { useMediaQuery } from 'react-responsive'
 import '../index.css'
 import * as tw from './tailwind'
 
-
-export default function DinamometroManual({ onDataChange }) {
+export default function DinamometroManual({ onDataChange, initialData=null}) {
     const isMobile = useMediaQuery({ query: '(max-width: 1224px)' })
-
+ 
     return (
         <Card className='mt-4 p-2'>
             <h2 className={tw.headerTable}>Dinamometro Manual</h2>
-            {isMobile ? <DinamometroManualCarousel onDataChange={onDataChange} /> : <DinamometroManualTable onDataChange={onDataChange} />}
+            {isMobile ? <DinamometroManualCarousel onDataChange={onDataChange} initialData={initialData} /> : <DinamometroManualTable onDataChange={onDataChange} initialData={initialData} />}
             <p className='text-justify'>
                 Razão normal: Torque Flexor / Torque Extensor isocinetico:60% (quando feito a 60°/s) 65-70% (quando feito a 180°/s)
             </p>
@@ -25,18 +24,7 @@ export default function DinamometroManual({ onDataChange }) {
 }
 
 export function DinamometroManualCarousel({ onDataChange, initialData = null}) {
-    const [data, setData] = useState(initialData || {
-        "torqueExtensorMedioDireito": '',
-        "torqueExtensorMedioEsquerdo": '',
-        "torqueFlexorMedioDireito": '',
-        "torqueFlexorMedioEsquerdo": '',
-        "torqueHipPositionDireito": '',
-        "torqueHipPositionEsquerdo": '',
-        "deficitExtensor": '',
-        "deficitFlexor": '',
-        "deficitHipPosition": '',
-
-    })
+    const [data, setData] = useState(initialData || {})
 
     const carouselRef = useRef()
 
@@ -53,17 +41,18 @@ export function DinamometroManualCarousel({ onDataChange, initialData = null}) {
             deficitHipPosition
         })
     }, [data.torqueExtensorMedioDireito, data.torqueExtensorMedioEsquerdo, data.torqueFlexorMedioDireito, data.torqueFlexorMedioEsquerdo, data.torqueHipPositionDireito, data.torqueHipPositionEsquerdo])
+
     const handleChange = (e) => {
         const { name, value } = e.target
         setData({
             ...data,
-            [name]: value
+            [name]: parseFloat(value)
         })
 
     }
 
     useEffect(() => {
-        onDataChange(data)
+        onDataChange({dinamometroManual:data})
 
     }, [data])
 
@@ -248,28 +237,17 @@ export function DinamometroManualCarousel({ onDataChange, initialData = null}) {
 }
 
 
-export function DinamometroManualTable({ onDataChange }) {
+export function DinamometroManualTable({ onDataChange, initialData = null}) {
 
-    const [data, setData] = useState({
-        "torqueExtensorMedioDireito": '',
-        "torqueExtensorMedioEsquerdo": '',
-        "torqueFlexorMedioDireito": '',
-        "torqueFlexorMedioEsquerdo": '',
-        "torqueHipPositionDireito": '',
-        "torqueHipPositionEsquerdo": '',
-        "deficitExtensor": '',
-        "deficitFlexor": '',
-        "deficitHipPosition": '',
-
-    })
+    const [data, setData] = useState(initialData || {})
 
 
 
 
     useEffect(() => {
-        const deficitExtensor = Math.abs(data.torqueExtensorMedioDireito - data.torqueExtensorMedioEsquerdo)
-        const deficitFlexor = Math.abs(data.torqueFlexorMedioDireito - data.torqueFlexorMedioEsquerdo)
-        const deficitHipPosition = Math.abs(data.torqueHipPositionDireito - data.torqueHipPositionEsquerdo)
+        const deficitExtensor = parseFloat(Math.abs(data.torqueExtensorMedioDireito - data.torqueExtensorMedioEsquerdo).toFixed(2))
+        const deficitFlexor = parseFloat(Math.abs(data.torqueFlexorMedioDireito - data.torqueFlexorMedioEsquerdo).toFixed(2))
+        const deficitHipPosition = parseFloat(Math.abs(data.torqueHipPositionDireito - data.torqueHipPositionEsquerdo).toFixed(2))
 
         setData({
             ...data,
@@ -280,15 +258,16 @@ export function DinamometroManualTable({ onDataChange }) {
     }, [data.torqueExtensorMedioDireito, data.torqueExtensorMedioEsquerdo, data.torqueFlexorMedioDireito, data.torqueFlexorMedioEsquerdo, data.torqueHipPositionDireito, data.torqueHipPositionEsquerdo])
     const handleChange = (e) => {
         const { name, value } = e.target
+        
         setData({
             ...data,
-            [name]: value
+            [name]: parseFloat(value)
         })
 
     }
 
     useEffect(() => {
-        onDataChange(data)
+        onDataChange({dinamometroManual:data})
 
     }, [data])
 
