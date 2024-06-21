@@ -1,8 +1,8 @@
 
 export default function Layout({ children }) {
     return (
-        <div className="shadow-xl shadow-black">
-
+        <div className=" container-fluid shadow-xl shadow-black">
+ç
             <div className="flex w-full justify-around md:justify-start">
 
 
