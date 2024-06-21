@@ -27,7 +27,7 @@ export default function Index() {
 
       <div className="w-full p-10">
         <button
-          className="bg-cyan-500 w-full hover:bg-cyan-600  p-16 text-3xl text-white font-bold rounded-xl  shadow-md shadow-cyan-900 hover:shadow-none"
+          className="bg-cyan-500 w-full hover:bg-cyan-600  px-8 py-16 text-3xl text-white font-bold rounded-xl  shadow-md shadow-cyan-900 hover:shadow-none"
           onClick={() => window.location.href = "osteoartrose_artroplastia"}
         >
           Osteoartrose e Artroplastia
