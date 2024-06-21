@@ -7,31 +7,30 @@ import OsteoartroseArtroplastia from './pages/OsteoartroseArtroplastia';
 import LCA from './pages/LCA';
 import Menisco from './pages/Menisco';
 import Pesquisa from './pages/Pesquisa';
-import RelatorioDFP from './pages/RelatorioDFP';
+import {RelatorioDFP, RelatorioLCA, RelatorioOsteoartroseArtroplastia, RelatorioMenisco} from './pages/Relatorios';
 
 
 function App() {
 
 
   return (
-    <Layout>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Index/>} />
-          <Route path="/dfp" element={<DFP initialData/>} />
-          <Route path="osteoartrose_artroplastia" element={<OsteoartroseArtroplastia/>} />
-          <Route path="lca" element={<LCA/>} /> 
-          <Route path="menisco" element={<Menisco/>} />
-          <Route path="pesquisa" element={<Pesquisa/>} />
-          <Route path="relatorio-dfp" element={<RelatorioDFP/>} />
-        
-      
-
-
-        </Routes>
-      </Router>
-    </Layout>
-  );
+  <Router>
+    <Routes>
+      <Route>
+        <Route path="/" element={<Index/>} />
+        <Route path="/dfp" element={<DFP initialData/>} />
+        <Route path="osteoartrose_artroplastia" element={<OsteoartroseArtroplastia/>} />
+        <Route path="lca" element={<LCA/>} /> 
+        <Route path="menisco" element={<Menisco/>} />
+        <Route path="pesquisa" element={<Pesquisa/>} />
+        <Route path="/relatorio-dfp" element={<RelatorioDFP/>} />
+        <Route path="/relatorio-lca" element={<RelatorioLCA/>}/>
+        <Route path='/relatorio-osteoartrose_artroplastia' element={<RelatorioOsteoartroseArtroplastia/>}/>
+        <Route path='/relatorio-menisco' element={<RelatorioMenisco/>}/>
+      </Route>
+    </Routes>
+  </Router>
+);
 }
 
 export default App;

@@ -377,6 +377,7 @@ export default function DadosPessoais({ onSubmitData, initialData = null }) {
                             setData(dayjs(JSON.parse(Cookies.get('lastRegister')).data, 'DD-MM-YY'))
                             setHora(dayjs(JSON.parse(Cookies.get('lastRegister')).hora, 'HH:mm'))
                             setQueixa(JSON.parse(Cookies.get('lastQueixa')))
+                            setCpf(JSON.parse(Cookies.get('lastRegister')).cpf)
 
                         }
                         setDisabled(true)

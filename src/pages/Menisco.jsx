@@ -13,6 +13,7 @@ import TesteMobilidadeTornozelo from "../components/TesteMobilidadeTornozelo"
 import StepDown from "../components/StepDown"
 import Lysholm from "../components/Lysholm"
 import { useLocation } from "react-router-dom"  
+import Layout from "../Layout"
 
 
 export default function Menisco() {
@@ -38,7 +39,7 @@ export default function Menisco() {
     }, [data])
   
     return (
-        <>
+        <Layout>
             <h1 className="text-2xl lg:text-3xl text-cMENISCOenter font-bold text-cyan-600 mt-14">
                 AVALIAÇÃO FUNCIONAL DO JOELHO (STATUS DE LESÃO DE MENISCO)
             </h1>
@@ -59,7 +60,6 @@ export default function Menisco() {
             <RelacaoFlexoresExtensores onDataChange={handleSetData} initialData={initialData?.relacaoFlexoresExtensores} />
             <Divider className="my-10" />
             <Lysholm onDataChange={handleSetData} initialData={initialData?.lysholm} />
-            <QuestionarioLysholm onDataChange={handleSetData} initialData={initialData?.questionarioLysholm} />
             <Divider className="my-10" />
             <TesteMobilidadeTornozelo onDataChange={handleSetData} initialData={initialData?.testeMobilidadeTornozelo} />
             <Divider className="my-10" />
@@ -70,39 +70,8 @@ export default function Menisco() {
                 Enviar
             </Button>
 
-            {/*
-                 <div className="py-10">
-                <DadosPessoais onSubmitData={handleSetData} />
-            </div>
-            <Divider className="my-10" />
-            <EscalaAnalogicaDor onDataChange={handleSetData} />
-            <Divider className="my-10" />
-            <AmplitudeMovimentoJoelho onDataChange={handleSetData} />
-            <Divider className="my-10" />
-            <PerimetroCoxa onDataChange={handleSetData} />
-            <Divider className="my-10" />
-            <DinamometroManual onDataChange={handleSetData} />
-            <Divider className="my-10" />
-            <RelacaoFlexoresExtensores onDataChange={handleSetData} />
-
-            <Divider className="my-10" />
-
-            <Lysholm onDataChange={handleSetData} />
-            <QuestionarioLysholm onDataChange={handleSetData} />
-            <Divider className="my-10" />
-            <Divider className="my-10" />
-            <TesteMobilidadeTornozelo onDataChange={handleSetData} />
-            <Divider className="my-10" />
-            <StepDown onDataChange={handleSetData} />
-            <Divider className="my-10" />
-
-            <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={enviarDados}>
-                Enviar
-            </Button>
-            
-            
-            */}
+        
        
-        </>
+        </Layout>
     )
 }

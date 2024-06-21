@@ -14,6 +14,7 @@ import Womac from "../components/Womac";
 import QuestionarioSF36 from "../components/SF36"
 import TesteCaminhada from "../components/TesteCaminhada"
 import { useLocation } from "react-router-dom"
+import Layout from "../Layout"
 
 
 
@@ -46,7 +47,7 @@ export default function OsteoartroseArtroplastia() {
 
 
     return (
-        <>
+        <Layout>
             <h1 className="text-2xl lg:text-3xl text-center font-bold text-cyan-600 mt-14">
                 OSTEOARTROSE /ARTROPLASTIA
             </h1>
@@ -77,44 +78,9 @@ export default function OsteoartroseArtroplastia() {
 
 
 
-            {/*
-            <h1 className="text-2xl lg:text-3xl text-center font-bold text-cyan-600 mt-14">
-                OSTEOARTROSE /ARTROPLASTIA
-            </h1>
-            <div className="py-10">
-                <DadosPessoais onSubmitData={handleSetData} />
-            </div>
-            <Divider className="my-10" />
-            <AmplitudeMovimentoJoelho onDataChange={handleSetData} />
-            <Divider className="my-10" />
-            <PerimetroCoxa onDataChange={handleSetData} />
-            <Divider className="my-10" />
-            <EscalaAnalogicaDor onDataChange={handleSetData} />
-            <Divider className="my-10" />
-            <QuestionarioSF36 onDataChange={handleSetData} />
-            <Divider className="my-10" />
-            <Womac onDataChange={handleSetData} />
-            <Divider className="my-10" />
-            <DinamometroManual onDataChange={handleSetData} />
-            <Divider className="my-10" />
-            <RelacaoFlexoresExtensores onDataChange={handleSetData} />
-            <Divider className="my-10" />
-            <TesteCaminhada onDataChange={handleSetData} />
-            <Divider className="my-10" />
-            <CriteriosLimitacaoFuncionalGraveOsteoartroseTable onDataChange={handleSetData} sexo={data.sexo} />
-           
-
-            
-
-            <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={enviarDados}>
-                Enviar
-            </Button>
-             */}
 
 
-
-
-        </>
+        </Layout>
     )
 
 }

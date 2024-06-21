@@ -8,19 +8,20 @@ import RelacaoFlexoresExtensores from "../components/RelacaoFlexoresExtensores"
 import { Divider } from "antd"
 import EscalaAnalogicaDor from "../components/EscalaVisualAnalogicaDor"
 import Lachemeter from "../components/Lechemeter"
-import { QuestionarioLysholm } from "../components/QuestionarioJoelho"
+
 import { Button } from "antd"
-import { push, ref } from "firebase/database";
 import Lysholm from "../components/Lysholm"
 import TesteMobilidadeTornozelo from "../components/TesteMobilidadeTornozelo"
 import StepDown from "../components/StepDown"
 import HopTest from "../components/HopTest"
 import { useLocation } from "react-router-dom"
+import Layout from "../Layout"
+import { enviarDados } from "../firebase"
 
 export default function LCA() {
     const location = useLocation()
     const initialData = location.state?.initialData
-    const [data, setData] = useState(initialData||{})
+    const [data, setData] = useState(initialData||{ })
     const handleSetData = (object) => {
         const [keys, values] = [Object.keys(object), Object.values(object)]
         let newData = { ...data };
@@ -37,20 +38,10 @@ export default function LCA() {
     useEffect(() => {
         console.log(data);
     }, [data])
-    const enviarDados = async () => {
-        await push(ref(db, 'lca'), JSON.stringify(data)).then(() => {
-            console.log('Data is set');
-            document.location.href = "/";
-        }).catch((error) => {
-
-            console.log(error);
-        }
-        );
-
-    }
+    
 
     return (
-        <>
+        <Layout>
             <h1 className="text-2xl lg:text-3xl text-center font-bold text-cyan-600 mt-14">
                 AVALIAÇÃO FUNCIONAL DO JOELHO (LCA)
             </h1>
@@ -79,13 +70,13 @@ export default function LCA() {
             <StepDown onDataChange={handleSetData} initialData={initialData?.stepDown} />
             <Divider className="my-10" />
           
-            <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={enviarDados}>
+            <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={(_)=>enviarDados('lca', data)}>
                 Enviar
             </Button>
            
 
           
-        </>
+        </Layout>
     )
 
 }

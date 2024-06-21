@@ -28,13 +28,7 @@ export function QuestionarioLysholm({ pontuacao }) {
                     Pontuação
                 </div>
                 <div className="col-auto bg-transparent">
-                    <input
-                        disabled
-                        type="number"
-                        name="pontuacaoLysholm"
-                        id="pontuacaoLysholm"
-                        value={pontuacao}
-                        className={tw.inputTransparent} />
+                    <div className={tw.inputTransparent}>{pontuacao}</div>
                 </div>
             </div>
             <div>

@@ -9,7 +9,7 @@ import { QuestionarioLysholm } from "./QuestionarioJoelho";
 export default function Lysholm({ onDataChange, initialData = null }) {
     const [expanded, setExpanded] = useState(false)
     const [data, setData] = useState(initialData || {})
-    const soma = initialData?.soma || 0
+    const [soma, setSoma] = useState(initialData?.soma || 0)
 
 
 
@@ -29,6 +29,8 @@ export default function Lysholm({ onDataChange, initialData = null }) {
                 sum += data[key].result
             }
         })
+
+        setSoma(sum)
 
         onDataChange({ lysholm: { ...data, soma: sum } })
         

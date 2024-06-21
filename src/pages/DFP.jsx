@@ -7,15 +7,18 @@ import AmplitudeMovimentoJoelho from "../components/AmplitudeMovimentoJoelho";
 import PerimetroCoxa from "../components/PerimetroCoxa";
 import DinamometroManual from "../components/DinamometroManual";
 import RelacaoFlexoresExtensores from "../components/RelacaoFlexoresExtensores";
-import {enviarDados } from "../firebase";
+import { enviarDados } from "../firebase";
 import TesteMobilidadeTornozelo from "../components/TesteMobilidadeTornozelo";
 import StepDown from "../components/StepDown";
 import Kujala from "../components/Kujala";
 import { useLocation } from "react-router-dom"
+import Layout from "../Layout";
 export default function DFP() {
   const location = useLocation()
   const initialData = location.state?.initialData
-  const [data, setData] = useState(initialData||{})
+
+
+  const [data, setData] = useState(initialData || {})
 
 
 
@@ -23,7 +26,7 @@ export default function DFP() {
   useEffect(() => {
     console.log(data);
   }, [data])
-  
+
 
 
 
@@ -44,7 +47,8 @@ export default function DFP() {
   }
 
   return (
-    <>
+    <Layout>
+
       <h1 className="text-2xl lg:text-3xl text-center font-bold text-cyan-600 mt-14">
         AVALIAÇÃO FUNCIONAL DO JOELHO (DFP)
       </h1>
@@ -71,8 +75,8 @@ export default function DFP() {
       <Divider className="my-10" />
       <StepDown onDataChange={handleSetData} initialData={initialData?.stepDown} />
       <Divider className="my-10" />
-      
-      <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={(_)=>enviarDados("dfp", data)}>
+
+      <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={(_) => enviarDados("dfp", data)}>
         Enviar
       </Button>
 
@@ -80,7 +84,7 @@ export default function DFP() {
 
 
 
-    </>
+    </Layout>
 
 
 

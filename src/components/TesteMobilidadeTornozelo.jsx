@@ -23,20 +23,34 @@ export default function TesteMobilidadeTornozelo({onDataChange, initialData = nu
 
 
 
-            <div className="grid grid-cols-2 gap-4 border-t border-b border-b-1 border-t-1 border-cyan-800 ">
+        <div className="grid grid-cols-2 gap-4 border-t  border-t-1 border-cyan-800 bg-slate-300 ">
                 <div className={tw.sideValue}>
-                    <label htmlFor="testeJoelho">Resultado</label>
+                    <label htmlFor="testeJoelho">Direito</label>
                 </div>
                 <div>
                     <input
                         type="number"
-                        name="testeJoelho"
+                        name="testeJoelhoDireito"
                         id="testeJoelho"
                         value={data.testeJoelho}
                         onChange={handleChange}
                         className={tw.inputTransparent} />
                 </div>
 
+            </div>
+            <div className="grid grid-cols-2 gap-4 border-b border-b-1 border-cyan-800 ">
+                <div className={tw.sideValue}>
+                    <label htmlFor="testeJoelhoEsquerdo">Esquerdo</label>
+                </div>
+                <div>
+                    <input
+                        type="number"
+                        name="testeJoelhoEsquerdo"
+                        id="testeJoelhoEsquerdo"
+                        value={data.testeJoelhoEsquerdo}
+                        onChange={handleChange}
+                        className={tw.inputTransparent} />
+                </div>
             </div>
 
             

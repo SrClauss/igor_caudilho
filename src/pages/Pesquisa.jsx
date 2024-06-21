@@ -4,6 +4,9 @@ import { ref, get, child, query, orderByChild, equalTo, startAt, endAt } from "f
 import { Card, Divider, Tag } from "antd";
 import { useNavigate } from 'react-router-dom'
 import Search from "antd/es/input/Search";
+import Layout from "../Layout";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 export default function Pesquisa() {
 
@@ -45,7 +48,9 @@ export default function Pesquisa() {
 
             if (snapshot.exists()) {
 
+
                 Object.values(snapshot.val()).forEach((value) => {
+                    console.log(value)
                     const newData = { colecao: colecao, colecaoLabel: colecoesLabel[colecao], dados: value }
                     setData((oldData) => [...oldData, newData])
 
@@ -64,9 +69,37 @@ export default function Pesquisa() {
     }
 
     return (
-        <>
+        <Layout>
 
-            <Search disabled={searchDisabled} placeholder="input search text" onChange={(e) => setNome(e.target.value)} onSearch={pesquisaPorNome} enterButton />
+            <div className="flex flex-row">
+
+                <div className="w-1/2 mr-10">
+
+                    <Search disabled={searchDisabled} placeholder="digite o nome do paciente" onChange={(e) => setNome(e.target.value)} onSearch={pesquisaPorNome} enterButton />
+                </div>
+
+                <div className="w-1/2">
+
+
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+                        <DatePicker
+
+
+                            className='w-full'
+                            label="Data"
+                            format='DD/MM/YYYY'
+
+
+
+                        />
+
+                    </LocalizationProvider>
+
+                </div>
+
+
+            </div>
 
 
             <div className="flex flex-col">
@@ -85,7 +118,15 @@ export default function Pesquisa() {
                                     <Tag className="my-1 mx-3" color="purple">{item.dados.dadosPessoais.peso} kg</Tag>
                                     <Tag className="my-1 mx-3" color="orange">{item.dados.dadosPessoais.altura} cm</Tag>
                                     <Tag className="my-1 mx-3" color="cyan">{new Date(item.dados.dadosPessoais.data).toLocaleDateString("pt-BR")}</Tag>
-                                    <Tag className="my-1 mx-3 cursor-pointer" color="magenta">Relatório</Tag>
+                                    <Tag className="my-1 mx-3 cursor-pointer" onClick={
+
+                                        (_) => {
+
+                                            [
+
+                                                navigate(`/relatorio-${item.colecao}`, { state: { data: item.dados } })
+                                            ]
+                                        }} color="magenta">Relatório</Tag>
                                 </div>
                             </div>
                         )
@@ -94,7 +135,10 @@ export default function Pesquisa() {
 
 
             </div>
-        </>
+
+
+
+        </Layout>
     )
 
 
