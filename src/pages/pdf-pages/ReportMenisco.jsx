@@ -94,7 +94,7 @@ function MyDocument({ data }) {
 export default function ReportMenisco({ data }) {
     return (
         <div>
-            <PDFDownloadLink document={<MyDocument data={data} />} fileName="report.pdf">
+            <PDFDownloadLink document={<MyDocument data={data} />} fileName={data.dadosPessoais.cpf + data.dadosPessoais.hora + ".pdf"}>
                 {({ blob, url, loading, error }) =>
                     loading ? 'Carregando...' : 'Baixar PDF'
                 }

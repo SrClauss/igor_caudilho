@@ -99,7 +99,7 @@ export default function ReportDFP({data}) {
  
     return (
         <div>
-            <PDFDownloadLink document={<MyDocument data={data} />} fileName="report.pdf">
+            <PDFDownloadLink document={<MyDocument data={data} />} fileName={data.dadosPessoais.cpf + data.dadosPessoais.hora + ".pdf"}>
                 {({ blob, url, loading, error }) =>
                     loading ? 'Carregando...' : 'Baixar PDF'
                 }

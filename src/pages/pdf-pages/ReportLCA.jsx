@@ -12,6 +12,7 @@ import Container from "../../components/pdf-components/base-components/Container
 import FieldTextArea from "../../components/pdf-components/base-components/FieldTextArea";
 import TwoToneFields from "../../components/pdf-components/base-components/TwoToneFields";
 import LachemeterPDF from '../../components/pdf-components/LachmeterPDF';
+import HopeTestPDF from '../../components/pdf-components/base-components/HopTestPDF';
 const styles = StyleSheet.create({
     threeColumnsContainer: {
         flexDirection: 'row',
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
 
 function MyDocument({ data }) {
 
-
+    
     return (
         <Document>
             <Page size="A4" style={styles.container}>
@@ -77,13 +78,19 @@ function MyDocument({ data }) {
                     <StepDownPDF stepDown={data.stepDown} />
                 </View>
 
+        
+            </Page>
+            <Page size="A4" style={styles.container}>
+                <View style={styles.logo}>
+                    <Image style={{width: "30%"}} src="igor_caudilho.png" />
+                </View>
                 <View style={styles.threeColumnsContainer}>
                     <Container title="Questionários">
                         <TwoToneFields left="Lysholm" right={data.lysholm.soma} />
                     </Container>
                     <TesteMobilidadeTornozeloPDF testeMobilidadeTornozelo={data.testeMobilidadeTornozelo} />
+                    <HopeTestPDF hopeTest={data.hopTest} />
                 </View>
-
                 <FieldTextArea label="Observações" value={data.observacoes} />
             </Page>
         </Document>
@@ -93,7 +100,7 @@ function MyDocument({ data }) {
 
 export default function ReportLCA({ data }) {
     return (
-        <PDFDownloadLink document={<MyDocument data={data} />} fileName="relatorio.pdf">
+        <PDFDownloadLink document={<MyDocument data={data} />} fileName={data.dadosPessoais.cpf + data.dadosPessoais.hora + ".pdf"}>
             {({ blob, url, loading, error }) => (loading ? 'Carregando...' : 'Baixar PDF')}
         </PDFDownloadLink>
     )

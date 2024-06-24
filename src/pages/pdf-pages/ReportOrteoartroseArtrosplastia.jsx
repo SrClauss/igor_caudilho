@@ -132,7 +132,7 @@ export default function ReportOsteoartroseArtroplastia({ data }) {
 
     return (
         <div>
-            <PDFDownloadLink document={<MyDocument data={data} />} fileName="relatorio.pdf">
+            <PDFDownloadLink document={<MyDocument data={data} />} fileName={data.dadosPessoais.cpf + data.dadosPessoais.hora + ".pdf"}>
                 {({ blob, url, loading, error }) => (loading ? 'Carregando...' : 'Baixar PDF')}
             </PDFDownloadLink>
 
