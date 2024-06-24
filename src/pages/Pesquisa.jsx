@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { db } from "../firebase";
 import { ref, get, child, query, orderByChild, equalTo, startAt, endAt } from "firebase/database";
-import { Card, Divider, Tag } from "antd";
+import { Button, Card, Divider, Switch, Tag } from "antd";
 import { useNavigate } from 'react-router-dom'
 import Search from "antd/es/input/Search";
 import Layout from "../Layout";
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { DatePicker } from "antd";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import ReportDFP from "./pdf-pages/ReportDFP";
 import ReportMenisco from "./pdf-pages/ReportMenisco";
@@ -17,14 +17,15 @@ export default function Pesquisa() {
     const navigate = useNavigate()
     const [nome, setNome] = useState('')
     const [data, setData] = useState([])
+    const [searchDate, setSearchDate] = useState(false)
     const [searchDisabled, setSearchDisabled] = useState(false)
-
+    const [pesquisaNome, setPesquisaNome] = useState(true)
     const renderReport = (item) => {
         switch (item.colecao) {
             case 'dfp':
                 return <ReportDFP data={item.dados} />;
             case 'menisco':
-                 return <ReportMenisco data={item.dados} />;
+                return <ReportMenisco data={item.dados} />;
             case 'lca':
                 return <ReportLCA data={item.dados} />;
             case 'osteoartrose_artroplastia':
@@ -34,7 +35,7 @@ export default function Pesquisa() {
                 return "Error"; // Valor padrão se nenhum case corresponder
         }
     };
-    
+
 
     const navigateToPage = (data) => {
 
@@ -46,7 +47,38 @@ export default function Pesquisa() {
         setData([])
 
     }, [nome])
+    const pesquisaPorData = () => {
 
+    
+        setData([])
+        const colecoes = ['dfp', 'menisco', 'lca', 'osteoartrose_artroplastia']
+
+        const colecoesLabel = {
+
+            'dfp': 'DFP',
+            'menisco': 'Menisco',
+            'lca': 'LCA',
+            'osteoartrose_artroplastia': 'Osteoartrose/Artroplastia'
+        }
+        colecoes.forEach(async (colecao) => {
+            const queryData = query(ref(db, colecao), orderByChild('data'), startAt(searchDate.slice(0, 9)), endAt(searchDate.slice(0, 10) + '\uf8ff'))
+            const snapshot = await get(queryData)
+
+  
+
+
+            if (snapshot.exists()) {
+
+
+                Object.values(snapshot.val()).forEach((value) => {
+                    console.log(value)
+                    const newData = { colecao: colecao, colecaoLabel: colecoesLabel[colecao], dados: value }
+                    setData((oldData) => [...oldData, newData])
+
+                })
+            }
+        })
+    }
     const pesquisaPorNome = () => {
         setSearchDisabled(true)
 
@@ -91,32 +123,40 @@ export default function Pesquisa() {
     return (
         <Layout>
 
-            <div className="flex flex-row">
 
-                <div className="w-1/2 mr-10">
+            <div className="m-10">
 
-                    <Search disabled={searchDisabled} placeholder="digite o nome do paciente" onChange={(e) => setNome(e.target.value)} onSearch={pesquisaPorNome} enterButton />
-                </div>
-
-                <div className="w-1/2">
+                <span className={pesquisaNome ? "" : "font-bold"}>Pesquisar por data</span>
+                <Switch className="m-10" value={pesquisaNome} onChange={setPesquisaNome} />
+                <span className={pesquisaNome ? "font-bold" : ""}>Pesquisa por nome</span>
 
 
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+            </div>
 
-                        <DatePicker
+            <div className="flex flex-col">
+                {
+
+                    pesquisaNome ?
+                        <div className="m-10">
+
+                            <Search disabled={searchDisabled} placeholder="digite o nome do paciente" onChange={(e) => setNome(e.target.value)} onSearch={pesquisaPorNome} enterButton />
+                        </div>
+                        :
 
 
-                            className='w-full'
-                            label="Data"
-                            format='DD/MM/YYYY'
+
+                        <div className="m-10 flex flex-row">
+                            <input
+                                onChange={(e) => { setSearchDate(new Date(e.target.value).toISOString()) }}
+                                type="date"
+                                className="w-full border border-gray-200 rounded-md hover:border-gray-500" placeholder="insira a data" />
+                            <button
+                                onClick={pesquisaPorData}
+                                className="bg-blue-500 text-white rounded-md px-3 py-1 mx-1 hover:bg-blue-800">Pesquisar</button>
 
 
-
-                        />
-
-                    </LocalizationProvider>
-
-                </div>
+                        </div>
+                }
 
 
             </div>
