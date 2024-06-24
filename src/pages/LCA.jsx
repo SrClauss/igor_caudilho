@@ -34,10 +34,7 @@ export default function LCA() {
 
         setData(newData);
     }
-    useEffect(() => {
-        console.log(data);
-    }, [data])
-    
+   
 
     return (
         <Layout>

@@ -41,23 +41,22 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         margin: 10,
-        width: '30%',
+        width: '100%',
     },
     
 
 });
 
-
-function MyDocument({data }) {
-    
+function MyDocument({ data }) {
 
 
     return (
         <Document>
             <Page size="A4" style={styles.container}>
                 <View style={styles.logo}>
-                    <Image src="igor_caudilho.png" />
+                    <Image style={{width: "30%"}} src="igor_caudilho.png" />
                 </View>
+
                 <View>
                     <DadosPessoaisPDF dadosPessoais={data.dadosPessoais} />
                 </View>

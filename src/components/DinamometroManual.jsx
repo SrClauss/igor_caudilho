@@ -4,9 +4,19 @@ import { useMediaQuery } from 'react-responsive'
 import '../index.css'
 import * as tw from './tailwind'
 
-export default function DinamometroManual({ onDataChange, initialData=null}) {
+const calculeDeficit = (valor1, valor2) => {
+    const num1 = parseFloat(valor1)
+    const num2 = parseFloat(valor2)
+    const razaoPercentual = (Math.min(num1, num2) / Math.max(num1, num2)) * 100
+
+    return razaoPercentual.toFixed(2)
+}
+
+export default function DinamometroManual({ onDataChange, initialData = null }) {
     const isMobile = useMediaQuery({ query: '(max-width: 1224px)' })
- 
+
+
+
     return (
         <Card className='mt-4 p-2'>
             <h2 className={tw.headerTable}>Dinamometro Manual</h2>
@@ -23,16 +33,16 @@ export default function DinamometroManual({ onDataChange, initialData=null}) {
 
 }
 
-export function DinamometroManualCarousel({ onDataChange, initialData = null}) {
+export function DinamometroManualCarousel({ onDataChange, initialData = null }) {
     const [data, setData] = useState(initialData || {})
 
     const carouselRef = useRef()
 
 
     useEffect(() => {
-        const deficitExtensor = Math.abs(data.torqueExtensorMedioDireito - data.torqueExtensorMedioEsquerdo)
-        const deficitFlexor = Math.abs(data.torqueFlexorMedioDireito - data.torqueFlexorMedioEsquerdo)
-        const deficitHipPosition = Math.abs(data.torqueHipPositionDireito - data.torqueHipPositionEsquerdo)
+        const deficitExtensor = calculeDeficit(data.torqueExtensorMedioDireito, data.torqueExtensorMedioEsquerdo)
+        const deficitFlexor = calculeDeficit(data.torqueFlexorMedioDireito, data.torqueFlexorMedioEsquerdo)
+        const deficitHipPosition = calculeDeficit(data.torqueHipPositionDireito, data.torqueHipPositionEsquerdo)
 
         setData({
             ...data,
@@ -52,7 +62,7 @@ export function DinamometroManualCarousel({ onDataChange, initialData = null}) {
     }
 
     useEffect(() => {
-        onDataChange({dinamometroManual:data})
+        onDataChange({ dinamometroManual: data })
 
     }, [data])
 
@@ -237,7 +247,7 @@ export function DinamometroManualCarousel({ onDataChange, initialData = null}) {
 }
 
 
-export function DinamometroManualTable({ onDataChange, initialData = null}) {
+export function DinamometroManualTable({ onDataChange, initialData = null }) {
 
     const [data, setData] = useState(initialData || {})
 
@@ -245,9 +255,9 @@ export function DinamometroManualTable({ onDataChange, initialData = null}) {
 
 
     useEffect(() => {
-        const deficitExtensor = parseFloat(Math.abs(data.torqueExtensorMedioDireito - data.torqueExtensorMedioEsquerdo).toFixed(2))
-        const deficitFlexor = parseFloat(Math.abs(data.torqueFlexorMedioDireito - data.torqueFlexorMedioEsquerdo).toFixed(2))
-        const deficitHipPosition = parseFloat(Math.abs(data.torqueHipPositionDireito - data.torqueHipPositionEsquerdo).toFixed(2))
+        const deficitExtensor = calculeDeficit(data.torqueExtensorMedioDireito, data.torqueExtensorMedioEsquerdo)
+        const deficitFlexor = calculeDeficit(data.torqueFlexorMedioDireito, data.torqueFlexorMedioEsquerdo)
+        const deficitHipPosition = calculeDeficit(data.torqueHipPositionDireito, data.torqueHipPositionEsquerdo)
 
         setData({
             ...data,
@@ -258,7 +268,7 @@ export function DinamometroManualTable({ onDataChange, initialData = null}) {
     }, [data.torqueExtensorMedioDireito, data.torqueExtensorMedioEsquerdo, data.torqueFlexorMedioDireito, data.torqueFlexorMedioEsquerdo, data.torqueHipPositionDireito, data.torqueHipPositionEsquerdo])
     const handleChange = (e) => {
         const { name, value } = e.target
-        
+
         setData({
             ...data,
             [name]: parseFloat(value)
@@ -267,7 +277,7 @@ export function DinamometroManualTable({ onDataChange, initialData = null}) {
     }
 
     useEffect(() => {
-        onDataChange({dinamometroManual:data})
+        onDataChange({ dinamometroManual: data })
 
     }, [data])
 
@@ -276,10 +286,10 @@ export function DinamometroManualTable({ onDataChange, initialData = null}) {
         <>
 
             <div className={tw.fourColumnsHeader}>
-                <div className={tw.columnHeader}>60º/s</div>
-                <div className={tw.columnHeader}>Direita</div>
-                <div className={tw.columnHeader}>Esquerda</div>
-                <div className={tw.columnHeader}>Deficit</div>
+                <div className={tw.columnHeader}>60&deg;</div>
+                <div className={tw.columnHeader}>Direita(&deg;)</div>
+                <div className={tw.columnHeader}>Esquerda(&deg;)</div>
+                <div className={tw.columnHeader}>Deficit(%) </div>
             </div>
             <div className={tw.fourColumnsGrayContent}>
                 <div className={tw.tableSideValue}>Torque Extensor Medio</div>
@@ -294,7 +304,7 @@ export function DinamometroManualTable({ onDataChange, initialData = null}) {
                 <div className={tw.colTransparent}>
                     <input id='deficitExtensor'
                         disabled
-                        className={tw.inputTransparentBold} type="number" name="deficitExtensor" value={data.deficitExtensor? data.deficitExtensor: ""} />
+                        className={tw.inputTransparentBold} type="number" name="deficitExtensor" value={data.deficitExtensor ? data.deficitExtensor : ""} />
                 </div>
             </div>
             <div className={tw.fourWhiteColumnsContent}>
@@ -310,7 +320,7 @@ export function DinamometroManualTable({ onDataChange, initialData = null}) {
                 <div className={tw.colTransparent}>
                     <input id='deficitFlexor'
                         disabled
-                        className={tw.inputTransparentBold} type="number" name="deficitFlexor" value={data.deficitFlexor!=0? data.deficitFlexor: ""} />
+                        className={tw.inputTransparentBold} type="number" name="deficitFlexor" value={data.deficitFlexor != 0 ? data.deficitFlexor : ""} />
                 </div>
             </div>
 
@@ -327,7 +337,7 @@ export function DinamometroManualTable({ onDataChange, initialData = null}) {
                 <div className={tw.colTransparent}>
                     <input id='deficitHipPosition'
                         disabled
-                        className={tw.inputTransparentBold} type="number" name="deficitHipPosition" value={data.deficitHipPosition!=0? data.deficitHipPosition: ""} />
+                        className={tw.inputTransparentBold} type="number" name="deficitHipPosition" value={data.deficitHipPosition != 0 ? data.deficitHipPosition : ""} />
                 </div>
 
             </div>

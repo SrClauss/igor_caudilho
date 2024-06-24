@@ -7,8 +7,7 @@ import OsteoartroseArtroplastia from './pages/OsteoartroseArtroplastia';
 import LCA from './pages/LCA';
 import Menisco from './pages/Menisco';
 import Pesquisa from './pages/Pesquisa';
-import {RelatorioDFP, RelatorioLCA, RelatorioOsteoartroseArtroplastia, RelatorioMenisco} from './pages/Relatorios';
-import TestPDF from './pages/TestPDF';
+
 
 
 function App() {
@@ -24,11 +23,7 @@ function App() {
         <Route path="lca" element={<LCA/>} /> 
         <Route path="menisco" element={<Menisco/>} />
         <Route path="pesquisa" element={<Pesquisa/>} />
-        <Route path="/relatorio-dfp" element={<RelatorioDFP/>} />
-        <Route path="/relatorio-lca" element={<RelatorioLCA/>}/>
-        <Route path='/relatorio-osteoartrose_artroplastia' element={<RelatorioOsteoartroseArtroplastia/>}/>
-        <Route path='/relatorio-menisco' element={<RelatorioMenisco/>}/>
-        <Route path="/test-pdf" element={<TestPDF/>} />
+
 
 
       </Route>

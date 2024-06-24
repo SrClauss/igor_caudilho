@@ -32,7 +32,7 @@ export default function TesteMobilidadeTornozelo({onDataChange, initialData = nu
                         type="number"
                         name="testeJoelhoDireito"
                         id="testeJoelho"
-                        value={data.testeJoelho}
+                        value={data.testeJoelhoDireito }
                         onChange={handleChange}
                         className={tw.inputTransparent} />
                 </div>

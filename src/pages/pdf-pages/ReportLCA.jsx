@@ -12,7 +12,6 @@ import Container from "../../components/pdf-components/base-components/Container
 import FieldTextArea from "../../components/pdf-components/base-components/FieldTextArea";
 import TwoToneFields from "../../components/pdf-components/base-components/TwoToneFields";
 import LachemeterPDF from '../../components/pdf-components/LachmeterPDF';
-
 const styles = StyleSheet.create({
     threeColumnsContainer: {
         flexDirection: 'row',
@@ -42,9 +41,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         margin: 10,
-        width: '30%',
+        width: '100%',
     },
-
+    
 
 });
 
@@ -55,7 +54,7 @@ function MyDocument({ data }) {
         <Document>
             <Page size="A4" style={styles.container}>
                 <View style={styles.logo}>
-                    <Image src="igor_caudilho.png" />
+                    <Image style={{width: "30%"}} src="igor_caudilho.png" />
                 </View>
 
                 <View>

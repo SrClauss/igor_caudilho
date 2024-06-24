@@ -81,7 +81,7 @@ export function CriteriosLimitacaoFuncionalGraveOsteoartroseTable({ onDataChange
     }, [data])
     return (
         <Card>
-            <div className={tw.componentTitle}>{"Critérios de Limitação Funcional Grave por Osteoartrose" + ` (${sexo ? sexo : "Masculino"})`}</div>
+            <div className={tw.componentTitle}>{"Critérios de Limitação Funcional Grave por Osteoartrose"}</div>
             <div className={tw.threeColumnsHeader}>
                 <div className={tw.columnHeader}>Critérios</div>
                 <div className={tw.columnHeader}>Paciente</div>

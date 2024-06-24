@@ -1,14 +1,14 @@
 
 export default function Layout({ children }) {
     return (
-        <div className=" container-fluid shadow-xl shadow-black">
-ç
+        <div className="container shadow-xl bg-white shadow-black">
+
             <div className="flex w-full justify-around md:justify-start">
 
 
                 <img src="/igor_caudilho.png" alt="igor caudilho" />
             </div>
-            <div className=" p-10">
+            <div className="p-  ">
 
                 {children}
             </div>
