@@ -7,6 +7,10 @@ import Search from "antd/es/input/Search";
 import Layout from "../Layout";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import ReportDFP from "./pdf-pages/ReportDFP";
+import ReportMenisco from "./pdf-pages/ReportMenisco";
+import ReportLCA from "./pdf-pages/ReportLCA";
+import ReportOsteoartroseArtroplastia from "./pdf-pages/ReportOrteoartroseArtrosplastia";
 
 export default function Pesquisa() {
 
@@ -15,6 +19,22 @@ export default function Pesquisa() {
     const [data, setData] = useState([])
     const [searchDisabled, setSearchDisabled] = useState(false)
 
+    const renderReport = (item) => {
+        switch (item.colecao) {
+            case 'dfp':
+                return <ReportDFP data={item.dados} />;
+            case 'menisco':
+                 return <ReportMenisco data={item.dados} />;
+            case 'lca':
+                return <ReportLCA data={item.dados} />;
+            case 'osteoartrose_artroplastia':
+                return <ReportOsteoartroseArtroplastia data={item.dados} />;
+
+            default:
+                return "Error"; // Valor padrão se nenhum case corresponder
+        }
+    };
+    
 
     const navigateToPage = (data) => {
 
@@ -118,15 +138,8 @@ export default function Pesquisa() {
                                     <Tag className="my-1 mx-3" color="purple">{item.dados.dadosPessoais.peso} kg</Tag>
                                     <Tag className="my-1 mx-3" color="orange">{item.dados.dadosPessoais.altura} cm</Tag>
                                     <Tag className="my-1 mx-3" color="cyan">{new Date(item.dados.dadosPessoais.data).toLocaleDateString("pt-BR")}</Tag>
-                                    <Tag className="my-1 mx-3 cursor-pointer" onClick={
+                                    <Tag className="my-1 mx-3 cursor-pointer" color="magenta">{renderReport(item)}</Tag>
 
-                                        (_) => {
-
-                                            [
-
-                                                navigate(`/relatorio-${item.colecao}`, { state: { data: item.dados } })
-                                            ]
-                                        }} color="magenta">Relatório</Tag>
                                 </div>
                             </div>
                         )

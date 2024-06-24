@@ -8,7 +8,6 @@ import RelacaoFlexoresExtensores from "../components/RelacaoFlexoresExtensores"
 import { Divider } from "antd"
 import EscalaAnalogicaDor from "../components/EscalaVisualAnalogicaDor"
 import Lachemeter from "../components/Lechemeter"
-
 import { Button } from "antd"
 import Lysholm from "../components/Lysholm"
 import TesteMobilidadeTornozelo from "../components/TesteMobilidadeTornozelo"

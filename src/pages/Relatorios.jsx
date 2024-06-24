@@ -203,7 +203,7 @@ export function RelatorioOsteoartroseArtroplastia() {
     }, [])
 
     return (
-
+        <div className="a4-container">
         <div className="text-center px-5 py-5">
             <div className="flex justify-right ml-10">
                 <img src="/igor_caudilho.png" alt="logo" className="w-24" />
@@ -360,6 +360,7 @@ export function RelatorioOsteoartroseArtroplastia() {
 
 
             </div>
+        </div>
         </div>
 
     )

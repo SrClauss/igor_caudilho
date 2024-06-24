@@ -15,6 +15,7 @@
     "@mui/icons-material": "^5.15.18",
     "@mui/material": "^5.15.18",
     "@mui/x-date-pickers": "^7.5.0",
+    "@react-pdf/renderer": "^3.4.4",
     "antd": "^5.17.3",
     "axios": "^1.7.2",
     "dayjs": "^1.11.11",

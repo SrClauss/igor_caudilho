@@ -62,7 +62,24 @@ export default function Index() {
 
       </div>
 
-     
+
+      <div className="w-full p-10">
+
+        <button
+
+          className="bg-cyan-500 w-full hover:bg-cyan-600  p-16 text-3xl text-white font-bold rounded-xl  shadow-md shadow-cyan-900 hover:shadow-none"
+          onClick={() => window.location.href = '/test-pdf'}
+
+        >
+
+
+          Teste PDF
+
+        </button>
+
+      </div>
+
+
 
     </Layout>
 
