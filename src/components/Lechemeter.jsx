@@ -25,9 +25,9 @@ export function LachemeterCarousel({ onDataChange, initialData = null }) {
 
 
 
-        const mediaDireita = data?.maximaManualDireita ? data.maximaManualDireita.reduce((acc, curr) => acc + curr, 0) / 3 : 0
+        const mediaDireita = data?.maximaManualDireita ? (data.maximaManualDireita.reduce((acc, curr) => acc + curr, 0) / 3).toFixed() : 0
 
-        const mediaEsquerda = data?.maximaManualEsquerda ? data.maximaManualEsquerda.reduce((acc, curr) => acc + curr, 0) / 3 : 0
+        const mediaEsquerda = data?.maximaManualEsquerda ? (data.maximaManualEsquerda.reduce((acc, curr) => acc + curr, 0) / 3).toFixed() : 0
 
         const diferenca = mediaDireita - mediaEsquerda
         setData({

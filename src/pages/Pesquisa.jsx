@@ -5,8 +5,7 @@ import { Button, Card, Divider, Switch, Tag } from "antd";
 import { useNavigate } from 'react-router-dom'
 import Search from "antd/es/input/Search";
 import Layout from "../Layout";
-import { DatePicker } from "antd";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
 import ReportDFP from "./pdf-pages/ReportDFP";
 import ReportMenisco from "./pdf-pages/ReportMenisco";
 import ReportLCA from "./pdf-pages/ReportLCA";
