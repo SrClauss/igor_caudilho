@@ -15,7 +15,7 @@ import QuestionarioSF36 from "../components/SF36"
 import TesteCaminhada from "../components/TesteCaminhada"
 import { useLocation } from "react-router-dom"
 import Layout from "../Layout"
-
+import Observacoes from "../components/Observacoes"
 
 
 
@@ -72,6 +72,9 @@ export default function OsteoartroseArtroplastia() {
             <TesteCaminhada onDataChange={handleSetData} initialData={initialData?.testeCaminhada} />
             <Divider className="my-10" />
             <CriteriosLimitacaoFuncionalGraveOsteoartroseTable onDataChange={handleSetData} sexo={data.sexo} initialData={initialData?.criteriosLimitacaoFuncionalGrave} />
+            <div className="mt-10">
+                <Observacoes onDataChange={handleSetData} initialData={initialData?.observacoes} />
+            </div>
             <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={(_)=>enviarDados("osteoartrose_artroplastia", data)}>
                 Enviar
             </Button>

@@ -13,6 +13,7 @@ import StepDown from "../components/StepDown";
 import Kujala from "../components/Kujala";
 import { useLocation } from "react-router-dom"
 import Layout from "../Layout";
+import Observacoes from "../components/Observacoes";
 export default function DFP() {
   const location = useLocation()
   const initialData = location.state?.initialData
@@ -24,7 +25,10 @@ export default function DFP() {
 
 
   useEffect(() => {
-    console.log(data);
+
+    console.log("initialData", initialData)
+    console.log("data", data)
+
   }, [data])
 
 
@@ -74,7 +78,10 @@ export default function DFP() {
       <TesteMobilidadeTornozelo onDataChange={handleSetData} initialData={initialData?.testeMobilidadeTornozelo} />
       <Divider className="my-10" />
       <StepDown onDataChange={handleSetData} initialData={initialData?.stepDown} />
-      <Divider className="my-10" />
+      <div className="mt-10">
+
+        <Observacoes onDataChange={handleSetData} initialData={initialData?.observacoes} />
+      </div>
 
       <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={(_) => enviarDados("dfp", data)}>
         Enviar

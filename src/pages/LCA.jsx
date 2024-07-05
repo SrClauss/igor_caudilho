@@ -16,11 +16,12 @@ import HopTest from "../components/HopTest"
 import { useLocation } from "react-router-dom"
 import Layout from "../Layout"
 import { enviarDados } from "../firebase"
+import Observacoes from "../components/Observacoes"
 
 export default function LCA() {
     const location = useLocation()
     const initialData = location.state?.initialData
-    const [data, setData] = useState(initialData||{ })
+    const [data, setData] = useState(initialData || {})
     const handleSetData = (object) => {
         const [keys, values] = [Object.keys(object), Object.values(object)]
         let newData = { ...data };
@@ -34,7 +35,7 @@ export default function LCA() {
 
         setData(newData);
     }
-   
+
 
     return (
         <Layout>
@@ -42,7 +43,7 @@ export default function LCA() {
                 AVALIAÇÃO FUNCIONAL DO JOELHO (LCA)
             </h1>
             <div className="py-10">
-                <DadosPessoais onSubmitData={handleSetData} initialData={initialData?.dadosPessoais}/>
+                <DadosPessoais onSubmitData={handleSetData} initialData={initialData?.dadosPessoais} />
             </div>
             <Divider className="my-10" />
             <EscalaAnalogicaDor onDataChange={handleSetData} initialData={initialData?.escalaAnalogicaDor} />
@@ -64,14 +65,17 @@ export default function LCA() {
             <TesteMobilidadeTornozelo onDataChange={handleSetData} initialData={initialData?.testeMobilidadeTornozelo} />
             <Divider className="my-10" />
             <StepDown onDataChange={handleSetData} initialData={initialData?.stepDown} />
-            <Divider className="my-10" />
-          
-            <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={(_)=>enviarDados('lca', data)}>
+            <div className="mt-10">
+
+                <Observacoes onDataChange={handleSetData} initialData={initialData?.observacoes} />
+            </div>
+
+            <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={(_) => enviarDados('lca', data)}>
                 Enviar
             </Button>
-           
 
-          
+
+
         </Layout>
     )
 

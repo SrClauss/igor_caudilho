@@ -6,7 +6,7 @@ import './register';
 // Estilos
 
 // Componente FieldTextArea
-function FieldTextArea ({ label, value , minHeight=100}){
+function FieldTextArea ({ label, value , minHeight=25}){
   const styles = StyleSheet.create({
       container: {
         marginTop: 10,

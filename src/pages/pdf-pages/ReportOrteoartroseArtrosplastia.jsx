@@ -115,7 +115,7 @@ function MyDocument({ data }) {
 
 
                     </Container>
-                    <FieldTextArea label="Observações" />
+                    <FieldTextArea label="Observações" value={data.observacoes} />
 
 
 

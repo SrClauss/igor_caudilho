@@ -80,9 +80,11 @@ function MyDocument({ data }) {
                     <TesteMobilidadeTornozeloPDF testeMobilidadeTornozelo={data.testeMobilidadeTornozelo} />
                     <StepDownPDF stepDown={data.stepDown} />
                 </View>
-                <FieldTextArea label="Observações" />
+                <FieldTextArea label="Observações" value={data.observacoes}/>
 
             </Page>
+          
+            
         </Document >
 
     )

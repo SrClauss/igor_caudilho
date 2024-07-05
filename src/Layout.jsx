@@ -73,7 +73,7 @@ export default function Layout({ children }) {
                     <div className="text-white text-md md:text-xl mt-4 sm:mt-0 sm:ml-4">
                         <a href="mailto:dr.igor@clinicasaolucas.com.br" target="_blank" rel="noreferrer">
                             <Mail /><span className="ml-2">
-                                <span>dr.igor@clinicasaolucas.com.br</span>
+                                <span> dr.igorcardillo@gmail.com </span>
                             </span>
                         </a>
                     </div>

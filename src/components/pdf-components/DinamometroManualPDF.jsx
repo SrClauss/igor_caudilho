@@ -20,10 +20,10 @@ const dinamometroManual = {
 
 export default function DinamometroManualPDF({ dinamometroManual}) {
     return (
-        <Container title="Dinamômetro Manual">
+        <Container title="Dinamômetro Manual (N/m)">
             <RowTable items={["Torque", "Direito", "Esquerdo", "Diferença"]} isGray isBold />
-            <RowTable items={["Extensor", dinamometroManual.torqueExtensorMedioDireito + "°", dinamometroManual.torqueExtensorMedioEsquerdo + "°", dinamometroManual.deficitExtensor +"%"]} />
-            <RowTable items={["Flexor", dinamometroManual.torqueFlexorMedioDireito + "°", dinamometroManual.torqueFlexorMedioEsquerdo + "°", dinamometroManual.deficitFlexor + "%"]} isGray />
+            <RowTable items={["Extensor", dinamometroManual.torqueExtensorMedioDireito, dinamometroManual.torqueExtensorMedioEsquerdo, dinamometroManual.deficitExtensor +"%"]} />
+            <RowTable items={["Flexor", dinamometroManual.torqueFlexorMedioDireito, dinamometroManual.torqueFlexorMedioEsquerdo, dinamometroManual.deficitFlexor + "%"]} isGray />
 
         </Container>
     )

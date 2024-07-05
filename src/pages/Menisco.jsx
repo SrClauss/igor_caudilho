@@ -14,6 +14,7 @@ import StepDown from "../components/StepDown"
 import Lysholm from "../components/Lysholm"
 import { useLocation } from "react-router-dom"  
 import Layout from "../Layout"
+import Observacoes from "../components/Observacoes"
 
 
 export default function Menisco() {
@@ -64,7 +65,9 @@ export default function Menisco() {
             <TesteMobilidadeTornozelo onDataChange={handleSetData} initialData={initialData?.testeMobilidadeTornozelo} />
             <Divider className="my-10" />
             <StepDown onDataChange={handleSetData} initialData={initialData?.stepDown} />
-            <Divider className="my-10" />
+            <div className="mt-10">
+                <Observacoes onDataChange={handleSetData} initialData={initialData?.observacoes} />
+            </div>
 
             <Button type="primary" className="block mx-auto mt-10 w-full" size="large" onClick={(_)=>enviarDados('menisco', data)}>
                 Enviar
