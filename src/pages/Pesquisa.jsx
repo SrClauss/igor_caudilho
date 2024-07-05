@@ -38,7 +38,7 @@ export default function Pesquisa() {
 
     const navigateToPage = (data) => {
 
-        console.log(data)
+   
         navigate(`/${data.colecao}`, { state: { initialData: data.dados } })
 
     }

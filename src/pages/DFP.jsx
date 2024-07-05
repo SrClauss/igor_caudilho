@@ -24,12 +24,6 @@ export default function DFP() {
 
 
 
-  useEffect(() => {
-
-    console.log("initialData", initialData)
-    console.log("data", data)
-
-  }, [data])
 
 
 
