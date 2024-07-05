@@ -65,7 +65,7 @@ export default function Layout({ children }) {
                     </div>
                 </div>
                 <div className="flex flex-col sm:flex-row mt-4">
-                    <div className="text-white text-md md:text:xl">
+                    <div className="text-white text-md md:text-xl">
                         <a href="https://www.instagram.com/dr.igorcardillo" target="_blank" rel="noreferrer">
                             <Instagram /><span className="ml-2">@dr.igorcardillo</span>
                         </a>
