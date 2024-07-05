@@ -11,7 +11,7 @@ export default function Layout({ children }) {
 
                 <img src="/igor_caudilho.png" width="500" alt="igor caudilho" />
             </div>
-            <div className="p-  ">
+            <div>
 
                 {children}
             </div>

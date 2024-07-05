@@ -162,7 +162,7 @@ export default function Pesquisa() {
 
 
             <div className="flex flex-col">
-                <div className="w-full flex flex-col items-center">
+                <div className="w-full flex flex-col items-center min-h-[720px]">
                     {data.map((item, index) => {
                         return (
                             <div key={index} className=" my-2 border-2 rounded-md shadow-md w-full flex flex-col items-center">
