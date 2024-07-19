@@ -12,8 +12,8 @@ export default function RelacaoFlexoresExtensoresPDF({relacaoFlexoresExtensores}
     return (
         <Container title="Relação Flexores/Extenssores">
             <RowTablePDF items={["", "60%"]} isGray isBold/>
-            <RowTablePDF items={["Direito", relacaoFlexoresExtensores.direito]} />
-            <RowTablePDF items={["Esquerdo", relacaoFlexoresExtensores.esquerdo]} isGray />
+            <RowTablePDF items={["Direito", relacaoFlexoresExtensores?.direito]} />
+            <RowTablePDF items={["Esquerdo", relacaoFlexoresExtensores?.esquerdo]} isGray />
         
         </Container>
     )

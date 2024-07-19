@@ -26,19 +26,19 @@ export default function Sf36PDF({ sf36 }) {
         <View style={styles.container}>
             <View style={styles.title}><Text>SF36</Text></View>
             <FieldsRow fields={[
-                { label: 'Aspectos Sociais', value: sf36.dominions.aspectosSociais },
-                { label: 'Capacidade Funcional', value: sf36.dominions.capacidadeFuncional },
-                { label: 'Dor', value: sf36.dominions.dor },
+                { label: 'Aspectos Sociais', value: sf36?.dominions.aspectosSociais },
+                { label: 'Capacidade Funcional', value: sf36?.dominions.capacidadeFuncional },
+                { label: 'Dor', value: sf36?.dominions.dor },
             ]} />
             <FieldsRow fields={[
-                { label: 'Estado Geral de Saúde', value: sf36.dominions.estadoGeralSaude },
-                { label: 'Limitação Aspectos Físicos', value: sf36.dominions.limitacaoAspectosFisicos },
-                { label: 'Limitações Aspectos Emocionais', value: sf36.dominions.limitacoesAspectosEmocionais },
+                { label: 'Estado Geral de Saúde', value: sf36?.dominions.estadoGeralSaude },
+                { label: 'Limitação Aspectos Físicos', value: sf36?.dominions?.limitacaoAspectosFisicos },
+                { label: 'Limitações Aspectos Emocionais', value: sf36?.dominions?.limitacoesAspectosEmocionais },
             ]} />
             <FieldsRow fields={[
-                { label: 'Saúde Mental', value: sf36.dominions.saudeMental },
-                { label: 'Vitalidade', value: sf36.dominions.vitalidade },
-                { label: 'Total', value: sf36.total },
+                { label: 'Saúde Mental', value: sf36?.dominions?.saudeMe0ntal },
+                { label: 'Vitalidade', value: sf36?.dominions?.vitalidade },
+                { label: 'Total', value: sf36?.total },
 
             ]} />
 

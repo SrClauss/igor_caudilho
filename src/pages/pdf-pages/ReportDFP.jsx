@@ -76,7 +76,7 @@ function MyDocument({data }) {
                 <View style={styles.threeColumnsContainer}>
                     <Container title="Questionários">
 
-                        <TwoToneFields left="Kujala" right={data.kujala.soma} />
+                        <TwoToneFields left="Kujala" right={data.kujala?.soma} />
                         
                     </Container>
                     <TesteMobilidadeTornozeloPDF testeMobilidadeTornozelo={data.testeMobilidadeTornozelo} />

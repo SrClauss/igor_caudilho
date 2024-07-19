@@ -20,6 +20,9 @@ export default function Pesquisa() {
     const [searchDisabled, setSearchDisabled] = useState(false)
     const [pesquisaNome, setPesquisaNome] = useState(true)
     const renderReport = (item) => {
+
+        
+
         switch (item.colecao) {
             case 'dfp':
                 return <ReportDFP data={item.dados} />;

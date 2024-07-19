@@ -75,7 +75,7 @@ function MyDocument({ data }) {
 
                 <View style={styles.threeColumnsContainer}>
                     <Container title="Questionários">
-                        <TwoToneFields left="Lysholm" right={data.lysholm.soma} />
+                        <TwoToneFields left="Lysholm" right={data.lysholm?.soma} />
                     </Container>
                     <TesteMobilidadeTornozeloPDF testeMobilidadeTornozelo={data.testeMobilidadeTornozelo} />
                     <StepDownPDF stepDown={data.stepDown} />

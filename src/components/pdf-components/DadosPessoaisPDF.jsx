@@ -14,21 +14,21 @@ export default function DadosPessoaisPDF({ dadosPessoais}) {
         <View>
             <FieldsRow fields={[{ label: 'Nome', value: dadosPessoais.nome }, { label: 'CPF', value: dadosPessoais.cpf }]} />  
             <FieldsRow fields={[
-                { label: 'Idade', value: dadosPessoais.idade },
-                { label: 'Altura', value: dadosPessoais.altura },
-                { label: 'Peso', value: dadosPessoais.peso },
-                { label: 'Sexo', value: dadosPessoais.sexo },
+                { label: 'Idade', value: dadosPessoais?.idade },
+                { label: 'Altura', value: dadosPessoais?.altura },
+                { label: 'Peso', value: dadosPessoais?.peso },
+                { label: 'Sexo', value: dadosPessoais?.sexo },
             ]} />
 
             <FieldsRow fields={[
                 { label: 'Lados', value: dadosPessoais.lados.join(', ') },
-                { label: 'Membro', value: dadosPessoais.membro },
+                { label: 'Membro', value: dadosPessoais?.membro },
             ]} />
             <FieldsRow fields={[
-                { label: 'Data', value: new Date(dadosPessoais.data).toLocaleDateString() },
-                { label: 'Hora', value: new Date(dadosPessoais.hora).toLocaleTimeString() },
+                { label: 'Data', value: new Date(dadosPessoais?.data).toLocaleDateString() },
+                { label: 'Hora', value: new Date(dadosPessoais?.hora).toLocaleTimeString() },
             ]} />
-            <FieldTextArea label="Queixa" value={dadosPessoais.queixa} />
+            <FieldTextArea label="Queixa" value={dadosPessoais?.queixa} />
         </View>
 
         
