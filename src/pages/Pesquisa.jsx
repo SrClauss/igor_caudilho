@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { db } from "../firebase";
 import { ref, get, child, query, orderByChild, equalTo, startAt, endAt } from "firebase/database";
-import { Button, Card, Divider, Switch, Tag } from "antd";
+import { Switch, Tag } from "antd";
 import { useNavigate } from 'react-router-dom'
 import Search from "antd/es/input/Search";
 import Layout from "../Layout";
-
 import ReportDFP from "./pdf-pages/ReportDFP";
 import ReportMenisco from "./pdf-pages/ReportMenisco";
 import ReportLCA from "./pdf-pages/ReportLCA";
@@ -19,6 +18,14 @@ export default function Pesquisa() {
     const [searchDate, setSearchDate] = useState(false)
     const [searchDisabled, setSearchDisabled] = useState(false)
     const [pesquisaNome, setPesquisaNome] = useState(true)
+
+
+
+    const renderCopyLink = (item) => {
+        const url = window.location.href.replace("pesquisa", "") + item.colecao + '/' + item.dados.id
+        navigator.clipboard.writeText(url)
+        alert('Link copiado para a área de transferência')
+    }
     const renderReport = (item) => {
 
         
@@ -70,10 +77,19 @@ export default function Pesquisa() {
 
 
             if (snapshot.exists()) {
+                
+                const keys = []
+                Object.keys(snapshot.val()).forEach((key) => {
+                    keys.push(key)
+
+                })
 
 
-                Object.values(snapshot.val()).forEach((value) => {
-                    console.log(value)
+
+
+                Object.values(snapshot.val()).forEach((value, index) => {
+                    value.id =  keys[index]
+         
                     const newData = { colecao: colecao, colecaoLabel: colecoesLabel[colecao], dados: value }
                     setData((oldData) => [...oldData, newData])
 
@@ -98,13 +114,26 @@ export default function Pesquisa() {
 
             const queryNome = query(ref(db, colecao), orderByChild('nome'), startAt(nome), endAt(nome + '\uf8ff'))
             const snapshot = await get(queryNome)
-
+        
 
             if (snapshot.exists()) {
 
+                const keys = []
+                Object.keys(snapshot.val()).forEach((key) => {
+                    keys.push(key)
 
-                Object.values(snapshot.val()).forEach((value) => {
-                    console.log(value)
+                })
+
+
+
+                 
+
+
+
+                Object.values(snapshot.val()).forEach((value, index) => {
+
+                    value.id = keys[index]
+            
                     const newData = { colecao: colecao, colecaoLabel: colecoesLabel[colecao], dados: value }
                     setData((oldData) => [...oldData, newData])
 
@@ -174,6 +203,7 @@ export default function Pesquisa() {
                                 }}>{item.dados.dadosPessoais.nome}</div>
 
                                 <div className="items-center py-3">
+                                    <Tag className="my-1 mx-3 cursor-pointer" color="volcano" onClick={(e)=>renderCopyLink(item)}>Copiar Link</Tag>
                                     <Tag className="my-1 mx-3" color="blue">{item.colecaoLabel}</Tag>
                                     <Tag className="my-1 mx-3" color="red">{item.dados.dadosPessoais.idade} anos</Tag>
                                     <Tag className="my-1 mx-3" color="green">{item.dados.dadosPessoais.sexo}</Tag>

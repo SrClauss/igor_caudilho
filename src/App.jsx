@@ -16,17 +16,20 @@ function App() {
   return (
   <Router>
     <Routes>
-      <Route>
+   
         <Route path="/" element={<Index/>} />
-        <Route path="/dfp" element={<DFP initialData/>} />
+        <Route path="/dfp" element={<DFP/>} />
+        <Route path='/dfp/:id' element={<DFP/>} />
         <Route path="osteoartrose_artroplastia" element={<OsteoartroseArtroplastia/>} />
+        <Route path="osteoartrose_artroplastia/:id" element={<OsteoartroseArtroplastia/>} />
         <Route path="lca" element={<LCA/>} /> 
+        <Route path="lca/:id" element={<LCA/>} />
         <Route path="menisco" element={<Menisco/>} />
+        <Route path="menisco/:id" element={<Menisco/>} />
         <Route path="pesquisa" element={<Pesquisa/>} />
 
 
 
-      </Route>
     </Routes>
   </Router>
 );
