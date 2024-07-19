@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { db } from "../firebase";
+import { copyAndDelete, db } from "../firebase";
 import { ref, get, child, query, orderByChild, equalTo, startAt, endAt } from "firebase/database";
 import { Switch, Tag } from "antd";
 import { useNavigate } from 'react-router-dom'
@@ -203,14 +203,15 @@ export default function Pesquisa() {
                                 }}>{item.dados.dadosPessoais.nome}</div>
 
                                 <div className="items-center py-3">
-                                    <Tag className="my-1 mx-3 cursor-pointer" color="volcano" onClick={(e)=>renderCopyLink(item)}>Copiar Link</Tag>
                                     <Tag className="my-1 mx-3" color="blue">{item.colecaoLabel}</Tag>
                                     <Tag className="my-1 mx-3" color="red">{item.dados.dadosPessoais.idade} anos</Tag>
                                     <Tag className="my-1 mx-3" color="green">{item.dados.dadosPessoais.sexo}</Tag>
                                     <Tag className="my-1 mx-3" color="purple">{item.dados.dadosPessoais.peso} kg</Tag>
                                     <Tag className="my-1 mx-3" color="orange">{item.dados.dadosPessoais.altura} cm</Tag>
                                     <Tag className="my-1 mx-3" color="cyan">{new Date(item.dados.dadosPessoais.data).toLocaleDateString("pt-BR")}</Tag>
+                                    <Tag className="my-1 mx-3 cursor-pointer" color="volcano" onClick={(e)=>renderCopyLink(item)}>Copiar Link</Tag>
                                     <Tag className="my-1 mx-3 cursor-pointer" color="magenta">{renderReport(item)}</Tag>
+                                    <Tag className="my-1 mx-3 cursor-pointer" color="geekblue" onClick={(_) => copyAndDelete(item.colecao, item.dados.id)}>Fechar Edição</Tag>
 
                                 </div>
                             </div>

@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getDatabase, ref, update, push, query, orderByChild, equalTo, get } from "firebase/database";
+import { getDatabase, ref, update, push, query, orderByChild, equalTo, get, remove } from "firebase/database";
 
 
 const firebaseConfig = {
@@ -55,5 +55,31 @@ export const enviarDados = async (colecao, data) => {
       })
     }
     document.location.href = "/";
+  })
+}
+
+
+
+export const copyAndDelete= async (colecao, id) => {
+  const docRef = ref(db, `${colecao}/${id}`);
+
+  
+
+  get(docRef).then((snapshot) => {
+    const data = snapshot.val()
+    remove(ref(db, `${colecao}/${id}`)).then(() => {
+      push(ref(db, colecao), data).then(() => {
+        console.log('Dados copiados com sucesso')
+      }).catch((error) => {
+        console.log('Erro ao copiar os dados', error)
+      })
+    }).catch((error) => {
+      console.log('Erro ao copiar os dados', error)
+    })
+
+
+ 
+  }).catch((error) => {
+    console.log('Erro ao copiar os dados', error)
   })
 }
