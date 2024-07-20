@@ -16,7 +16,8 @@ import { useLocation } from "react-router-dom"
 import Layout from "../Layout"
 import Observacoes from "../components/Observacoes"
 import { useParams } from "react-router-dom"
-
+import {get, ref} from "firebase/database"
+import { db } from "../firebase"
 
 
 export default function OsteoartroseArtroplastia() {
@@ -33,7 +34,7 @@ export default function OsteoartroseArtroplastia() {
         if (id) {
             setIsLoading(true); // Inicia o carregamento
 
-            const docRef = get(ref(db, `menisco/${id}`));
+            const docRef = get(ref(db, `osteoartrose_artroplastia/${id}`));
             docRef.then((snapshot) => {
                 setData(snapshot.val());
             }).finally(() => {
@@ -90,7 +91,7 @@ export default function OsteoartroseArtroplastia() {
             <Divider className="my-10" />
             <TesteCaminhada onDataChange={handleSetData} initialData={data?.testeCaminhada} />
             <Divider className="my-10" />
-            <CriteriosLimitacaoFuncionalGraveOsteoartroseTable onDataChange={handleSetData} sexo={data.sexo} initialData={data?.criteriosLimitacaoFuncionalGrave} />
+            <CriteriosLimitacaoFuncionalGraveOsteoartroseTable onDataChange={handleSetData} initialData={data?.criteriosLimitacaoFuncionalGrave} />
             <div className="mt-10">
                 <Observacoes onDataChange={handleSetData} initialData={data?.observacoes} />
             </div>

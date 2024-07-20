@@ -17,6 +17,10 @@ import Layout from "../Layout"
 import Observacoes from "../components/Observacoes"
 import { useParams } from "react-router-dom"
 
+import { get, ref } from "firebase/database";
+
+import { db } from "../firebase";
+
 
 export default function Menisco() {
     const location = useLocation()

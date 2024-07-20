@@ -18,6 +18,8 @@ import Layout from "../Layout"
 import { enviarDados } from "../firebase"
 import Observacoes from "../components/Observacoes"
 import { useParams } from "react-router-dom"
+import { get, ref } from "firebase/database";
+
 
 
 export default function LCA() {
