@@ -15,7 +15,7 @@ export function CriteriosLimitacaoFuncionalGraveOsteoartroseTable({ onDataChange
         sf36Dor: (x) => x <= 35,
         sf36AspectosFisicos: (x) => x <= 25,
         sf36CapacidadeFuncional: (x) => x <= 25,
-        womac: (x) => x <= 50,
+        womac: (x) => x >= 50,
         caminhada6MinPorcentagem: (x) => x >= 26,
         EVACaminhada6Min: (x) => x >= 5
     }
@@ -29,7 +29,7 @@ export function CriteriosLimitacaoFuncionalGraveOsteoartroseTable({ onDataChange
         sf36Dor: (x) => x <= 50,
         sf36AspectosFisicos: (x) => x <= 53,
         sf36CapacidadeFuncional: (x) => x <= 40,
-        womac: (x) => x <= 63,
+        womac: (x) => x >= 63,
         caminhada6MinPorcentagem: (x) => x >= 30,
         EVACaminhada6Min: (x) => x >= 4
     }
@@ -44,7 +44,7 @@ export function CriteriosLimitacaoFuncionalGraveOsteoartroseTable({ onDataChange
         sf36Dor: "SF36 Dor <= 35",
         sf36AspectosFisicos: "SF36 Aspectos Físicos <= 25",
         sf36CapacidadeFuncional: "SF36 Capacidade Funcional <= 25",
-        womac: "womac <= 50",
+        womac: "womac >= 50",
         caminhada6MinPorcentagem: "Caminhada 6 min % >= 26",
         EVACaminhada6Min: "EVA Caminhada 6 min >= 5"
     
@@ -59,7 +59,7 @@ export function CriteriosLimitacaoFuncionalGraveOsteoartroseTable({ onDataChange
         sf36Dor: "SF36 Dor <= 50",
         sf36AspectosFisicos: "SF36 Aspectos Físicos <= 53",
         sf36CapacidadeFuncional: "SF36 Capacidade Funcional <= 40",
-        womac: "womac <= 63",
+        womac: "womac >= 63",
         caminhada6MinPorcentagem: "Caminhada 6 min % >= 30",
         EVACaminhada6Min: "EVA Caminhada 6 min >= 4"
     

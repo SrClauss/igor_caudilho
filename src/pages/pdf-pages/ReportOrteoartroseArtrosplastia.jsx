@@ -110,7 +110,7 @@ function MyDocument({ data }) {
                         <RowTablePDF items={["SF36 Dor <= 35", data.criteriosLimitacaoFuncionalGrave?.sf36Dor, (data.criteriosLimitacaoFuncionalGrave?.sf36Dor ?? 0) <= 35 ? "X" : "O"]} />
                         <RowTablePDF items={["SF36 Aspectos Físicos <= 25", data.criteriosLimitacaoFuncionalGrave?.sf36AspectosFisicos, (data.criteriosLimitacaoFuncionalGrave?.sf36AspectosFisicos ?? 0) <= 25 ? "X" : "O"]} isGray />
                         <RowTablePDF items={["SF36 Capacidade Funcional <= 25", data.criteriosLimitacaoFuncionalGrave?.sf36CapacidadeFuncional, (data.criteriosLimitacaoFuncionalGrave?.sf36CapacidadeFuncional ?? 0) <= 25 ? "X" : "O"]} />
-                        <RowTablePDF items={["Womac <= 50", data.criteriosLimitacaoFuncionalGrave?.womac, (data.criteriosLimitacaoFuncionalGrave?.womac ?? 0) <= 50 ? "X" : "O"]} isGray />
+                        <RowTablePDF items={["Womac >= 50", data.criteriosLimitacaoFuncionalGrave?.womac, (data.criteriosLimitacaoFuncionalGrave?.womac ?? 0) >= 50 ? "X" : "O"]} isGray />
                         <RowTablePDF items={["Caminhada 6 min % >= 26", data.criteriosLimitacaoFuncionalGrave?.caminhada6MinPorcentagem, (data.criteriosLimitacaoFuncionalGrave?.caminhada6MinPorcentagem ?? 0) >= 26 ? "X" : "O"]} />
                     </Container>
                     <FieldTextArea label="Observações" value={data.observacoes} />
