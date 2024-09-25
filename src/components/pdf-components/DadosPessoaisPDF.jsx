@@ -10,7 +10,7 @@ import { View } from "@react-pdf/renderer";
 
 export default function DadosPessoaisPDF({ dadosPessoais}) {
 
-    console.log(dadosPessoais)
+
     return(
 
         <View>
