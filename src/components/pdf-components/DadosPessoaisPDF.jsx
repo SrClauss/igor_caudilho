@@ -9,6 +9,8 @@ import { View } from "@react-pdf/renderer";
 
 
 export default function DadosPessoaisPDF({ dadosPessoais}) {
+
+    console.log(dadosPessoais)
     return(
 
         <View>
@@ -21,7 +23,7 @@ export default function DadosPessoaisPDF({ dadosPessoais}) {
             ]} />
 
             <FieldsRow fields={[
-                { label: 'Lados', value: dadosPessoais.lados.join(', ') },
+                { label: 'Lados', value: dadosPessoais.lados?.join(', ') },
                 { label: 'Membro', value: dadosPessoais?.membro },
             ]} />
             <FieldsRow fields={[
