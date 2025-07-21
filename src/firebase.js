@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { getDatabase, ref, update, push, query, orderByChild, equalTo, get, remove } from "firebase/database";
 
 
@@ -25,61 +24,58 @@ export const enviarDados = async (colecao, data) => {
   submitData.nome = data.dadosPessoais.nome
   const querycpf = query(ref(db, colecao), orderByChild('cpf'), equalTo(submitData.cpf))
 
-  get(querycpf).then((snapshot) => {
+  try {
+    const snapshot = await get(querycpf);
     if (snapshot.exists()) {
+      let shouldUpdate = false;
+      let childKey = null;
+
       snapshot.forEach((childSnapshot) => {
         const childData = childSnapshot.val();
-        const childKey = childSnapshot.key;
         if (childData.data === submitData.data) {
-          const question = confirm('Já existe um registro com esses dados, deseja sobrescrever?')
-          if (question) {
-            update(ref(db, `${colecao}/${childKey}`), submitData).then(() => {
-              console.log('Dados enviados com sucesso')
-            }).catch((error) => {
-              console.log('Erro ao enviar os dados', error)
-            })
-          }
-        } else {
-          push(ref(db, colecao), submitData).then(() => {
-            console.log('Dados enviados com sucesso')
-          }).catch((error) => {
-            console.log('Erro ao enviar os dados', error)
-          })
+          shouldUpdate = confirm('Já existe um registro com esses dados, deseja sobrescrever?');
+          childKey = childSnapshot.key;
         }
       });
+
+      if (shouldUpdate && childKey) {
+        await update(ref(db, `${colecao}/${childKey}`), submitData);
+        console.log('Dados enviados com sucesso');
+      } else {
+        await push(ref(db, colecao), submitData);
+        console.log('Dados enviados com sucesso');
+      }
     } else {
-      push(ref(db, colecao), submitData).then(() => {
-        console.log('Dados enviados com sucesso')
-      }).catch((error) => {
-        console.log('Erro ao enviar os dados', error)
-      })
+      await push(ref(db, colecao), submitData);
+      console.log('Dados enviados com sucesso');
     }
     document.location.href = "/";
-  })
+  } catch (error) {
+    console.log('Erro ao enviar os dados', error);
+  }
 }
 
 
 
-export const copyAndDelete= async (colecao, id) => {
-  const docRef = ref(db, `${colecao}/${id}`);
+export const copyAndDelete = async (colecao, id) => {
+  try {
+    const docRef = ref(db, `${colecao}/${id}`);
+    const snapshot = await get(docRef);
+    const data = snapshot.val();
+    
+    await remove(docRef);
+    await push(ref(db, colecao), data);
+    
+    console.log('Dados copiados com sucesso');
+  } catch (error) {
+    console.log('Erro ao copiar os dados:', error);
+  }
+};
 
-  
-
-  get(docRef).then((snapshot) => {
-    const data = snapshot.val()
-    remove(ref(db, `${colecao}/${id}`)).then(() => {
-      push(ref(db, colecao), data).then(() => {
-        console.log('Dados copiados com sucesso')
-      }).catch((error) => {
-        console.log('Erro ao copiar os dados', error)
-      })
-    }).catch((error) => {
-      console.log('Erro ao copiar os dados', error)
-    })
-
-
- 
+export const deleteData = async (colecao, id) => {
+  remove(ref(db, `${colecao}/${id}`)).then(() => {
+    console.log('Dados deletados com sucesso')
   }).catch((error) => {
-    console.log('Erro ao copiar os dados', error)
+    console.log('Erro ao deletar os dados', error)
   })
 }
